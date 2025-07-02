@@ -1,0 +1,62 @@
+/* PLEASE NOTE: THESE TAILWIND IMPORTS SHOULD NEVER BE DELETED */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+/* DO NOT DELETE THESE TAILWIND IMPORTS, OTHERWISE THE STYLING WILL NOT RENDER AT ALL */
+/* Animation classes */
+.animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-out;
+}
+.animate.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-in-left {
+  transform: translateX(-20px);
+}
+.fade-in-left.animate-in {
+  transform: translateX(0);
+}
+.fade-in-right {
+  transform: translateX(20px);
+}
+.fade-in-right.animate-in {
+  transform: translateX(0);
+}
+.fade-in-up {
+  transform: translateY(20px);
+}
+.fade-in-up.animate-in {
+  transform: translateY(0);
+}
+.delay-100 {
+  transition-delay: 100ms;
+}
+.delay-200 {
+  transition-delay: 200ms;
+}
+.delay-300 {
+  transition-delay: 300ms;
+}
+.delay-400 {
+  transition-delay: 400ms;
+}
+.delay-500 {
+  transition-delay: 500ms;
+}
+/* Page transition */
+.page-transition {
+  animation: fadeIn 0.4s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
