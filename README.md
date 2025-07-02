@@ -22,7 +22,7 @@
    npm run dev
    ```
 
-4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+4. Open [http://localhost:5173] in your browser.
 
 ## 📦 Available Scripts
 
@@ -35,14 +35,14 @@
 ## 🔄 Common Git Commands
 
 ### Push Changes
-```bash
+```
 git add .
-git commit -m "Your descriptive commit message"
+git commit -m "Fixed some stuff"
 git push origin main
 ```
 
 ### Pull Latest Changes
-```bash
+```
 git pull origin main
 ```
 
