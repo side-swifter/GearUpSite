@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { CalendarIcon, CheckIcon, TrendingUpIcon } from 'lucide-react';
 const Progress = () => {
   useEffect(() => {
