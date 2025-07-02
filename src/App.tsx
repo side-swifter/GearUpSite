@@ -5,6 +5,7 @@ import Impact from './pages/Impact';
 import Progress from './pages/Progress';
 import Team from './pages/Team';
 import Rating from './pages/Rating';
+import SignUp from './pages/SignUp';
 export function App() {
   return <Router>
       <Routes>
@@ -14,6 +15,7 @@ export function App() {
           <Route path="progress" element={<Progress />} />
           <Route path="team" element={<Team />} />
           <Route path="rate-us" element={<Rating />} />
+          <Route path="signup" element={<SignUp />} />
         </Route>
       </Routes>
     </Router>;
