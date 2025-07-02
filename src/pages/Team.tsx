@@ -42,17 +42,20 @@ const Team = () => {
               <div className="h-64 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Michael Johnson" className="w-full h-full object-cover object-center" />
               </div>
+
+              {/* Team Member Details */} // Manas Kamarsu
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-1">
-                  Michael Johnson
+                  Manas Kamarsu
                 </h3>
                 <p className="text-red-600 font-medium mb-3">
-                  Founder & Executive Director
+                  Co-Founder & Lead Instructor
                 </p>
                 <p className="text-gray-600 mb-4">
-                  Former robotics engineer with a passion for education. Michael
-                  founded Gear Up Robotics after seeing the impact hands-on
-                  engineering projects had on students.
+                Manas is a 2-year FTC veteran and one of the driving forces behind Gear-Up Robotics. 
+                Known for his innovative thinking and strong leadership,he’s passionate about making robotics 
+                approachable and exciting for young learners. Manas brings creativity, technical skill,
+                and a genuine love for teaching into every session.
                 </p>
                 <div className="flex space-x-3">
                   <a href="#" className="text-gray-500 hover:text-red-600 transition-colors">
@@ -67,21 +70,24 @@ const Team = () => {
                 </div>
               </div>
             </div>
+
+            {/* Team Member Details */} // Abhinav
             <div className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-100 animate fade-in-up delay-100">
               <div className="h-64 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sarah Williams" className="w-full h-full object-cover object-center" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-1">
-                  Sarah Williams
+                  Abhinav Basava
                 </h3>
                 <p className="text-red-600 font-medium mb-3">
-                  Chief Education Officer
+                  Co-Founder & Lead Instructor
                 </p>
                 <p className="text-gray-600 mb-4">
-                  With 15 years of experience in K-12 STEM education, Sarah
-                  develops our curriculum and teacher training programs to
-                  ensure effective learning outcomes.
+                As a co-founder and 1-year FTC competitor, Abhinav plays a key leadership role in shaping the vision of Gear-Up Robotics. 
+                He’s a high-energy mentor who thrives on helping students grow in confidence and skill. Abhinav’s 
+                teaching style is fun, friendly,
+                and always focused on making robotics engaging for everyone.
                 </p>
                 <div className="flex space-x-3">
                   <a href="#" className="text-gray-500 hover:text-red-600 transition-colors">
@@ -96,21 +102,23 @@ const Team = () => {
                 </div>
               </div>
             </div>
+
+            {/* Team Member Details */} // Vivaan Parikh
             <div className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-100 animate fade-in-up delay-200">
               <div className="h-64 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="David Chen" className="w-full h-full object-cover object-center" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-1">
-                  David Chen
+                  Vivaan Parikh
                 </h3>
                 <p className="text-red-600 font-medium mb-3">
-                  Chief Technology Officer
+                  Instructor
                 </p>
                 <p className="text-gray-600 mb-4">
-                  A robotics PhD with experience at leading tech companies,
-                  David oversees our technology development and ensures our
-                  programs use the latest innovations.
+                With 2 years of FTC experience, Vivaan is a skilled and strategic robotics mentor. He excels at explaining 
+                technical concepts in a way that clicks with students, and he’s always ready to jump in and 
+                guide with patience and enthusiasm. Vivaan’s passion for robotics shines through in every class.
                 </p>
                 <div className="flex space-x-3">
                   <a href="#" className="text-gray-500 hover:text-red-600 transition-colors">
@@ -128,7 +136,8 @@ const Team = () => {
           </div>
         </div>
       </section>
-      {/* Program Directors */}
+      
+      {/* Team Member Details */} // Siddarth Shailesh
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
@@ -141,12 +150,11 @@ const Team = () => {
               </div>
               <div className="p-4">
                 <h3 className="text-lg font-bold text-gray-900 mb-1">
-                  Emily Rodriguez
+                  Siddarth Shailesh
                 </h3>
                 <p className="text-red-600 font-medium mb-2">K-5 Programs</p>
                 <p className="text-gray-600 text-sm">
-                  Elementary education specialist with a focus on early STEM
-                  exposure.
+                  EInstructor
                 </p>
               </div>
             </div>
