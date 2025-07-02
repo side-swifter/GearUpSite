@@ -71,7 +71,7 @@ const Team = () => {
               </div>
             </div>
 
-            {/* Team Member Details */} // Abhinav
+            {/* Team Member Details */} 
             <div className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-100 animate fade-in-up delay-100">
               <div className="h-64 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sarah Williams" className="w-full h-full object-cover object-center" />
@@ -103,7 +103,7 @@ const Team = () => {
               </div>
             </div>
 
-            {/* Team Member Details */} // Vivaan Parikh
+            {/* Team Member Details */} 
             <div className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-100 animate fade-in-up delay-200">
               <div className="h-64 overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="David Chen" className="w-full h-full object-cover object-center" />
@@ -137,7 +137,7 @@ const Team = () => {
         </div>
       </section>
       
-      {/* Team Member Details */} // Siddarth Shailesh
+      {/* Team Member Details */} 
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
