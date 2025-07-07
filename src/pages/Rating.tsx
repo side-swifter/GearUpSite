@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Star, Send, CheckCircle } from 'lucide-react';
 const Rating = () => {
   const [rating, setRating] = useState(0);
@@ -22,7 +22,7 @@ const Rating = () => {
     });
     return () => observer.disconnect();
   }, []);
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // In a real application, you would send this data to your server
     console.log({

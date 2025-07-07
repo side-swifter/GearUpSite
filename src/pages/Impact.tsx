@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { CheckCircleIcon, TrendingUpIcon, GlobeIcon } from 'lucide-react';
 const Impact = () => {
   useEffect(() => {

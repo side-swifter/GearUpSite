@@ -4,7 +4,8 @@ import emailjs from '@emailjs/browser';
 // EmailJS Configuration
 const emailJsPublicKey = 'gU33dTEMvODoA6qw_';
 const emailJsServiceId = 'service_71giipo';  // Your EmailJS service ID
-const emailJsTemplateId = 'template_rgz4bxp'; // Your new template ID
+const emailJsTemplateId = 'template_rgz4bxp'; // Team notification template ID
+const confirmationTemplateId = 'template_confirm_signup'; // New confirmation template ID
 const TEAM_EMAIL = 'gear-up-robotics@outlook.com';
 
 const SignUp = () => {
@@ -85,29 +86,53 @@ const SignUp = () => {
       console.log('Using service ID:', emailJsServiceId);
       console.log('Template parameters:', JSON.stringify(templateParams, null, 2));
 
-      // Send the email using the browser SDK with error handling
-      const result = await emailjs.send(
+      // Send email to the team
+      const teamEmailPromise = emailjs.send(
         emailJsServiceId,
         emailJsTemplateId,
         templateParams,
         emailJsPublicKey
-      ).catch(error => {
-        console.error('EmailJS Error Details:', {
-          status: error.status,
-          text: error.text,
-          response: error.response,
-          stack: error.stack
-        });
-        throw error;
-      });
+      );
 
-      console.log('EmailJS Response:', result);
+      // Send confirmation email to the user
+      const userConfirmationParams = {
+        to_email: formData.email,
+        to_name: formData.parentName || 'Valued Member',
+        student_name: formData.studentName,
+        parent_name: formData.parentName,
+        contact_email: TEAM_EMAIL,
+        contact_phone: '+1 (647) 999-9999', // Replace with actual contact number
+        year: new Date().getFullYear()
+      };
 
-      if (result.status === 200 || result.status === 201) {
+      const userEmailPromise = emailjs.send(
+        emailJsServiceId,
+        confirmationTemplateId,
+        userConfirmationParams,
+        emailJsPublicKey
+      );
+
+      // Wait for both emails to complete
+      const [teamResult, userResult] = await Promise.all([
+        teamEmailPromise.catch(error => {
+          console.error('Team email failed:', error);
+          throw new Error('Failed to send team notification');
+        }),
+        userEmailPromise.catch(error => {
+          console.error('Confirmation email failed:', error);
+          throw new Error('Failed to send confirmation email');
+        })
+      ]);
+
+      console.log('EmailJS Responses:', { teamResult, userResult });
+
+      if ((teamResult.status === 200 || teamResult.status === 201) && 
+          (userResult.status === 200 || userResult.status === 201)) {
         setSubmitStatus({
           success: true,
-          message: 'Thank you for your interest! Our team will contact you soon at ' + formData.email
+          message: `Thank you for signing up, ${formData.studentName || 'Valued Member'}! We've sent a confirmation email to ${formData.email}. Our team will be in touch with you soon.`
         });
+        
         // Reset form on successful submission
         setFormData({
           studentName: '',
@@ -120,35 +145,12 @@ const SignUp = () => {
           message: ''
         });
       } else {
-        throw new Error('Failed to send message');
+        throw new Error('Failed to send one or more emails');
       }
     } catch (error: any) {
       console.error('Error in form submission:', error);
       
-      let errorMessage = 'There was an error submitting your form. Please try again later or contact us directly.';
-      
-      // Log detailed error information
-      if (error?.response) {
-        console.error('EmailJS Error Response:', {
-          status: error.status,
-          text: error.text,
-          response: error.response
-        });
-      }
-      
-      // Provide specific error messages based on the error type
-      if (error.status === 412) {
-        errorMessage = 'Template validation failed. Please check that all required template variables are provided.';
-      } else if (error.status === 400) {
-        errorMessage = 'Invalid request. Please check the form data and try again.';
-      } else if (error.status === 403) {
-        errorMessage = 'Access denied. Please verify your EmailJS configuration and domain settings.';
-      } else if (error.message?.includes('Failed to fetch')) {
-        errorMessage = 'Network error. Please check your internet connection and try again.';
-      } else if (error.message?.includes('Invalid template ID') || 
-                error.message?.includes('Invalid service ID')) {
-        errorMessage = 'Configuration error. Please verify your EmailJS service and template IDs.';
-      }
+      const errorMessage = error?.message || 'There was an error submitting your form. Please try again later or contact us directly.';
       
       setSubmitStatus({
         success: false,
