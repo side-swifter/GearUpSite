@@ -35,7 +35,7 @@ const SignUp = () => {
     email: '',
     phone: '',
     grade: '',
-    experience: '',
+    course: '',
     interests: '',
     message: ''
   });
@@ -69,7 +69,7 @@ const SignUp = () => {
         // Student information - must match template exactly
         studentName: formData.studentName,
         grade: formData.grade || 'Not specified',
-        experience: formData.experience || 'Not specified',
+        course: formData.course || 'Not specified',
         interests: formData.interests || 'Not specified',
         
         // Parent/Guardian information - must match template exactly
@@ -140,7 +140,7 @@ const SignUp = () => {
           email: '',
           phone: '',
           grade: '',
-          experience: '',
+          course: '',
           interests: '',
           message: ''
         });
@@ -264,21 +264,22 @@ const SignUp = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="experience" className="block text-sm font-medium text-gray-700 mb-1">
-                    Previous Robotics/Programming Experience
+                  <label htmlFor="course" className="block text-sm font-medium text-gray-700 mb-1">
+                    Select Course *
                   </label>
                   <select
-                    id="experience"
-                    name="experience"
-                    value={formData.experience}
+                    id="course"
+                    name="course"
+                    required
+                    value={formData.course}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   >
-                    <option value="">Select Experience Level</option>
-                    <option value="none">No Experience</option>
-                    <option value="beginner">Beginner (1-2 years)</option>
-                    <option value="intermediate">Intermediate (2-4 years)</option>
-                    <option value="advanced">Advanced (4+ years)</option>
+                    <option value="">Select a course</option>
+                    <option value="Block Coding Course 1">Block Coding Course 1</option>
+                    <option value="Block Coding Course 2">Block Coding Course 2</option>
+                    <option value="Block Coding Course 3">Block Coding Course 3</option>
+                    <option value="Python Intro">Python Intro</option>
                   </select>
                 </div>
               </div>
