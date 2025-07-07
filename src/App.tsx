@@ -7,7 +7,7 @@ import Team from './pages/Team';
 import Rating from './pages/Rating';
 import SignUp from './pages/SignUp';
 export function App() {
-  return <Router>
+  return <Router basename="/">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
