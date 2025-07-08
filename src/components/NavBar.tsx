@@ -24,6 +24,9 @@ const NavBar = () => {
   }, {
     name: 'Rate Us!',
     path: '/rate-us'
+  }, {
+    name: 'Contact Us',
+    path: '/contact'
   }];
   return <nav className="sticky top-0 z-50 bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

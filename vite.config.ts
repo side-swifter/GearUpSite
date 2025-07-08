@@ -10,17 +10,8 @@ export default defineConfig({
     fs: {
       strict: true,
     },
-    // This ensures that the server handles SPA routing
-    // by serving index.html for all routes
-    proxy: {
-      // This is a catch-all proxy for SPA routing
-      // It tells the dev server to serve index.html for all routes
-      '^/(?!@vite|@react-refresh|@id|node_modules|src|assets|public).*': {
-        target: 'http://localhost:5173',
-        changeOrigin: true,
-        rewrite: (path) => '/index.html',
-      },
-    },
+    // Enable CORS for development
+    cors: true,
   },
   build: {
     rollupOptions: {

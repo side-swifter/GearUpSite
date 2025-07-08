@@ -6,6 +6,7 @@ import Progress from './pages/Progress';
 import Team from './pages/Team';
 import Rating from './pages/Rating';
 import SignUp from './pages/SignUp';
+import Contact from './pages/Contact';
 export function App() {
   return <Router basename="/">
       <Routes>
@@ -16,6 +17,7 @@ export function App() {
           <Route path="team" element={<Team />} />
           <Route path="rate-us" element={<Rating />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>
     </Router>;

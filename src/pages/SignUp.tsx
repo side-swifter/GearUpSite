@@ -323,9 +323,6 @@ const SignUp = () => {
                   className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
                   required
                 />
-                <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
-                  I understand that submitting this form does not guarantee a spot in the program and that a team member will contact me with more information. *
-                </label>
               </div>
 
               <div className="pt-4 space-y-4">
@@ -334,7 +331,7 @@ const SignUp = () => {
                   disabled={isSubmitting}
                   className="w-full flex justify-center py-3 px-6 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? 'Sending...' : 'Submit Application'}
+                  {isSubmitting ? 'Sending...' : 'Sign Up'}
                 </button>
                 
                 {submitStatus && (
@@ -348,7 +345,7 @@ const SignUp = () => {
         </div>
 
         <div className="mt-8 text-center text-sm text-gray-500">
-          <p>Have questions? Email us at <a href="mailto:info@gearuprobotics.com" className="text-red-600 hover:text-red-800">info@gearuprobotics.com</a></p>
+          <p>Have questions? Email us at <a href="Gear-Up-Robotics@outlook.com" className="text-red-600 hover:text-red-800">Gear-Up-Robotics@outlook.com</a></p>
         </div>
       </div>
     </div>
