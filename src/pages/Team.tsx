@@ -45,6 +45,14 @@ type TeamMember = {
 // appear in the appropriate section based on the filters below.
 const teamMembers: TeamMember[] = [
   {
+    id: 'sudarshan-iyengar',
+    name: 'Dr. Sudarshan Iyengar',
+    role: 'Professor & Advisor',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    alt: 'Dr. Sudarshan Iyengar',
+    description: 'Dr. Sudarshan Iyengar, a faculty member at IIT Ropar and PhD graduate from IISc, is a leading educator and researcher known for making technical education engaging through innovative teaching, storytelling, and large-scale online courses like "The Joy of Computing." Currently serving as Director of Annam.AI, he leads major AI education initiatives, coordinates national research fellowships, and heads the Education Design Lab, with his work reaching over 900,000 students and focusing on AI for social good and education design.'
+  },
+  {
     id: 'akshayraj',
     name: 'Akshayraj Sanjai',
     role: 'Instructor / Lead Programmer',
@@ -127,14 +135,18 @@ const teamMembers: TeamMember[] = [
 ];
 
 const TeamMemberCard: React.FC<TeamMember> = ({ name, role, image, alt, description, delay = '' }) => (
-  <div className={`bg-white rounded-lg overflow-hidden shadow-md border border-gray-100 animate fade-in-up ${delay}`}>
-    <div className="h-64 overflow-hidden">
+  <div className={`bg-white rounded-lg overflow-hidden shadow-md border border-gray-100 animate fade-in-up ${delay} flex flex-col h-full`}>
+    <div className="h-64 overflow-hidden flex-shrink-0">
       <img src={image} alt={alt} className="w-full h-full object-cover object-center" />
     </div>
-    <div className="p-6">
-      <h3 className="text-xl font-bold text-gray-900 mb-1">{name}</h3>
-      <p className="text-red-600 font-medium mb-3">{role}</p>
-      <p className="text-gray-600">{description}</p>
+    <div className="p-6 flex flex-col flex-grow">
+      <div>
+        <h3 className="text-xl font-bold text-gray-900 mb-1">{name}</h3>
+        <p className="text-red-600 font-medium mb-3">{role}</p>
+      </div>
+      <div className="mt-auto">
+        <p className="text-gray-600">{description}</p>
+      </div>
     </div>
   </div>
 );
@@ -158,10 +170,16 @@ const Team = () => {
     // Add more IDs to include in main team: member.id === 'new-member-id'
   );
   
+  // Professors & Advisors
+  const professors = teamMembers.filter(member => 
+    member.role.toLowerCase().includes('professor')
+  );
+
   // Program Directors - appears in the bottom section
   const programDirectors = teamMembers.filter(member => 
-    member.id === 'manas' || member.id === 'siddarth' ||
-    member.role.toLowerCase().includes('founder')
+    (member.id === 'manas' || member.id === 'siddarth' ||
+    member.role.toLowerCase().includes('founder')) &&
+    !member.role.toLowerCase().includes('professor')
     // Add more IDs to include as program directors: member.id === 'new-director-id'
   );
 
@@ -190,6 +208,30 @@ const Team = () => {
           </p>
         </div>
       </section>
+      
+      {/* Professors & Advisors Section */}
+      {professors.length > 0 && (
+        <section className="py-16 bg-white min-h-[70vh] flex items-center">
+          <div className="w-full">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+                Our Professors & Advisors
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-12">
+                Guiding us with their expertise and experience.
+              </p>
+              <div className="flex justify-center px-4">
+                <div className="w-full max-w-md">
+                  {professors.map((member) => (
+                    <TeamMemberCard key={member.id} {...member} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+      
       {/* Team */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -208,10 +250,6 @@ const Team = () => {
                 delay={`delay-${(index % 3) * 100}`}
               />
             ))}
-
-
-
-
           </div>
         </div>
 
