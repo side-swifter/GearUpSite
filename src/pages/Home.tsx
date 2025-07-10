@@ -51,6 +51,18 @@ const TestimonialCard = ({ name, role, content, rating, delay = '' }: Testimonia
 );
 const Home = () => {
   useEffect(() => {
+    // Handle scrolling to goals section if navigated from another page
+    if (typeof window !== 'undefined' && sessionStorage.getItem('scrollToGoals') === 'true') {
+      sessionStorage.removeItem('scrollToGoals');
+      setTimeout(() => {
+        const goalsSection = document.getElementById('goals');
+        if (goalsSection) {
+          goalsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // Small delay to ensure the page has rendered
+    }
+
+    // Intersection Observer for animations
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -84,9 +96,9 @@ const Home = () => {
               build the technologies of tomorrow.
             </p>
             <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4 animate fade-in-up delay-400">
-              <a href="#goals" className="bg-white text-red-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
+              <Link to="/#goals" className="bg-white text-red-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
                 Our Goals
-              </a>
+              </Link>
               <Link to="/team" className="bg-transparent text-white border-2 border-white px-8 py-3 rounded-full font-medium hover:bg-white hover:bg-opacity-10 transition-all transform hover:scale-105">
                 Meet Our Team
               </Link>

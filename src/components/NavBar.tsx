@@ -18,9 +18,18 @@ const NavBar = () => {
   }, [pathname]);
   const scrollToGoals = (e: MouseEvent) => {
     e.preventDefault();
-    const goalsSection = document.getElementById('goals');
-    if (goalsSection) {
-      goalsSection.scrollIntoView({ behavior: 'smooth' });
+    
+    if (pathname === '/') {
+      // If already on home page, just scroll to the section
+      const goalsSection = document.getElementById('goals');
+      if (goalsSection) {
+        goalsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If not on home page, use Link to navigate and then scroll
+      // We'll use sessionStorage to trigger the scroll after navigation
+      sessionStorage.setItem('scrollToGoals', 'true');
+      window.location.href = '/';
     }
   };
 
