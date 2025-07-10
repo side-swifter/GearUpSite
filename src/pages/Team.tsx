@@ -302,7 +302,7 @@ const Team = () => {
             We're always looking for passionate educators, engineers, and
             volunteers to help us expand our impact.
           </p>
-          <a href="#" className="inline-block bg-white text-red-600 px-8 py-3 rounded-full font-medium hover:bg-red-50 transition-all transform hover:scale-105 shadow-lg">
+          <a href="contact" className="inline-block bg-white text-red-600 px-8 py-3 rounded-full font-medium hover:bg-red-50 transition-all transform hover:scale-105 shadow-lg">
             Contact Us!
           </a>
         </div>
