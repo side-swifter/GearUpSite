@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Instagram, Twitter } from 'lucide-react';
 
 /**
  * Team Member Type Definition
