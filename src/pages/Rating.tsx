@@ -57,10 +57,8 @@ const faqs: FAQ[] = [
 // ==============================================
 // FAQ ITEM COMPONENT
 // ==============================================
-// Using the id in the component even though it's not directly used in the JSX
-// to satisfy the TypeScript type requirements
 const FAQItem: React.FC<FAQ> = ({ id, question, answer, delay = '' }) => (
-  <div className={`bg-white p-6 rounded-lg shadow-sm border border-gray-100 animate fade-in-up ${delay}`}>
+  <div key={id} className={`bg-white p-6 rounded-lg shadow-sm border border-gray-100 animate fade-in-up ${delay}`}>
     <h3 className="text-lg font-bold text-gray-900 mb-2">
       {question}
     </h3>
