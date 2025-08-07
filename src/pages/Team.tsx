@@ -55,16 +55,16 @@ const teamMembers: TeamMember[] = [
   {
     id: 'akshayraj',
     name: 'Akshayraj Sanjai',
-    role: 'Instructor / Lead Programmer',
+    role: 'Programming',
     image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     alt: 'Akshayraj Sanjai',
-    description: 'With 1 year of FTC experience, 2 years of Vex V5RC experience and 1 year of FLL experience, Akshayraj is a skilled and well versed with robotics and is always ready to jump in and guide students with patience and enthusiasm.',
+    description: 'With 1 year of FTC experience, 2 years of Vex V5RC experience and 1 year of FLL experience, Akshayraj is a skilled and well versed with robotics and programming and is always ready to jump in and guide students with patience and enthusiasm.',
     delay: ''
   },
   {
     id: 'vivaan',
     name: 'Vivaan Parikh',
-    role: 'Teaching Team Lead',
+    role: 'Engineering & Brainstorming',
     image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     alt: 'Vivaan Parikh',
     description: 'With 2 years of FTC experience, Vivaan is a skilled and strategic robotics mentor. He excels at explaining technical concepts in a way that clicks with students, and he\'s always ready to jump in and guide with patience and enthusiasm.',
@@ -73,7 +73,7 @@ const teamMembers: TeamMember[] = [
   {
     id: 'manas',
     name: 'Manas Kamarsu',
-    role: 'Co-Founder',
+    role: 'CAD',
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     alt: 'Manas Kamarsu',
     description: 'Manas is a 2-year FTC veteran and one of the driving forces behind Gear-Up Robotics.'
@@ -81,57 +81,24 @@ const teamMembers: TeamMember[] = [
   {
     id: 'siddarth',
     name: 'Siddarth Shailesh',
-    role: 'Co-Founder',
+    role: 'Physics and Quantum Mechanics',
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     alt: 'Siddarth Shailesh',
     description: 'Sid brings 1 year of FTC experience and a talent for making learning both educational and fun.'
   },
 
   {
-    id: 'deekshita',
-    name: 'Deekshita Gunturu',
-    role: 'Marketing',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    alt: 'Deekshita Gunturu',
-    description: 'With 1 year of FTC experience, Deekshita is a skilled with marketing and knows how to get the word out about Gear-Up Robotics and our acheivements',
-    delay: ''
+    id: 'noah',
+    name: 'Noah',
+    role: 'Physics and Quantum Mechanics',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    alt: 'Noah',
+    description: 'Noah bring a first place Science Olympiad medal in quantum detanglers and is always ready to jump in and guide students with patience and enthusiasm.'
   },
-  {
-    id: 'shresh',
-    name: 'Shresh Panda',
-    role: 'Instructor / Marketing Lead',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    alt: 'Shresh Panda',
-    description: 'Shresh is already a teacher and has experience with controling and managing students, he also PCEP and IT Specialist certificates and is able to code in many languages, allowing your student to have the best learning experience.',
-    delay: ''
-  },
-  {
-    id: 'tahan',
-    name: 'Tahan Choudhary',
-    role: 'Graphic Design Lead',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    alt: 'Tahan Choudhary',
-    description: 'With 2 year of FTC experience and on a Vex V5RC team and multiple graphic design courses, Tahan is a skilled with graphic design and knows how to get your designs to the next level.',
-    delay: ''
-  },
-  {
-    id: 'nishant',
-    name: 'Nishant Kulkrini',
-    role: 'CAD Instructor',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    alt: 'Nishant Kulkrini',
-    description: 'With 2 year of FTC experience, Nishant is a skilled with CAD design and knows his way around Onshape.',
-    delay: ''
-  },  
-  {
-    id: 'jashank',
-    name: 'Jashank Bansali',
-    role: 'Instructor',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    alt: 'Jashank',
-    description: 'With 2 year of FTC experience, Jashank is a skilled with programing and knows how to make your students learning experience as fun as a possible.',
-    delay: ''
-  },
+
+
+
+
 ];
 
 const TeamMemberCard: React.FC<TeamMember> = ({ name, role, image, alt, description, delay = '' }) => (
@@ -160,27 +127,15 @@ const Team = () => {
   // Main Team Members - appears in the top section
   const mainTeamMembers = teamMembers.filter(member => 
     member.id === 'akshayraj' || 
-    member.id === 'vivaan' || 
-    member.id === 'deekshita' || 
-    member.id === 'shresh' || 
-    member.id === 'tahan' || 
-    member.id === 'nishant' || 
-    member.id === 'jashank' &&
-    !member.role.toLowerCase().includes('founder')
-    // Add more IDs to include in main team: member.id === 'new-member-id'
+    member.id === 'vivaan' ||
+    member.id === 'manas' ||
+    member.id === 'siddarth' ||
+    member.id === 'noah'
   );
   
   // Professors & Advisors
   const professors = teamMembers.filter(member => 
     member.role.toLowerCase().includes('professor')
-  );
-
-  // Program Directors - appears in the bottom section
-  const programDirectors = teamMembers.filter(member => 
-    (member.id === 'manas' || member.id === 'siddarth' ||
-    member.role.toLowerCase().includes('founder')) &&
-    !member.role.toLowerCase().includes('professor')
-    // Add more IDs to include as program directors: member.id === 'new-director-id'
   );
 
   useEffect(() => {
@@ -233,14 +188,14 @@ const Team = () => {
       )}
       
       {/* Team */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-            Our Team
+            Our Founding Members
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto text-center mb-12">
-            Our Team bring years of combined experience in
-            education, robotics, recruiting, marketing, and non-profit management.
+            Our Founding Members bring years of experience in
+            education, robotics, recruiting, marketing, and non-profit management and the passion to educate students about robotics.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {mainTeamMembers.map((member, index) => (
@@ -258,41 +213,6 @@ const Team = () => {
 
       </section>
       
-      {/* Team Member Details */} 
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
-            Program Directors
-          </h2>
-          <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-8 w-full" style={{ maxWidth: 'fit-content' }}>
-            {programDirectors.map((director, index) => (
-              <div key={director.id} className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-100 animate fade-in-up w-64" style={{ animationDelay: `${(index % 4) * 100}ms` }}>
-                <div className="h-48 overflow-hidden">
-                  <img 
-                    src={director.image} 
-                    alt={director.alt} 
-                    className="w-full h-full object-cover object-center"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">
-                    {director.name}
-                  </h3>
-                  <p className="text-red-600 font-medium mb-2">
-                    {director.role}
-                  </p>
-                  <p className="text-gray-600 text-sm">
-                    {director.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
 
       {/* Join Our Team */}
       <section className="py-16 bg-red-600">
