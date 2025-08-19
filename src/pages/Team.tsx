@@ -122,10 +122,10 @@ const teamMembers: TeamMember[] = [
   {
     id: 'shresh',
     name: 'Shresh Panda',
-    role: 'Physics and Quantum Mechanics',
+    role: 'Marketing',
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     alt: 'Shresh Panda',
-    description: 'Sid brings 1 year of FTC experience and a talent for making learning both educational and fun.'
+    description: 'Shresh Panda is a marketing specialist at Gear Up, known for raising funds for many organizations through ethical and effective outreach, backed by his experience in business clubs and formal marketing training.'
   },
 
 
@@ -192,7 +192,8 @@ const Team = () => {
     member.id === 'vivaan' ||
     member.id === 'manas' ||
     member.id === 'siddarth' ||
-    member.id === 'noah'
+    member.id === 'noah' ||
+    member.id === 'shresh'
   );
   
   // Professors & Advisors
