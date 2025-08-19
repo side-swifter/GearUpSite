@@ -49,7 +49,7 @@ const faqs: FAQ[] = [
   {
     id: 'response-time',
     question: 'Will someone respond to my feedback?',
-    answer: 'If you\'ve shared specific concerns or questions that require a response, a member of our team will reach out to you within 2-3 business days.',
+    answer: 'If you\'ve shablue specific concerns or questions that require a response, a member of our team will reach out to you within 2-3 business days.',
     delay: 'delay-300'
   }
 ];
@@ -85,7 +85,7 @@ const TestimonialCard: React.FC<Testimonial> = ({ name, role, content, rating, d
     </div>
     <p className="text-gray-700 mb-6">"{content}"</p>
     <div className="flex items-center">
-      <div className="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold text-sm mr-3">
+      <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-sm mr-3">
         {name.split(' ').map(n => n[0]).join('')}
       </div>
       <div>
@@ -126,7 +126,7 @@ const Rating = () => {
   return (
     <div className="w-full bg-white">
       {/* Hero Section */}
-      <section className="bg-red-600 py-20">
+      <section className="bg-blue-600 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-white mb-6">Rate Us!</h1>
           <p className="text-xl text-white max-w-3xl mx-auto">

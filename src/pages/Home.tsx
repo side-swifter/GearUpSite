@@ -22,7 +22,7 @@ type Testimonial = {
 //   role: 'Their Role',
 //   content: 'Their testimonial text...',
 //   rating: 5,  // 1-5 stars
-//   delay: '100' // Optional: '100', '200', '300' for staggered animations
+//   delay: '100' // Optional: '100', '200', '300' for staggeblue animations
 // }
 const testimonials: Testimonial[] = [
   // Add testimonials here when you have them
@@ -39,7 +39,7 @@ const TestimonialCard = ({ name, role, content, rating, delay = '' }: Testimonia
         ))}
       </div>
     </div>
-    <Quote className="h-6 w-6 text-red-100 mb-4" />
+    <Quote className="h-6 w-6 text-blue-100 mb-4" />
     <p className="text-gray-600 italic mb-6">"{content}"</p>
     <div className="flex items-center">
       <div>
@@ -92,11 +92,11 @@ const Home = () => {
   return <div className="w-full bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-500 transform -skew-y-6 origin-top-right z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-400 transform -skew-y-6 origin-top-right z-0"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative z-10">
           <div className="text-center md:text-left md:max-w-2xl">
             <div className="flex justify-center md:justify-start mb-6">
-              <img src="/transparentGearup.png" alt="Gear Up Robotics Logo" className="h-64 w-auto" />
+              <img src="/logo-no-background.png" alt="Gear Up Robotics Logo" className="h-64 w-auto" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 animate fade-in-left">
               Powering the Future Through Robotics
@@ -111,7 +111,7 @@ const Home = () => {
               <Link 
                 to="#goals" 
                 onClick={scrollToGoals}
-                className="bg-white text-red-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
+                className="bg-white text-blue-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
               >
                 Our Goals
               </Link>
@@ -133,8 +133,8 @@ const Home = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transform transition-all duration-300 hover:-translate-y-2">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <Lightbulb className="h-6 w-6 text-red-600" />
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <Lightbulb className="h-6 w-6 text-blue-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Inspire Innovation</h3>
               <p className="text-gray-600">
@@ -142,8 +142,8 @@ const Home = () => {
               </p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transform transition-all duration-300 hover:-translate-y-2">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <Users className="h-6 w-6 text-red-600" />
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <Users className="h-6 w-6 text-blue-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Build Community</h3>
               <p className="text-gray-600">
@@ -151,8 +151,8 @@ const Home = () => {
               </p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transform transition-all duration-300 hover:-translate-y-2">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <Award className="h-6 w-6 text-red-600" />
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <Award className="h-6 w-6 text-blue-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Achieve Excellence</h3>
               <p className="text-gray-600">
@@ -177,8 +177,8 @@ const Home = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transform transition-all duration-300 hover:-translate-y-2 animate fade-in-up">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <div className="h-6 w-6 text-red-600" />
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <div className="h-6 w-6 text-blue-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 STEM Education
@@ -189,8 +189,8 @@ const Home = () => {
               </p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transform transition-all duration-300 hover:-translate-y-2 animate fade-in-up delay-100">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <Users className="h-6 w-6 text-red-600" />
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <Users className="h-6 w-6 text-blue-500" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Community Building
@@ -201,8 +201,8 @@ const Home = () => {
               </p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transform transition-all duration-300 hover:-translate-y-2 animate fade-in-up delay-200">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <Lightbulb className="h-6 w-6 text-red-600" />
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <Lightbulb className="h-6 w-6 text-blue-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Innovation
@@ -213,8 +213,8 @@ const Home = () => {
               </p>
             </div>
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transform transition-all duration-300 hover:-translate-y-2 animate fade-in-up delay-300">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <Award className="h-6 w-6 text-red-600" />
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <Award className="h-6 w-6 text-blue-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Competitions
@@ -246,22 +246,22 @@ const Home = () => {
         </section>
       )}
       {/* CTA Section */}
-      <section className="bg-red-600 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-blue-500 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div className="mb-6 md:mb-0">
               <h2 className="text-3xl font-bold text-white">
                 Ready to join our mission?
               </h2>
-              <p className="mt-2 text-lg text-red-100">
+              <p className="mt-2 text-lg text-blue-100">
                 Help us inspire the next generation of robotics engineers.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/rate-us" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-red-600 bg-white hover:bg-red-50 transition-colors">
+              <Link to="/rate-us" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-blue-500 bg-white hover:bg-blue-50 transition-colors">
                 Support Us
               </Link>
-              <Link to="/progress" className="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-medium rounded-md shadow-sm text-white bg-transparent hover:bg-red-700 transition-colors">
+              <Link to="/progress" className="inline-flex items-center justify-center px-6 py-3 border border-white text-base font-medium rounded-md shadow-sm text-white bg-transparent hover:bg-blue-600 transition-colors">
                 See Our Progress <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </div>

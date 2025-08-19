@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+ import { useEffect } from 'react';
 import { CheckCircleIcon, TrendingUpIcon, GlobeIcon } from 'lucide-react';
 const Impact = () => {
   useEffect(() => {
@@ -18,7 +18,7 @@ const Impact = () => {
   }, []);
   return <div className="w-full bg-white">
       {/* Hero Section */}
-      <section className="bg-red-600 py-20">
+      <section className="bg-blue-500 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-white mb-6">Our Impact</h1>
           <p className="text-xl text-white max-w-3xl mx-auto">

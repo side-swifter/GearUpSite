@@ -109,7 +109,7 @@ const TeamMemberCard: React.FC<TeamMember> = ({ name, role, image, alt, descript
     <div className="p-6 flex flex-col flex-grow">
       <div>
         <h3 className="text-xl font-bold text-gray-900 mb-1">{name}</h3>
-        <p className="text-red-600 font-medium mb-3">{role}</p>
+        <p className="text-blue-600 font-medium mb-3">{role}</p>
       </div>
       <div className="mt-auto">
         <p className="text-gray-600">{description}</p>
@@ -155,7 +155,7 @@ const Team = () => {
   }, []);
   return <div className="w-full bg-white">
       {/* Hero Section */}
-      <section className="bg-red-600 py-20">
+      <section className="bg-blue-600 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-white mb-6">Our Team</h1>
           <p className="text-xl text-white max-w-3xl mx-auto">
@@ -215,14 +215,14 @@ const Team = () => {
       
 
       {/* Join Our Team */}
-      <section className="py-16 bg-red-600">
+      <section className="py-16 bg-blue-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-6">Join Our Team</h2>
           <p className="text-xl text-white max-w-3xl mx-auto mb-8">
             We're always looking for passionate educators, engineers, and
             volunteers to help us expand our impact.
           </p>
-          <a href="contact" className="inline-block bg-white text-red-600 px-8 py-3 rounded-full font-medium hover:bg-red-50 transition-all transform hover:scale-105 shadow-lg">
+          <a href="contact" className="inline-block bg-white text-blue-600 px-8 py-3 rounded-full font-medium hover:bg-blue-50 transition-all transform hover:scale-105 shadow-lg">
             Contact Us!
           </a>
         </div>

@@ -184,7 +184,7 @@ const SignUp = () => {
                     required
                     value={formData.studentName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="John Doe"
                   />
                 </div>
@@ -200,7 +200,7 @@ const SignUp = () => {
                     required
                     value={formData.parentName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Jane Doe"
                   />
                 </div>
@@ -216,7 +216,7 @@ const SignUp = () => {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -232,7 +232,7 @@ const SignUp = () => {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="(123) 456-7890"
                   />
                 </div>
@@ -247,7 +247,7 @@ const SignUp = () => {
                     required
                     value={formData.grade}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select Grade</option>
                     <option value="3rd">3rd Grade</option>
@@ -273,7 +273,7 @@ const SignUp = () => {
                     required
                     value={formData.course}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select a course</option>
                     <option value="Block Coding Course 1">Block Coding Course 1</option>
@@ -295,7 +295,7 @@ const SignUp = () => {
                   required
                   value={formData.interests}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Tell us what excites you about robotics and what you hope to learn..."
                 ></textarea>
               </div>
@@ -310,7 +310,7 @@ const SignUp = () => {
                   rows={3}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Any questions or additional information you'd like to share..."
                 ></textarea>
               </div>
@@ -320,7 +320,7 @@ const SignUp = () => {
                   id="terms"
                   name="terms"
                   type="checkbox"
-                  className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   required
                 />
               </div>
@@ -329,13 +329,13 @@ const SignUp = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex justify-center py-3 px-6 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full flex justify-center py-3 px-6 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? 'Sending...' : 'Sign Up'}
                 </button>
                 
                 {submitStatus && (
-                  <div className={`p-4 rounded-md ${submitStatus.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+                  <div className={`p-4 rounded-md ${submitStatus.success ? 'bg-green-50 text-green-800' : 'bg-blue-50 text-blue-800'}`}>
                     <p className="text-center">{submitStatus.message}</p>
                   </div>
                 )}
@@ -345,7 +345,7 @@ const SignUp = () => {
         </div>
 
         <div className="mt-8 text-center text-sm text-gray-500">
-          <p>Have questions? Email us at <a href="Gear-Up-Robotics@outlook.com" className="text-red-600 hover:text-red-800">Gear-Up-Robotics@outlook.com</a></p>
+          <p>Have questions? Email us at <a href="Gear-Up-Robotics@outlook.com" className="text-blue-600 hover:text-blue-800">Gear-Up-Robotics@outlook.com</a></p>
         </div>
       </div>
     </div>

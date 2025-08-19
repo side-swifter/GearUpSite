@@ -54,9 +54,9 @@ const NavBar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
-              <img src="/transparentGear.png" alt="Gear Up Robotics Logo" className="h-10 w-auto" />
+              <img src="/gear-logo.png" alt="Gear Up Robotics Logo" className="h-10 w-auto" />
               <span className="ml-3 text-lg font-bold text-gray-900">
-                Gear-Up Robotics
+                Gear-Up Foundation
               </span>
             </Link>
           </div>
@@ -66,7 +66,7 @@ const NavBar = () => {
                 <button
                   key={item.name}
                   onClick={item.onClick}
-                  className="text-gray-700 hover:text-red-600 hover:border-b-2 hover:border-red-600 px-1 pt-1 text-sm font-medium transition-all duration-200 cursor-pointer"
+                  className="text-gray-700 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 px-1 pt-1 text-sm font-medium transition-all duration-200 cursor-pointer"
                 >
                   {item.name}
                 </button>
@@ -74,7 +74,7 @@ const NavBar = () => {
                 <Link 
                   key={item.name} 
                   to={item.path} 
-                  className={`${pathname === item.path ? 'text-red-600 border-b-2 border-red-600' : 'text-gray-700 hover:text-red-600 hover:border-b-2 hover:border-red-600'} px-1 pt-1 text-sm font-medium transition-all duration-200`}
+                  className={`${pathname === item.path ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-700 hover:text-blue-600 hover:border-b-2 hover:border-blue-600'} px-1 pt-1 text-sm font-medium transition-all duration-200`}
                 >
                   {item.name}
                 </Link>
@@ -82,13 +82,13 @@ const NavBar = () => {
             ))}
             <Link 
               to="/signup" 
-              className="ml-4 px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700 transition-colors duration-200"
+              className="ml-4 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors duration-200"
             >
               Sign Up for Classes
             </Link>
           </div>
           <div className="flex items-center md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-red-600 focus:outline-none">
+            <button onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none">
               {isOpen ? <XIcon className="block h-6 w-6" /> : <MenuIcon className="block h-6 w-6" />}
             </button>
           </div>
@@ -102,7 +102,7 @@ const NavBar = () => {
               <Link 
                 key={item.name} 
                 to={item.path} 
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50"
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
               >
                 {item.name}
               </Link>
@@ -110,13 +110,13 @@ const NavBar = () => {
               <button
                 key={item.name}
                 onClick={item.onClick}
-                className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-red-600 hover:bg-gray-50"
+                className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
               >
                 {item.name}
               </button>
             )
           )}
-          <Link to="/signup" className="block w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700">
+          <Link to="/signup" className="block w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
             Sign Up for Classes
           </Link>
         </div>
