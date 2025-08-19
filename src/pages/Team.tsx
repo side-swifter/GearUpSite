@@ -24,6 +24,9 @@ import React, { useEffect } from 'react';
  * - Main Team: Add their ID to mainTeamMembers filter
  * - Program Directors: Add their ID to programDirectors filter
  */
+
+
+
 type TeamMember = {
   id: string;
   name: string;
@@ -32,6 +35,12 @@ type TeamMember = {
   alt: string;
   description: string;
   delay?: string;
+  // Simple image controls - use these to adjust photo positioning
+  imageControls?: {
+    shiftLeft?: number;   // Shift left (negative values shift right) - range: -50 to 50
+    shiftUp?: number;     // Shift up (negative values shift down) - range: -50 to 50
+    scale?: number;       // Scale multiplier - 1.0 = normal, 1.2 = 20% bigger, 0.8 = 20% smaller
+  };
   socials?: {
     instagram?: string | null;
     twitter?: string | null;
@@ -56,10 +65,15 @@ const teamMembers: TeamMember[] = [
     id: 'akshayraj',
     name: 'Akshayraj Sanjai',
     role: 'Programming',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    image: '/team-photos/akshay.png',
     alt: 'Akshayraj Sanjai',
     description: 'With 1 year of FTC experience, 2 years of Vex V5RC experience and 1 year of FLL experience, Akshayraj is a skilled and well versed with robotics and programming and is always ready to jump in and guide students with patience and enthusiasm.',
-    delay: ''
+    delay: '',
+    imageControls: { 
+      shiftLeft: 0, 
+      shiftUp: -30,
+      scale: 1.05 
+    }
   },
   {
     id: 'vivaan',
@@ -82,18 +96,36 @@ const teamMembers: TeamMember[] = [
     id: 'siddarth',
     name: 'Siddarth Shailesh',
     role: 'Physics and Quantum Mechanics',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    image: '/team-photos/sid.png',
     alt: 'Siddarth Shailesh',
-    description: 'Sid brings 1 year of FTC experience and a talent for making learning both educational and fun.'
+    description: 'Sid brings 1 year of FTC experience and a talent for making learning both educational and fun.',
+    imageControls: { 
+      shiftLeft: 0, 
+      shiftUp: -5,
+      scale: 1 
+    }
   },
 
   {
     id: 'noah',
     name: 'Noah Lee',
     role: 'Physics and Quantum Mechanics',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    alt: 'Noah',
-    description: 'Noah bring a first place Science Olympiad medal in quantum detanglers and is always ready to jump in and guide students with patience and enthusiasm.'
+    image: '/team-photos/noah-lee.png',
+    alt: 'Noah Lee',
+    description: 'Coding enthusiast. Quantum fanatic. Biology nerd. I have 5 years of experience of Python, C#, and Java in addition to 2 years of quantum computing experience.',
+    imageControls: { 
+      shiftLeft: 0, 
+      shiftUp: -5,
+      scale: 1 
+    }
+  },
+  {
+    id: 'shresh',
+    name: 'Shresh Panda',
+    role: 'Physics and Quantum Mechanics',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    alt: 'Shresh Panda',
+    description: 'Sid brings 1 year of FTC experience and a talent for making learning both educational and fun.'
   },
 
 
@@ -101,22 +133,52 @@ const teamMembers: TeamMember[] = [
 
 ];
 
-const TeamMemberCard: React.FC<TeamMember> = ({ name, role, image, alt, description, delay = '' }) => (
-  <div className={`bg-white rounded-lg overflow-hidden shadow-md border border-gray-100 animate fade-in-up ${delay} flex flex-col h-full`}>
-    <div className="h-64 overflow-hidden flex-shrink-0">
-      <img src={image} alt={alt} className="w-full h-full object-cover object-center" />
-    </div>
-    <div className="p-6 flex flex-col flex-grow">
-      <div>
-        <h3 className="text-xl font-bold text-gray-900 mb-1">{name}</h3>
-        <p className="text-blue-600 font-medium mb-3">{role}</p>
+const TeamMemberCard: React.FC<TeamMember> = ({ name, role, image, alt, description, delay = '', imageControls }) => {
+  // Calculate transform values from simple controls
+  const getImageStyle = () => {
+    if (!imageControls) return {};
+    
+    const transforms = [];
+    
+    // Handle scaling
+    if (imageControls.scale && imageControls.scale !== 1) {
+      transforms.push(`scale(${imageControls.scale})`);
+    }
+    
+    // Handle shifting (convert to percentages for object-position)
+    let objectPosition = 'center center'; // default
+    if (imageControls.shiftLeft !== undefined || imageControls.shiftUp !== undefined) {
+      const xPos = 50 + (imageControls.shiftLeft || 0); // 50% is center, shift from there
+      const yPos = 50 + (imageControls.shiftUp || 0);   // 50% is center, shift from there
+      objectPosition = `${Math.max(0, Math.min(100, xPos))}% ${Math.max(0, Math.min(100, yPos))}%`;
+    }
+    
+    return {
+      transform: transforms.length > 0 ? transforms.join(' ') : undefined,
+      objectPosition: objectPosition
+    };
+  };
+
+  return (
+    <div className={`bg-white rounded-lg overflow-hidden shadow-md border border-gray-100 animate fade-in-up ${delay} flex flex-col h-full`}>
+      <div className="h-64 overflow-hidden flex-shrink-0">
+        <img 
+          src={image} 
+          alt={alt} 
+          className="w-full h-full object-cover"
+          style={getImageStyle()}
+        />
       </div>
-      <div className="mt-auto">
-        <p className="text-gray-600">{description}</p>
+      <div className="p-6 flex flex-col flex-grow">
+        <div>
+          <h3 className="text-xl font-bold text-gray-900 mb-1">{name}</h3>
+          <p className="text-blue-600 font-medium mb-3">{role}</p>
+          <p className="text-gray-600">{description}</p>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 // ==============================================
 // FILTER TEAM MEMBERS
