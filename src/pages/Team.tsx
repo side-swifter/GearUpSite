@@ -67,7 +67,7 @@ const teamMembers: TeamMember[] = [
     role: 'Programming',
     image: '/team-photos/akshay.png',
     alt: 'Akshayraj Sanjai',
-    description: 'With 1 year of FTC experience, 2 years of Vex V5RC experience and 1 year of FLL experience, Akshayraj is a skilled and well versed with robotics and programming and is always ready to jump in and guide students with patience and enthusiasm.',
+    description: 'With 1 year of FTC experience, 2 years of Vex V5RC experience and 1 year of FLL experience, Akshay is a skilled and well versed with robotics and programming and is always ready to jump in and guide students with patience and enthusiasm.',
     delay: '',
     imageControls: { 
       shiftLeft: 0, 
@@ -123,7 +123,7 @@ const teamMembers: TeamMember[] = [
     id: 'shresh',
     name: 'Shresh Panda',
     role: 'Marketing',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1598096969068-7f52cac10c83?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     alt: 'Shresh Panda',
     description: 'Shresh Panda is a marketing specialist at Gear Up, known for raising funds for many organizations through ethical and effective outreach, backed by his experience in business clubs and formal marketing training.'
   },
