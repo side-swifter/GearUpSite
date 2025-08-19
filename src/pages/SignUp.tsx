@@ -1,5 +1,120 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+
+// Custom Dropdown Component
+interface DropdownOption {
+  value: string;
+  label: string;
+}
+
+interface CustomDropdownProps {
+  id: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: DropdownOption[];
+  placeholder: string;
+  required?: boolean;
+  label: string;
+}
+
+const CustomDropdown: React.FC<CustomDropdownProps> = ({
+  id,
+  value,
+  onChange,
+  options,
+  placeholder,
+  required = false,
+  label
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find(option => option.value === value);
+
+  return (
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">
+        {label} {required && '*'}
+      </label>
+      <div className="relative" ref={dropdownRef}>
+        <button
+          type="button"
+          id={id}
+          onClick={() => setIsOpen(!isOpen)}
+          className={`relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm ${
+            !value ? 'text-gray-500' : 'text-gray-900'
+          }`}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+        >
+          <span className="block truncate">
+            {selectedOption ? selectedOption.label : placeholder}
+          </span>
+          <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+            <svg
+              className={`h-5 w-5 text-gray-400 transition-transform duration-200 ${
+                isOpen ? 'transform rotate-180' : ''
+              }`}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </span>
+        </button>
+
+        {isOpen && (
+          <div className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+            {options.map((option) => (
+              <div
+                key={option.value}
+                onClick={() => {
+                  onChange(option.value);
+                  setIsOpen(false);
+                }}
+                className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-blue-50 ${
+                  value === option.value ? 'text-blue-600 bg-blue-50' : 'text-gray-900'
+                }`}
+              >
+                <span className={`block truncate ${value === option.value ? 'font-semibold' : 'font-normal'}`}>
+                  {option.label}
+                </span>
+                {value === option.value && (
+                  <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-blue-600">
+                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 // EmailJS Configuration
 const emailJsPublicKey = 'gU33dTEMvODoA6qw_';
@@ -9,6 +124,31 @@ const confirmationTemplateId = 'template_confirm_signup'; // New confirmation te
 const TEAM_EMAIL = 'gear-up-robotics@outlook.com';
 
 const SignUp = () => {
+  // Dropdown options
+  const gradeOptions: DropdownOption[] = [
+    { value: "3rd", label: "3rd Grade" },
+    { value: "4th", label: "4th Grade" },
+    { value: "5th", label: "5th Grade" },
+    { value: "6th", label: "6th Grade" },
+    { value: "7th", label: "7th Grade" },
+    { value: "8th", label: "8th Grade" },
+    { value: "9th", label: "9th Grade" },
+    { value: "10th", label: "10th Grade" },
+    { value: "11th", label: "11th Grade" },
+    { value: "12th", label: "12th Grade" }
+  ];
+
+  const courseOptions: DropdownOption[] = [
+    { value: "Computer Aided Design 1 (CAD 1)", label: "Computer Aided Design 1 (CAD 1)" },
+    { value: "Intro to Programming with Scratch", label: "Intro to Programming with Scratch" },
+    { value: "Intro to Programming with Python (Python 1)", label: "Intro to Programming with Python (Python 1)" },
+    { value: "Intermediate Programming with Python (Python 2)", label: "Intermediate Programming with Python (Python 2)" },
+    { value: "Physics", label: "Physics" },
+    { value: "Computer Science", label: "Computer Science" },
+    { value: "Quantum Mechanics and Computations (Quantum 1)", label: "Robotics" },
+    { value: "Engineering and Brainstorming 1 (E&BG 1)", label: "Engineering and Brainstorming 1 (E&BG 1)" }
+  ];
+
   // Initialize EmailJS when the component mounts
   useEffect(() => {
     console.log('EmailJS Configuration:', {
@@ -42,6 +182,13 @@ const SignUp = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleDropdownChange = (name: string, value: string) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -237,51 +384,25 @@ const SignUp = () => {
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="grade" className="block text-sm font-medium text-gray-700 mb-1">
-                    Student's Grade (2024-2025) *
-                  </label>
-                  <select
-                    id="grade"
-                    name="grade"
-                    required
-                    value={formData.grade}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <option value="">Select Grade</option>
-                    <option value="3rd">3rd Grade</option>
-                    <option value="4th">4th Grade</option>
-                    <option value="5th">5th Grade</option>
-                    <option value="6th">6th Grade</option>
-                    <option value="7th">7th Grade</option>
-                    <option value="8th">8th Grade</option>
-                    <option value="9th">9th Grade</option>
-                    <option value="10th">10th Grade</option>
-                    <option value="11th">11th Grade</option>
-                    <option value="12th">12th Grade</option>
-                  </select>
-                </div>
+                <CustomDropdown
+                  id="grade"
+                  value={formData.grade}
+                  onChange={(value) => handleDropdownChange('grade', value)}
+                  options={gradeOptions}
+                  placeholder="Select Grade"
+                  required
+                  label="Student's Grade (2024-2025)"
+                />
 
-                <div>
-                  <label htmlFor="course" className="block text-sm font-medium text-gray-700 mb-1">
-                    Select Course *
-                  </label>
-                  <select
-                    id="course"
-                    name="course"
-                    required
-                    value={formData.course}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <option value="">Select a course</option>
-                    <option value="Block Coding Course 1">Block Coding Course 1</option>
-                    <option value="Block Coding Course 2">Block Coding Course 2</option>
-                    <option value="Block Coding Course 3">Block Coding Course 3</option>
-                    <option value="Python Intro">Python Intro</option>
-                  </select>
-                </div>
+                <CustomDropdown
+                  id="course"
+                  value={formData.course}
+                  onChange={(value) => handleDropdownChange('course', value)}
+                  options={courseOptions}
+                  placeholder="Select a course"
+                  required
+                  label="Select Course"
+                />
               </div>
 
               <div>
@@ -313,16 +434,6 @@ const SignUp = () => {
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Any questions or additional information you'd like to share..."
                 ></textarea>
-              </div>
-
-              <div className="flex items-center">
-                <input
-                  id="terms"
-                  name="terms"
-                  type="checkbox"
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                  required
-                />
               </div>
 
               <div className="pt-4 space-y-4">

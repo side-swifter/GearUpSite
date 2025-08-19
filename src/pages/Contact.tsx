@@ -1,10 +1,134 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import { emailjsConfig, getAdminNotificationTemplate, getUserConfirmationTemplate } from '../config/emailjs';
 
+// Custom Dropdown Component
+interface DropdownOption {
+  value: string;
+  label: string;
+}
+
+interface CustomDropdownProps {
+  id: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: DropdownOption[];
+  placeholder: string;
+  required?: boolean;
+  label: string;
+}
+
+const CustomDropdown: React.FC<CustomDropdownProps> = ({
+  id,
+  value,
+  onChange,
+  options,
+  placeholder,
+  required = false,
+  label
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const selectedOption = options.find(option => option.value === value);
+
+  return (
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">
+        {label} {required && '*'}
+      </label>
+      <div className="relative" ref={dropdownRef}>
+        <button
+          type="button"
+          id={id}
+          onClick={() => setIsOpen(!isOpen)}
+          className={`relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm ${
+            !value ? 'text-gray-500' : 'text-gray-900'
+          }`}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+        >
+          <span className="block truncate">
+            {selectedOption ? selectedOption.label : placeholder}
+          </span>
+          <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+            <svg
+              className={`h-5 w-5 text-gray-400 transition-transform duration-200 ${
+                isOpen ? 'transform rotate-180' : ''
+              }`}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </span>
+        </button>
+
+        {isOpen && (
+          <div className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+            {options.map((option) => (
+              <div
+                key={option.value}
+                onClick={() => {
+                  onChange(option.value);
+                  setIsOpen(false);
+                }}
+                className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-blue-50 ${
+                  value === option.value ? 'text-blue-600 bg-blue-50' : 'text-gray-900'
+                }`}
+              >
+                <span className={`block truncate ${value === option.value ? 'font-semibold' : 'font-normal'}`}>
+                  {option.label}
+                </span>
+                {value === option.value && (
+                  <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-blue-600">
+                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const Contact = () => {
   const navigate = useNavigate();
+  
+  // Subject dropdown options
+  const subjectOptions: DropdownOption[] = [
+    { value: "New Contact Form Submission", label: "General Inquiry" },
+    { value: "I want to join the team", label: "I want to join the team" },
+    { value: "Partnership Opportunity", label: "Partnership Opportunity" },
+    { value: "Other", label: "Other" }
+  ];
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,6 +140,13 @@ const Contact = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleDropdownChange = (name: string, value: string) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -119,7 +250,7 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -136,30 +267,21 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
-                    Subject *
-                  </label>
-                  <div className="mt-1">
-                    <select
-                      id="subject"
-                      name="subject"
-                      required
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
-                    >
-                      <option value="New Contact Form Submission">General Inquiry</option>
-                      <option value="I want to join the team">I want to join the team</option>
-                      <option value="Partnership Opportunity">Partnership Opportunity</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
+                  <CustomDropdown
+                    id="subject"
+                    value={formData.subject}
+                    onChange={(value) => handleDropdownChange('subject', value)}
+                    options={subjectOptions}
+                    placeholder="Select a subject"
+                    required
+                    label="Subject"
+                  />
                 </div>
 
                 <div className="sm:col-span-2">
@@ -174,7 +296,7 @@ const Contact = () => {
                       required
                       value={formData.message}
                       onChange={handleChange}
-                      className="py-3 px-4 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded-md"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Tell us how we can help you..."
                     />
                   </div>

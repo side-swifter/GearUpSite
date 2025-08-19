@@ -37,7 +37,7 @@ const faqs: FAQ[] = [
   {
     id: 'anonymous-feedback',
     question: 'Can I provide anonymous feedback?',
-    answer: 'Yes, while we ask for your name and email, you can contact us directly at feedback@gearuprobotics.org if you prefer to remain anonymous.',
+    answer: 'Yes, while we ask for your name and email, we never release your personal information.',
     delay: 'delay-100'
   },
   {
@@ -49,7 +49,7 @@ const faqs: FAQ[] = [
   {
     id: 'response-time',
     question: 'Will someone respond to my feedback?',
-    answer: 'If you\'ve shablue specific concerns or questions that require a response, a member of our team will reach out to you within 2-3 business days.',
+    answer: 'If you\'ve submitted specific concerns or questions that require a response, a member of our team will reach out to you within 2-3 business days.',
     delay: 'delay-300'
   }
 ];
