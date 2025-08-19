@@ -96,7 +96,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative z-10">
           <div className="text-center md:text-left md:max-w-2xl">
             <div className="flex justify-center md:justify-start mb-6">
-              <img src="/logo-no-background.png" alt="Gear Up Robotics Logo" className="h-64 w-auto" />
+              <img src="/circle logo.png" alt="Gear Up Robotics Logo" className="h-64 w-auto" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 animate fade-in-left">
               Powering the Future Through Robotics
