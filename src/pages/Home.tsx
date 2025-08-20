@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Lightbulb, Award, Quote } from 'lucide-react';
+import { ArrowRight, Users, Lightbulb, Award, Quote, GraduationCap } from 'lucide-react';
 
 type Testimonial = {
   id: string;
@@ -102,7 +102,7 @@ const Home = () => {
               Powering the Future Through Robotics
             </h1>
             <p className="text-xl md:text-2xl text-white mb-8 animate fade-in-left delay-200">
-              At Gear Up Robotics, we're revolutionizing STEM education by
+              At Gear Up Foundation, we're revolutionizing STEM education by
               making robotics accessible, engaging, and empowering. Join our
               movement to inspire the next generation of innovators who will
               build the technologies of tomorrow.
@@ -178,7 +178,7 @@ const Home = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 transform transition-all duration-300 hover:-translate-y-2 animate fade-in-up">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <div className="h-6 w-6 text-blue-600" />
+                <GraduationCap className="h-6 w-6 text-blue-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 STEM Education

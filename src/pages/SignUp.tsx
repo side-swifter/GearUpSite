@@ -145,7 +145,7 @@ const SignUp = () => {
     { value: "Intermediate Programming with Python (Python 2)", label: "Intermediate Programming with Python (Python 2)" },
     { value: "Physics", label: "Physics" },
     { value: "Computer Science", label: "Computer Science" },
-    { value: "Quantum Mechanics and Computations (Quantum 1)", label: "Robotics" },
+    { value: "Quantum Mechanics and Computations (Quantum 1)", label: "Quantum Mechanics and Computations (Quantum 1)" },
     { value: "Engineering and Brainstorming 1 (E&BG 1)", label: "Engineering and Brainstorming 1 (E&BG 1)" }
   ];
 

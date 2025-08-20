@@ -57,9 +57,14 @@ const teamMembers: TeamMember[] = [
     id: 'sudarshan-iyengar',
     name: 'Dr. Sudarshan Iyengar',
     role: 'Professor & Advisor',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    image: '/team-photos/Professor.png',
     alt: 'Dr. Sudarshan Iyengar',
-    description: 'Dr. Sudarshan Iyengar, a faculty member at IIT Ropar and PhD graduate from IISc, is a leading educator and researcher known for making technical education engaging through innovative teaching, storytelling, and large-scale online courses like "The Joy of Computing." Currently serving as Director of Annam.AI, he leads major AI education initiatives, coordinates national research fellowships, and heads the Education Design Lab, with his work reaching over 900,000 students and focusing on AI for social good and education design.'
+    description: 'Dr. Sudarshan Iyengar, a faculty member at IIT Ropar and PhD graduate from IISc, is a leading educator and researcher known for making technical education engaging through innovative teaching, storytelling, and large-scale online courses like "The Joy of Computing." Currently serving as Director of Annam.AI, he leads major AI education initiatives, coordinates national research fellowships, and heads the Education Design Lab, with his work reaching over 900,000 students and focusing on AI for social good and education design.',
+    imageControls: {
+      shiftLeft: 0,
+      shiftUp: -80,
+      scale: 1
+    }
   },
   {
     id: 'akshayraj',
@@ -98,7 +103,7 @@ const teamMembers: TeamMember[] = [
     role: 'Physics and Quantum Mechanics',
     image: '/team-photos/sid.png',
     alt: 'Siddarth Shailesh',
-    description: 'Sid brings 1 year of FTC experience and a talent for making learning both educational and fun.',
+    description: 'Siddharth Shailesh is a dedicated FTC member with one year of experience, bringing a strong foundation in computer science and physics. He’s committed to helping guide the organization’s growth through collaboration and continuous learning.',
     imageControls: { 
       shiftLeft: 0, 
       shiftUp: -5,
