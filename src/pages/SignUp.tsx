@@ -1,5 +1,32 @@
 import { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { teamMembers, TeamMember } from '../config/teamData';
+import { classData as importedClassData, getClassesByLevel, ClassData, ClassSession } from '../config/classData';
+
+// Class Schedule Types (for compatibility with existing code)
+interface ClassSchedule {
+  id: string;
+  name: string;
+  instructors: string[];
+  sessions: ClassSession[];
+  description?: string;
+  icon?: string;
+}
+
+// Classes are now managed in /src/config/classData.ts
+// Edit that file to add/remove classes, change levels, icons, and instructors
+
+// Filter active classes and convert to the expected format
+const classSchedule: { id: string; name: string; instructors: string[]; sessions: ClassSession[]; description: string; icon?: string }[] = importedClassData
+  .filter(cls => cls.active !== false)
+  .map(cls => ({
+    id: cls.id,
+    name: cls.name,
+    instructors: cls.instructors,
+    sessions: cls.sessions,
+    description: cls.description,
+    icon: cls.icon
+  }));
 
 // Custom Dropdown Component
 interface DropdownOption {
@@ -116,71 +143,27 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   );
 };
 
-// EmailJS Configuration
-const emailJsPublicKey = 'gU33dTEMvODoA6qw_';
-const emailJsServiceId = 'service_71giipo';  // Your EmailJS service ID
-const emailJsTemplateId = 'template_rgz4bxp'; // Team notification template ID
-const confirmationTemplateId = 'template_confirm_signup'; // New confirmation template ID
-const TEAM_EMAIL = 'gear-up-robotics@outlook.com';
+// Signup Modal Component
+interface SignupModalProps {
+  classItem: ClassSchedule;
+  session: ClassSession;
+  onClose: () => void;
+}
 
-const SignUp = () => {
-  // Dropdown options
-  const gradeOptions: DropdownOption[] = [
-    { value: "3rd", label: "3rd Grade" },
-    { value: "4th", label: "4th Grade" },
-    { value: "5th", label: "5th Grade" },
-    { value: "6th", label: "6th Grade" },
-    { value: "7th", label: "7th Grade" },
-    { value: "8th", label: "8th Grade" },
-    { value: "9th", label: "9th Grade" },
-    { value: "10th", label: "10th Grade" },
-    { value: "11th", label: "11th Grade" },
-    { value: "12th", label: "12th Grade" }
-  ];
-
-  const courseOptions: DropdownOption[] = [
-    { value: "Computer Aided Design 1 (CAD 1)", label: "Computer Aided Design 1 (CAD 1)" },
-    { value: "Intro to Programming with Scratch", label: "Intro to Programming with Scratch" },
-    { value: "Intro to Programming with Python (Python 1)", label: "Intro to Programming with Python (Python 1)" },
-    { value: "Intermediate Programming with Python (Python 2)", label: "Intermediate Programming with Python (Python 2)" },
-    { value: "Physics", label: "Physics" },
-    { value: "Computer Science", label: "Computer Science" },
-    { value: "Quantum Mechanics and Computations (Quantum 1)", label: "Quantum Mechanics and Computations (Quantum 1)" },
-    { value: "Engineering and Brainstorming 1 (E&BG 1)", label: "Engineering and Brainstorming 1 (E&BG 1)" }
-  ];
-
-  // Initialize EmailJS when the component mounts
-  useEffect(() => {
-    console.log('EmailJS Configuration:', {
-      publicKey: emailJsPublicKey ? '***' : 'MISSING',
-      serviceId: emailJsServiceId,
-      templateId: emailJsTemplateId
-    });
-    
-    if (emailJsPublicKey) {
-      try {
-        emailjs.init(emailJsPublicKey);
-        console.log('EmailJS initialized successfully');
-      } catch (error) {
-        console.error('Failed to initialize EmailJS:', error);
-      }
-    } else {
-      console.error('Missing required EmailJS public key');
-    }
-  }, []);
-
+const SignupModal: React.FC<SignupModalProps> = ({ classItem, session, onClose }) => {
   const [formData, setFormData] = useState({
     studentName: '',
     parentName: '',
     email: '',
     phone: '',
     grade: '',
-    course: '',
     interests: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{success: boolean; message: string} | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -195,131 +178,126 @@ const SignUp = () => {
     }));
   };
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{success: boolean; message: string} | null>(null);
+  const gradeOptions: DropdownOption[] = [
+    { value: "3rd", label: "3rd Grade" },
+    { value: "4th", label: "4th Grade" },
+    { value: "5th", label: "5th Grade" },
+    { value: "6th", label: "6th Grade" },
+    { value: "7th", label: "7th Grade" },
+    { value: "8th", label: "8th Grade" },
+    { value: "9th", label: "9th Grade" },
+    { value: "10th", label: "10th Grade" },
+    { value: "11th", label: "11th Grade" },
+    { value: "12th", label: "12th Grade" }
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!classItem || !session) return;
+    
     setIsSubmitting(true);
     setSubmitStatus(null);
 
     try {
-      // Prepare the template parameters - using the EXACT variable names from the template
       const templateParams = {
-        // Basic information
-        to_email: TEAM_EMAIL,
+        to_email: 'gear-up-robotics@outlook.com',
         to_name: 'Gear Up Robotics Team',
         from_name: formData.parentName || 'Website Visitor',
         from_email: formData.email,
         reply_to: formData.email,
         
-        // Student information - must match template exactly
         studentName: formData.studentName,
         grade: formData.grade || 'Not specified',
-        course: formData.course || 'Not specified',
+        class_name: classItem.name,
+        class_day: session.day,
+        class_time: session.time,
+        instructor: classItem.instructors.join(', '),
         interests: formData.interests || 'Not specified',
         
-        // Parent/Guardian information - must match template exactly
         parentName: formData.parentName,
         email: formData.email,
         phone: formData.phone || 'Not provided',
-        
-        // Message and metadata
         message: formData.message || 'No additional information provided',
         currentYear: new Date().getFullYear()
       };
 
-      console.log('Sending email with template ID:', emailJsTemplateId);
-      console.log('Using service ID:', emailJsServiceId);
-      console.log('Template parameters:', JSON.stringify(templateParams, null, 2));
-
-      // Send email to the team
-      const teamEmailPromise = emailjs.send(
-        emailJsServiceId,
-        emailJsTemplateId,
+      await emailjs.send(
+        'service_71giipo',
+        'template_rgz4bxp',
         templateParams,
-        emailJsPublicKey
+        'gU33dTEMvODoA6qw_'
       );
 
-      // Send confirmation email to the user
-      const userConfirmationParams = {
-        to_email: formData.email,
-        to_name: formData.parentName || 'Valued Member',
-        student_name: formData.studentName,
-        parent_name: formData.parentName,
-        contact_email: TEAM_EMAIL,
-        contact_phone: '+1 (647) 999-9999', // Replace with actual contact number
-        year: new Date().getFullYear()
-      };
-
-      const userEmailPromise = emailjs.send(
-        emailJsServiceId,
-        confirmationTemplateId,
-        userConfirmationParams,
-        emailJsPublicKey
-      );
-
-      // Wait for both emails to complete
-      const [teamResult, userResult] = await Promise.all([
-        teamEmailPromise.catch(error => {
-          console.error('Team email failed:', error);
-          throw new Error('Failed to send team notification');
-        }),
-        userEmailPromise.catch(error => {
-          console.error('Confirmation email failed:', error);
-          throw new Error('Failed to send confirmation email');
-        })
-      ]);
-
-      console.log('EmailJS Responses:', { teamResult, userResult });
-
-      if ((teamResult.status === 200 || teamResult.status === 201) && 
-          (userResult.status === 200 || userResult.status === 201)) {
-        setSubmitStatus({
-          success: true,
-          message: `Thank you for signing up, ${formData.studentName || 'Valued Member'}! We've sent a confirmation email to ${formData.email}. Our team will be in touch with you soon.`
-        });
-        
-        // Reset form on successful submission
-        setFormData({
-          studentName: '',
-          parentName: '',
-          email: '',
-          phone: '',
-          grade: '',
-          course: '',
-          interests: '',
-          message: ''
-        });
-      } else {
-        throw new Error('Failed to send one or more emails');
-      }
-    } catch (error: any) {
-      console.error('Error in form submission:', error);
+      setSubmitStatus({
+        success: true,
+        message: `Thank you for signing up for ${classItem.name}! We'll send you more details soon.`
+      });
       
-      const errorMessage = error?.message || 'There was an error submitting your form. Please try again later or contact us directly.';
-      
+      setFormData({
+        studentName: '',
+        parentName: '',
+        email: '',
+        phone: '',
+        grade: '',
+        interests: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
       setSubmitStatus({
         success: false,
-        message: errorMessage
+        message: 'There was an error submitting your form. Please try again later.'
       });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-4">Sign Up for Robotics Classes</h1>
-          <p className="text-xl text-gray-600">Join our robotics program and start your journey into the world of technology and innovation!</p>
-        </div>
 
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-          <div className="p-8 sm:p-10">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">Register for {classItem.name}</h2>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 text-2xl"
+            >
+              ×
+            </button>
+          </div>
+
+          {classItem && session && (
+            <div className="bg-blue-50 p-4 rounded-lg mb-6">
+              <h3 className="font-semibold text-blue-900 mb-2">Class Details:</h3>
+              <p className="text-blue-800"><strong>Class:</strong> {classItem.name}</p>
+              <p className="text-blue-800"><strong>Day:</strong> {session.day}</p>
+              <p className="text-blue-800"><strong>Time:</strong> {session.time} ({session.duration})</p>
+              <p className="text-blue-800"><strong>Instructor:</strong> {classItem.instructors.join(', ')}</p>
+              {classItem.description && (
+                <p className="text-blue-800 mt-2">
+                  <strong>Description:</strong> {classItem.description}
+                </p>
+              )}
+            </div>
+          )}
+
+          {submitStatus ? (
+            <div className={`p-4 rounded-md ${submitStatus.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+              <p className="text-center">{submitStatus.message}</p>
+              {submitStatus.success && (
+                <button
+                  onClick={onClose}
+                  className="mt-4 w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700"
+                >
+                  Close
+                </button>
+              )}
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="studentName" className="block text-sm font-medium text-gray-700 mb-1">
                     Student's Full Name *
@@ -331,8 +309,7 @@ const SignUp = () => {
                     required
                     value={formData.studentName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="John Doe"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -347,8 +324,7 @@ const SignUp = () => {
                     required
                     value={formData.parentName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Jane Doe"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -363,8 +339,7 @@ const SignUp = () => {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="your@email.com"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
@@ -379,35 +354,26 @@ const SignUp = () => {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="(123) 456-7890"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
 
-                <CustomDropdown
-                  id="grade"
-                  value={formData.grade}
-                  onChange={(value) => handleDropdownChange('grade', value)}
-                  options={gradeOptions}
-                  placeholder="Select Grade"
-                  required
-                  label="Student's Grade (2024-2025)"
-                />
-
-                <CustomDropdown
-                  id="course"
-                  value={formData.course}
-                  onChange={(value) => handleDropdownChange('course', value)}
-                  options={courseOptions}
-                  placeholder="Select a course"
-                  required
-                  label="Select Course"
-                />
+                <div className="md:col-span-2">
+                  <CustomDropdown
+                    id="grade"
+                    value={formData.grade}
+                    onChange={(value) => handleDropdownChange('grade', value)}
+                    options={gradeOptions}
+                    placeholder="Select Grade"
+                    required
+                    label="Student's Grade (2024-2025)"
+                  />
+                </div>
               </div>
 
               <div>
                 <label htmlFor="interests" className="block text-sm font-medium text-gray-700 mb-1">
-                  What interests you most about our robotics program? *
+                  What interests you most about this class? *
                 </label>
                 <textarea
                   id="interests"
@@ -416,8 +382,8 @@ const SignUp = () => {
                   required
                   value={formData.interests}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Tell us what excites you about robotics and what you hope to learn..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Tell us what excites you about this class..."
                 ></textarea>
               </div>
 
@@ -428,35 +394,420 @@ const SignUp = () => {
                 <textarea
                   id="message"
                   name="message"
-                  rows={3}
+                  rows={2}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Any questions or additional information you'd like to share..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Any questions or additional information..."
                 ></textarea>
               </div>
 
-              <div className="pt-4 space-y-4">
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="flex-1 py-2 px-4 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex justify-center py-3 px-6 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Sending...' : 'Sign Up'}
+                  {isSubmitting ? 'Submitting...' : 'Sign Up'}
                 </button>
-                
-                {submitStatus && (
-                  <div className={`p-4 rounded-md ${submitStatus.success ? 'bg-green-50 text-green-800' : 'bg-blue-50 text-blue-800'}`}>
-                    <p className="text-center">{submitStatus.message}</p>
-                  </div>
-                )}
               </div>
             </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// EmailJS Configuration
+const emailJsPublicKey = 'gU33dTEMvODoA6qw_';
+const emailJsServiceId = 'service_71giipo';  // Your EmailJS service ID
+const emailJsTemplateId = 'template_rgz4bxp'; // Team notification template ID
+
+const SignUp = () => {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [selectedProgram, setSelectedProgram] = useState<string>('');
+  const [selectedClass, setSelectedClass] = useState<ClassSchedule | null>(null);
+  const [selectedSession, setSelectedSession] = useState<ClassSession | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedInstructor, setSelectedInstructor] = useState<TeamMember | null>(null);
+  const [isInstructorModalOpen, setIsInstructorModalOpen] = useState(false);
+  const [isTimeModalOpen, setIsTimeModalOpen] = useState(false);
+
+  // Initialize EmailJS when the component mounts
+  useEffect(() => {
+    console.log('EmailJS Configuration:', {
+      publicKey: emailJsPublicKey ? '***' : 'MISSING',
+      serviceId: emailJsServiceId,
+      templateId: emailJsTemplateId
+    });
+    
+    emailjs.init(emailJsPublicKey);
+  }, []);
+
+  const handleProgramSelect = (programId: string) => {
+    setSelectedProgram(programId);
+    setCurrentStep(2);
+  };
+
+  const handleClassSelect = (classItem: ClassSchedule) => {
+    setSelectedClass(classItem);
+    setIsTimeModalOpen(true);
+  };
+
+  const handleSessionSelect = (session: ClassSession) => {
+    setSelectedSession(session);
+    setIsTimeModalOpen(false);
+    setIsModalOpen(true);
+  };
+
+  const closeTimeModal = () => {
+    setIsTimeModalOpen(false);
+    setSelectedClass(null);
+  };
+
+  const handleInstructorClick = (instructorName: string) => {
+    const instructor = teamMembers.find(member => member.name === instructorName);
+    if (instructor) {
+      setSelectedInstructor(instructor);
+      setIsInstructorModalOpen(true);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedClass(null);
+    setSelectedSession(null);
+  };
+
+  const closeInstructorModal = () => {
+    setIsInstructorModalOpen(false);
+    setSelectedInstructor(null);
+  };
+
+  const resetFlow = () => {
+    setCurrentStep(1);
+    setSelectedProgram('');
+    setSelectedClass(null);
+    setSelectedSession(null);
+  };
+
+
+  const programCategories = [
+    {
+      id: 'beginner',
+      title: 'Beginner',
+      description: 'Perfect for newcomers to robotics and programming',
+      icon: '🌱',
+      classes: getClassesByLevel('beginner').map(cls => ({
+        id: cls.id,
+        name: cls.name,
+        instructors: cls.instructors,
+        sessions: cls.sessions,
+        description: cls.description,
+        icon: cls.icon
+      }))
+    },
+    {
+      id: 'intermediate',
+      title: 'Intermediate',
+      description: 'For students with some programming or robotics experience',
+      icon: '🚀',
+      classes: getClassesByLevel('intermediate').map(cls => ({
+        id: cls.id,
+        name: cls.name,
+        instructors: cls.instructors,
+        sessions: cls.sessions,
+        description: cls.description,
+        icon: cls.icon
+      }))
+    },
+    {
+      id: 'advanced',
+      title: 'Advanced',
+      description: 'For experienced students ready for complex challenges',
+      icon: '🎯',
+      classes: getClassesByLevel('advanced').map(cls => ({
+        id: cls.id,
+        name: cls.name,
+        instructors: cls.instructors,
+        sessions: cls.sessions,
+        description: cls.description,
+        icon: cls.icon
+      }))
+    }
+  ];
+
+  const selectedCategory = programCategories.find(cat => cat.id === selectedProgram);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            Join Our Programs
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Discover the perfect robotics and programming class for your skill level. 
+            Follow our simple 2-step process to get started.
+          </p>
+        </div>
+
+        {/* Progress Steps */}
+        <div className="flex justify-center mb-12">
+          <div className="flex items-center space-x-8">
+            <div className="flex items-center transform transition-all duration-500 hover:scale-105">
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold transition-all duration-500 ${
+                currentStep >= 1 ? 'bg-blue-600 shadow-lg' : 'bg-gray-300'
+              }`}>
+                1
+              </div>
+              <span className="ml-3 text-lg font-medium text-gray-700">Choose Level</span>
+            </div>
+            <div className={`w-16 h-1 transition-all duration-700 ${currentStep >= 2 ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
+            <div className="flex items-center transform transition-all duration-500 hover:scale-105">
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold transition-all duration-500 ${
+                currentStep >= 2 ? 'bg-blue-600 shadow-lg' : 'bg-gray-300'
+              }`}>
+                2
+              </div>
+              <span className="ml-3 text-lg font-medium text-gray-700">Select Class & Time</span>
+            </div>
           </div>
         </div>
 
-        <div className="mt-8 text-center text-sm text-gray-500">
-          <p>Have questions? Email us at <a href="Gear-Up-Robotics@outlook.com" className="text-blue-600 hover:text-blue-800">Gear-Up-Robotics@outlook.com</a></p>
+        {/* Step 1: Program Selection */}
+        {currentStep === 1 && (
+          <div className="bg-white rounded-2xl shadow-xl p-8 animate-fade-in">
+            <h2 className="text-3xl font-bold text-center text-gray-900 mb-8 animate-slide-up">
+              What's your experience level?
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {programCategories.map((category, index) => (
+                <div
+                  key={category.id}
+                  onClick={() => handleProgramSelect(category.id)}
+                  className="group cursor-pointer bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-slide-up"
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
+                  <div className="text-center">
+                    <div className="text-5xl mb-4 transition-transform duration-300 group-hover:scale-110">{category.icon}</div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                      {category.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4 transition-colors duration-300 group-hover:text-gray-700">
+                      {category.description}
+                    </p>
+                    <div className="text-sm text-blue-600 font-medium transition-all duration-300 group-hover:text-blue-700 group-hover:font-semibold">
+                      {category.classes.length} classes available
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Step 2: Class Selection */}
+        {currentStep === 2 && selectedCategory && (
+          <div className="bg-white rounded-2xl shadow-xl p-8 animate-fade-in">
+            <div className="flex items-center justify-between mb-8 animate-slide-up">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                  {selectedCategory.title}
+                </h2>
+                <p className="text-gray-600">{selectedCategory.description}</p>
+              </div>
+              <button
+                onClick={resetFlow}
+                className="text-blue-600 hover:text-blue-800 font-medium flex items-center transition-all duration-300 hover:scale-105"
+              >
+                ← Back to Programs
+              </button>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {selectedCategory.classes.map((classItem, index) => (
+                <div
+                  key={classItem.id}
+                  className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg hover:border-blue-300 transition-all duration-300 animate-slide-up cursor-pointer group"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                  onClick={() => handleClassSelect(classItem)}
+                >
+                  {/* Header with icon/visual */}
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 text-center">
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
+                      <span className="text-2xl">
+                        {classItem.icon || '📚'}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                      {classItem.name}
+                    </h3>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="p-6">
+                    <div className="space-y-3 mb-4">
+                      <div className="flex items-center text-sm text-gray-600">
+                        <span className="w-4 h-4 text-blue-500 mr-2">👨‍🏫</span>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleInstructorClick(classItem.instructors[0]);
+                          }}
+                          className="text-blue-600 hover:text-blue-800 hover:underline cursor-pointer transition-colors"
+                        >
+                          {classItem.instructors[0]}
+                        </button>
+                      </div>
+                      <div className="flex items-center text-sm text-gray-600">
+                        <span className="w-4 h-4 text-blue-500 mr-2">📅</span>
+                        <span>{classItem.sessions.length} session{classItem.sessions.length > 1 ? 's' : ''}</span>
+                      </div>
+                    </div>
+                    
+                    <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium text-sm">
+                      View Times
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Time Selection Modal */}
+        {isTimeModalOpen && selectedClass && (
+          <TimeSelectionModal
+            classItem={selectedClass}
+            onClose={closeTimeModal}
+            onSelectSession={handleSessionSelect}
+            onInstructorClick={handleInstructorClick}
+          />
+        )}
+
+        {/* Signup Modal */}
+        {isModalOpen && selectedClass && selectedSession && (
+          <SignupModal
+            classItem={selectedClass}
+            session={selectedSession}
+            onClose={closeModal}
+          />
+        )}
+
+        {/* Instructor Profile Modal */}
+        {isInstructorModalOpen && selectedInstructor && (
+          <InstructorModal
+            instructor={selectedInstructor}
+            onClose={closeInstructorModal}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
+
+// Instructor Profile Modal Component
+interface InstructorModalProps {
+  instructor: TeamMember;
+  onClose: () => void;
+}
+
+interface TimeSelectionModalProps {
+  classItem: ClassSchedule;
+  onClose: () => void;
+  onSelectSession: (session: ClassSession) => void;
+  onInstructorClick: (instructorName: string) => void;
+}
+
+const TimeSelectionModal: React.FC<TimeSelectionModalProps> = ({ classItem, onClose, onSelectSession, onInstructorClick }) => {
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 animate-fade-in">
+      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-slide-up">
+        <div className="p-8">
+          <div className="flex justify-between items-start mb-6">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Choose Your Time Slot</h2>
+              <p className="text-gray-600">Select when you'd like to attend {classItem.name}</p>
+            </div>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 text-3xl leading-none transition-all duration-300 hover:scale-110"
+            >
+              ×
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {classItem.sessions.map((session, sessionIndex) => (
+              <button
+                key={sessionIndex}
+                onClick={() => onSelectSession(session)}
+                className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-blue-500 hover:bg-blue-50 transition-all duration-300 text-center animate-slide-up"
+                style={{ animationDelay: `${sessionIndex * 100}ms` }}
+              >
+                <div className="text-sm text-gray-500 mb-1">{session.day}</div>
+                <div className="text-lg font-semibold text-gray-900">{session.time}</div>
+                <div className="text-xs text-gray-400 mt-1">{session.duration}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const InstructorModal: React.FC<InstructorModalProps> = ({ instructor, onClose }) => {
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 animate-fade-in">
+      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-slide-up">
+        <div className="p-8">
+          <div className="flex justify-between items-start mb-6">
+            <h2 className="text-3xl font-bold text-gray-900">Meet Your Instructor</h2>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 text-3xl leading-none transition-all duration-300 hover:scale-110"
+            >
+              ×
+            </button>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-6">
+            <div className="md:w-1/3">
+              <div className="aspect-square rounded-xl overflow-hidden bg-gray-100">
+                <img 
+                  src={instructor.image} 
+                  alt={instructor.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            
+            <div className="md:w-2/3">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">{instructor.name}</h3>
+              <p className="text-lg text-blue-600 font-medium mb-4">{instructor.role}</p>
+              <p className="text-gray-700 leading-relaxed">{instructor.description}</p>
+            </div>
+          </div>
+
+          <div className="mt-8 flex justify-end">
+            <button
+              onClick={onClose}
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium transform hover:scale-105"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>
