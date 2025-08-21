@@ -54,7 +54,7 @@ const NavBar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
-              <img src="/gear-logo.png" alt="Gear Up Robotics Logo" className="h-10 w-auto" />
+              <img src="/gear-logo.png" alt="Gear Up Foundation Logo" className="h-10 w-auto" />
               <span className="ml-3 text-lg font-bold text-gray-900">
                 Gear-Up Foundation
               </span>

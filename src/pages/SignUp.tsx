@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { teamMembers, TeamMember } from '../config/teamData';
-import { classData as importedClassData, getClassesByLevel, ClassData, ClassSession } from '../config/classData';
+import { getClassesByLevel, ClassSession } from '../config/classData';
 
 // Class Schedule Types (for compatibility with existing code)
 interface ClassSchedule {
@@ -15,18 +15,6 @@ interface ClassSchedule {
 
 // Classes are now managed in /src/config/classData.ts
 // Edit that file to add/remove classes, change levels, icons, and instructors
-
-// Filter active classes and convert to the expected format
-const classSchedule: { id: string; name: string; instructors: string[]; sessions: ClassSession[]; description: string; icon?: string }[] = importedClassData
-  .filter(cls => cls.active !== false)
-  .map(cls => ({
-    id: cls.id,
-    name: cls.name,
-    instructors: cls.instructors,
-    sessions: cls.sessions,
-    description: cls.description,
-    icon: cls.icon
-  }));
 
 // Custom Dropdown Component
 interface DropdownOption {
@@ -201,7 +189,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ classItem, session, onClose }
     try {
       const templateParams = {
         to_email: 'gear-up-robotics@outlook.com',
-        to_name: 'Gear Up Robotics Team',
+        to_name: 'Gear Up Foundation Team',
         from_name: formData.parentName || 'Website Visitor',
         from_email: formData.email,
         reply_to: formData.email,
@@ -729,7 +717,7 @@ interface TimeSelectionModalProps {
   onInstructorClick: (instructorName: string) => void;
 }
 
-const TimeSelectionModal: React.FC<TimeSelectionModalProps> = ({ classItem, onClose, onSelectSession, onInstructorClick }) => {
+const TimeSelectionModal: React.FC<TimeSelectionModalProps> = ({ classItem, onClose, onSelectSession }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 animate-fade-in">
       <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-slide-up">

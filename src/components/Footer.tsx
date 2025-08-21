@@ -6,7 +6,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center mb-4">
-              <img src="/logo-no-background.png" alt="Gear Up Robotics Logo" className="h-12 w-auto mr-3" />
+              <img src="/logo-no-background.png" alt="Gear Up Foundation Logo" className="h-12 w-auto mr-3" />
             </div>
             <p className="text-gray-600 mb-4">
               Spreading the love of robotics and engineering through STEM
@@ -91,7 +91,7 @@ const Footer = () => {
         </div>
         <div className="mt-8 pt-8 border-t border-gray-200">
           <p className="text-gray-500 text-sm text-center">
-            © {new Date().getFullYear()} Gear Up Robotics. All rights reserved.
+            © {new Date().getFullYear()} Gear Up Foundation. All rights reserved.
           </p>
         </div>
       </div>

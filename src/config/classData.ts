@@ -38,8 +38,8 @@ export const classData: ClassData[] = [
     name: 'Intro to Programming with Scratch',
     level: 'beginner',
     instructors: ['Vivaan Parikh'],
-    sessions: [{ day: 'Sunday', time: '5:00 PM', duration: '1 hour' }],
-    description: 'Learn programming fundamentals through visual coding with Scratch',
+    sessions: [{ day: 'Sunday', time: '5:00-6:00 PM', duration: '1 hour' }],
+    description: 'Discover the world of programming through Scratch\'s intuitive drag-and-drop interface. Students learn fundamental programming concepts like loops, conditionals, and variables while creating interactive stories, games, and animations. Perfect for young minds to develop logical thinking and creativity.',
     icon: '🎮',
     active: true
   },
@@ -48,8 +48,8 @@ export const classData: ClassData[] = [
     name: 'Engineering & Brainstorming',
     level: 'beginner',
     instructors: ['Vivaan Parikh'],
-    sessions: [{ day: 'Wednesday', time: '4:00 PM', duration: '1 hour' }],
-    description: 'Develop problem-solving skills and learn engineering design principles',
+    sessions: [{ day: 'Wednesday', time: '4:00-5:00 PM', duration: '1 hour' }],
+    description: 'Develop critical thinking and problem-solving skills through hands-on engineering challenges. Students learn the engineering design process, brainstorming techniques, and how to approach complex problems systematically. Includes building prototypes and testing solutions.',
     icon: '⚙️',
     active: true
   },
@@ -57,70 +57,66 @@ export const classData: ClassData[] = [
   // INTERMEDIATE CLASSES
   {
     id: 'python-basics',
-    name: 'Python Programming Basics',
+    name: 'Beginner to Intermediate Python',
     level: 'intermediate',
-    instructors: ['Akshayraj Sanjai'],
+    instructors: ['Akshayraj Sanjai', 'Shresh Panda'],
     sessions: [
-      { day: 'Tuesday', time: '6:00 PM', duration: '1.5 hours' },
-      { day: 'Saturday', time: '10:00 AM', duration: '1.5 hours' }
+      { day: 'Saturday', time: '11:00 AM-12:00 PM', duration: '1 hour' },
+      { day: 'Sunday', time: '11:00 AM-12:00 PM', duration: '1 hour' }
     ],
-    description: 'Learn Python programming fundamentals and build your first applications',
+    description: 'Master Python programming from basics to intermediate concepts. Cover data types, functions, object-oriented programming, file handling, and popular libraries. Students build real projects including games, web scrapers, and data analysis tools.',
     icon: '🐍',
     active: true
   },
   {
-    id: 'web-development',
-    name: 'Web Development Fundamentals',
+    id: 'cad',
+    name: 'Computer Aided Design (CAD)',
     level: 'intermediate',
-    instructors: ['Akshayraj Sanjai'],
-    sessions: [{ day: 'Thursday', time: '7:00 PM', duration: '2 hours' }],
-    description: 'Build websites using HTML, CSS, and JavaScript',
-    icon: '🌐',
+    instructors: ['Manas Kamarsu'],
+    sessions: [{ day: 'Saturday', time: '5:00-6:00 PM', duration: '1 hour' }],
+    description: 'Learn professional 3D modeling and design using industry-standard CAD software. Students create detailed technical drawings, 3D models, and learn about manufacturing processes. Essential skills for engineering, architecture, and product design.',
+    icon: '🏗️',
     active: true
   },
   
   // ADVANCED CLASSES
   {
-    id: 'java-programming',
-    name: 'Advanced Java Programming',
+    id: 'quantum-mechanics',
+    name: 'Quantum Mechanics and Computations',
     level: 'advanced',
-    instructors: ['Dr. Sudarshan Iyengar'],
-    sessions: [{ day: 'Friday', time: '6:30 PM', duration: '2 hours' }],
-    description: 'Master object-oriented programming with Java',
-    icon: '☕',
-    active: true
-  },
-  {
-    id: 'robotics-advanced',
-    name: 'Advanced Robotics & AI',
-    level: 'advanced',
-    instructors: ['Dr. Sudarshan Iyengar', 'Akshayraj Sanjai'],
+    instructors: ['Siddarth Shailesh', 'Noah Lee'],
     sessions: [
-      { day: 'Monday', time: '7:00 PM', duration: '2.5 hours' },
-      { day: 'Saturday', time: '2:00 PM', duration: '2.5 hours' }
+      { day: 'Wednesday', time: '6:00-7:00 PM', duration: '1 hour' },
+      { day: 'Sunday', time: '2:00-3:00 PM', duration: '1 hour' }
     ],
-    description: 'Build intelligent robots using advanced programming and AI concepts',
-    icon: '🤖',
+    description: 'Explore the fascinating world of quantum physics and quantum computing. Students learn quantum principles, superposition, entanglement, and how quantum computers work. Includes hands-on experience with quantum simulators and programming quantum algorithms.',
+    icon: '⚛️',
     active: true
   },
   {
-    id: 'ai-machine-learning',
-    name: 'AI & Machine Learning',
+    id: 'computer-science',
+    name: 'Computer Science',
     level: 'advanced',
-    instructors: ['Dr. Sudarshan Iyengar'],
-    sessions: [{ day: 'Wednesday', time: '8:00 PM', duration: '2 hours' }],
-    description: 'Explore artificial intelligence and machine learning algorithms',
-    icon: '🧠',
+    instructors: ['Siddarth Shailesh', 'Noah Lee', 'Dr. Sudarshan Iyengar'],
+    sessions: [
+      { day: 'Saturday', time: '9:00-10:00 AM', duration: '1 hour' },
+      { day: 'Sunday', time: '9:00-10:00 AM', duration: '1 hour' }
+    ],
+    description: 'Comprehensive computer science fundamentals covering algorithms, data structures, computational complexity, and software engineering principles. Students solve challenging problems and learn to think like computer scientists through theoretical concepts and practical applications.',
+    icon: '💻',
     active: true
   },
   {
-    id: 'competitive-programming',
-    name: 'Competitive Programming',
+    id: 'physics',
+    name: 'Physics',
     level: 'advanced',
-    instructors: ['Akshayraj Sanjai'],
-    sessions: [{ day: 'Sunday', time: '3:00 PM', duration: '2 hours' }],
-    description: 'Prepare for programming competitions and technical interviews',
-    icon: '🏆',
+    instructors: ['Siddarth Shailesh'],
+    sessions: [
+      { day: 'Monday', time: '4:00-5:00 PM', duration: '1 hour' },
+      { day: 'Friday', time: '4:00-5:00 PM', duration: '1 hour' }
+    ],
+    description: 'Advanced physics concepts including mechanics, thermodynamics, electromagnetism, and modern physics. Students conduct virtual experiments, solve complex problems, and understand the mathematical foundations that govern our universe.',
+    icon: '🔬',
     active: true
   }
 ];

@@ -22,7 +22,7 @@ const Impact = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-white mb-6">Our Impact</h1>
           <p className="text-xl text-white max-w-3xl mx-auto">
-            Discover how Gear Up Robotics is transforming STEM education and
+            Discover how Gear Up Foundation is transforming STEM education and
             inspiring the next generation of innovators around the world.
           </p>
         </div>
@@ -145,7 +145,7 @@ const Impact = () => {
                 </div>
               </div>
               <p className="text-gray-700">
-                "Gear Up Robotics transformed our science program. Students who
+                "Gear Up Foundation transformed our science program. Students who
                 were previously disengaged are now leading robotics projects and
                 considering STEM careers."
               </p>
@@ -179,7 +179,7 @@ const Impact = () => {
                 </div>
               </div>
               <p className="text-gray-700">
-                "Gear Up Robotics showed me that I can use technology to solve
+                "Gear Up Foundation showed me that I can use technology to solve
                 real problems. I've learned more from building robots than I
                 ever did from textbooks alone."
               </p>
