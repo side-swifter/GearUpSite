@@ -167,7 +167,6 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose }) 
         interests: formData.interests || '',
         message: formData.message || '',
         className: classItem.name,
-        classId: classItem.id,
         submittedAt: serverTimestamp()
       };
 
