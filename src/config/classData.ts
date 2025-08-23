@@ -19,6 +19,7 @@ export interface ClassData {
   description: string;
   icon: string; // Emoji or icon for the class
   active?: boolean; // Set to false to temporarily hide a class
+  notes?: string;
 }
 
 // ==============================================
@@ -97,7 +98,7 @@ export const classData: ClassData[] = [
     id: 'computer-science',
     name: 'Computer Science',
     level: 'advanced',
-    instructors: ['Siddarth Shailesh', 'Noah Lee', 'Dr. Sudarshan Iyengar'],
+    instructors: ['Akshayraj Sanjai', 'Noah Lee'],
     sessions: [
       { day: 'Saturday', time: '9:00-10:00 AM', duration: '1 hour' },
       { day: 'Sunday', time: '9:00-10:00 AM', duration: '1 hour' }
@@ -105,6 +106,7 @@ export const classData: ClassData[] = [
     description: 'Comprehensive computer science fundamentals covering algorithms, data structures, computational complexity, and software engineering principles. Students solve challenging problems and learn to think like computer scientists through theoretical concepts and practical applications.',
     icon: '💻',
     active: true
+  
   },
   {
     id: 'physics',

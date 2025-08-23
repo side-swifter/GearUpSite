@@ -4,17 +4,21 @@
 // This file contains all team member data used across the application.
 // Edit this file to add/remove team members or update their information.
 
+export interface ImageControls {
+  shiftLeft?: number;
+  shiftUp?: number;
+  scale?: number;
+}
+
 export interface TeamMember {
   id: string;
   name: string;
   role: string;
   image: string;
   description: string;
-  imageControls?: {
-    shiftLeft?: number;
-    shiftUp?: number;
-    scale?: number;
-  };
+  alt?: string; // Alt text for images
+  delay?: string; // Animation delay class
+  imageControls?: ImageControls; // Image positioning controls
   socials?: {
     instagram?: string | null;
     twitter?: string | null;
@@ -32,6 +36,7 @@ export const teamMembers: TeamMember[] = [
     name: 'Dr. Sudarshan Iyengar',
     role: 'Professor & Advisor',
     image: '/team-photos/Professor.png',
+    alt: 'Dr. Sudarshan Iyengar',
     description: 'Dr. Sudarshan Iyengar, a faculty member at IIT Ropar and PhD graduate from IISc, is a leading educator and researcher known for making technical education engaging through innovative teaching, storytelling, and large-scale online courses like "The Joy of Computing." Currently serving as Director of Annam.AI, he leads major AI education initiatives, coordinates national research fellowships, and heads the Education Design Lab, with his work reaching over 900,000 students and focusing on AI for social good and education design.',
     imageControls: {
       shiftLeft: 0,
@@ -44,7 +49,9 @@ export const teamMembers: TeamMember[] = [
     name: 'Akshayraj Sanjai',
     role: 'Programming',
     image: '/team-photos/akshay.png',
+    alt: 'Akshayraj Sanjai',
     description: 'With 1 year of FTC experience, 2 years of Vex V5RC experience and 1 year of FLL experience, Akshay is a skilled and well versed with robotics and programming and is always ready to jump in and guide students with patience and enthusiasm.',
+    delay: '',
     imageControls: { 
       shiftLeft: 0, 
       shiftUp: -30,
@@ -55,22 +62,61 @@ export const teamMembers: TeamMember[] = [
     id: 'vivaan',
     name: 'Vivaan Parikh',
     role: 'Engineering & Brainstorming',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    description: 'With 2 years of FTC experience, Vivaan is a skilled and strategic robotics mentor. He excels at explaining technical concepts in a way that clicks with students, and he\'s always ready to jump in and guide with patience and enthusiasm.'
+    image: '/team-photos/vivaan.png',
+    alt: 'Vivaan Parikh',
+    description: 'With 2 years of FTC experience, Vivaan is a skilled and strategic robotics mentor. He excels at explaining technical concepts in a way that clicks with students, and he\'s always ready to jump in and guide with patience and enthusiasm.',
+    delay: '',
+    imageControls: { 
+      shiftLeft: 0,
+      shiftUp: -120,
+      scale: 1.05 
+    }
   },
   {
     id: 'manas',
-    name: 'Manas Kamarsu',
+    name: 'Shivmanas Kamarsu',
     role: 'CAD',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    description: 'Manas is a 2-year FTC veteran and one of the driving forces behind Gear-Up Robotics.'
+    image: '/team-photos/manas.png',
+    alt: 'Shivmanas Kamarsu',
+    description: 'Manas is a 2-year FTC veteran and one of the driving forces behind Gear-Up Robotics.',
+    delay: '',
+    imageControls: { 
+      shiftLeft: 0,
+      shiftUp: -15,
+      scale: 1.5 
+    }
+  },
+  {
+    id: 'siddarth',
+    name: 'Siddarth Shailesh',
+    role: 'Physics and Quantum Mechanics',
+    image: '/team-photos/sid.png',
+    alt: 'Siddarth Shailesh',
+    description: 'Siddharth Shailesh is a dedicated FTC member with one year of experience, bringing a strong foundation in computer science and physics. He\'s committed to helping guide the organization\'s growth through collaboration and continuous learning.',
+    imageControls: { 
+      shiftLeft: 0, 
+      shiftUp: -30,
+      scale: 1.05 
+    },
+    delay: 'delay-200'
+  },
+  {
+    id: 'shresh',
+    name: 'Shresh Panda',
+    role: 'Programming',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    alt: 'Shresh Panda',
+    description: 'Shresh brings enthusiasm and technical skills to our programming initiatives, helping students learn coding fundamentals.',
+    delay: 'delay-300'
   },
   {
     id: 'noah-lee',
     name: 'Noah Lee',
     role: 'Outreach & Marketing',
     image: '/team-photos/noah-lee.png',
-    description: 'Noah brings creativity and strategic thinking to our outreach efforts, helping connect with students and families in the community.'
+    alt: 'Noah Lee',
+    description: 'Noah brings creativity and strategic thinking to our outreach efforts, helping connect with students and families in the community.',
+    delay: 'delay-400'
   }
 ];
 
