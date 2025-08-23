@@ -1,5 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { teamMembers, TeamMember } from '../config/teamData';
+import { getClassById } from '../config/classData';
+import { X, ExternalLink } from 'lucide-react';
 
 // Team members are now managed centrally in /src/config/teamData.ts
 // Edit that file to add/remove team members or update their information.
@@ -8,7 +11,13 @@ import { teamMembers, TeamMember } from '../config/teamData';
 
 
 
-const TeamMemberCard: React.FC<TeamMember> = ({ name, role, image, alt, description, delay = '', imageControls }) => {
+// Class icons are now handled directly from classData.ts
+
+const TeamMemberCard: React.FC<TeamMember> = ({ name, role, image, alt, description, delay = '', imageControls, classIds }) => {
+  const [showClassesPopup, setShowClassesPopup] = useState(false);
+  
+  // Get actual classes this instructor teaches using classIds
+  const instructorClasses = classIds ? classIds.map(id => getClassById(id)).filter(Boolean) : [];
   // Calculate transform values from simple controls
   const getImageStyle = () => {
     if (!imageControls) return {};
@@ -35,7 +44,7 @@ const TeamMemberCard: React.FC<TeamMember> = ({ name, role, image, alt, descript
   };
 
   return (
-    <div className={`bg-white rounded-lg overflow-hidden shadow-md border border-gray-100 animate fade-in-up ${delay} flex flex-col h-full`}>
+    <div className={`bg-white rounded-lg overflow-hidden shadow-md border border-gray-100 animate fade-in-up ${delay} flex flex-col h-full transform transition-all duration-200 hover:-translate-y-1 hover:shadow-lg`}>
       <div className="h-64 overflow-hidden flex-shrink-0">
         <img 
           src={image} 
@@ -47,10 +56,69 @@ const TeamMemberCard: React.FC<TeamMember> = ({ name, role, image, alt, descript
       <div className="p-6 flex flex-col flex-grow">
         <div>
           <h3 className="text-xl font-bold text-gray-900 mb-1">{name}</h3>
-          <p className="text-blue-600 font-medium mb-3">{role}</p>
+          <button 
+            onClick={() => setShowClassesPopup(true)}
+            className="text-blue-600 font-medium mb-3 hover:text-blue-800 transition-colors cursor-pointer text-left"
+          >
+            {role} {classIds && classIds.length > 0 && '(Click to see classes)'}
+          </button>
+          
           <p className="text-gray-600">{description}</p>
         </div>
       </div>
+      
+      {/* Classes Popup Modal */}
+      {showClassesPopup && classIds && classIds.length > 0 && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[80vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-gray-900">{name}</h3>
+                <button 
+                  onClick={() => setShowClassesPopup(false)}
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              
+              <h4 className="text-lg font-semibold text-blue-600 mb-4">Classes Taught</h4>
+              
+              <div className="grid gap-3">
+                {instructorClasses.map((classData, index) => {
+                  if (!classData) return null;
+                  
+                  return (
+                    <div key={index}>
+                      <Link 
+                        to={`/class/${classData.id}`}
+                        onClick={() => setShowClassesPopup(false)}
+                        className="flex items-center p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100 hover:shadow-md hover:from-blue-100 hover:to-indigo-100 transition-all group cursor-pointer"
+                      >
+                        <div className="text-blue-600 mr-3 text-2xl">
+                          {classData.icon}
+                        </div>
+                        <div className="flex-1">
+                          <span className="text-gray-800 font-medium block">{classData.name}</span>
+                          <span className="text-sm text-gray-500">{classData.level} level</span>
+                        </div>
+                        <ExternalLink className="w-4 h-4 text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+              
+              <button 
+                onClick={() => setShowClassesPopup(false)}
+                className="mt-6 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -91,7 +159,7 @@ const Team = () => {
     });
     return () => observer.disconnect();
   }, []);
-  return <div className="w-full bg-white">
+  return <div className="w-full bg-white relative">
       {/* Hero Section */}
       <section className="bg-blue-600 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

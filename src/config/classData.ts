@@ -4,23 +4,49 @@
 // This file contains all class information used in the signup flow.
 // Edit this file to easily add/remove classes, change levels, icons, and instructors.
 
-export interface ClassSession {
-  day: string;
-  time: string;
-  duration: string;
-}
-
 export interface ClassData {
   id: string;
   name: string;
   level: 'beginner' | 'intermediate' | 'advanced';
   instructors: string[]; // Use exact names from teamData.ts
-  sessions: ClassSession[];
   description: string;
   icon: string; // Emoji or icon for the class
+  topics: string[]; // Topics/tags for the class
   active?: boolean; // Set to false to temporarily hide a class
   notes?: string;
 }
+
+// ==============================================
+// AVAILABLE TOPICS - EASY TO MANAGE
+// ==============================================
+// Add or remove topics here, then assign them to classes below
+export const availableTopics = [
+  'Programming',
+  'Scratch', 
+  'Game Development',
+  'Animation',
+  'Engineering',
+  'Problem Solving',
+  'Design Process',
+  'Prototyping',
+  'Python',
+  'Object-Oriented',
+  'Data Analysis',
+  'CAD',
+  '3D Modeling',
+  'Design',
+  'Quantum Physics',
+  'Quantum Computing',
+  'Advanced Math',
+  'Computer Science',
+  'Cryptography',
+  'Algorithms',
+  'Hardware',
+  'Physics',
+  'Calculus',
+  'AP Physics',
+  'Electrodynamics'
+];
 
 // ==============================================
 // CLASS DATA - EASY TO EDIT
@@ -39,9 +65,9 @@ export const classData: ClassData[] = [
     name: 'Intro to Programming with Scratch',
     level: 'beginner',
     instructors: ['Vivaan Parikh'],
-    sessions: [{ day: 'Sunday', time: '5:00-6:00 PM', duration: '1 hour' }],
     description: 'Discover the world of programming through Scratch\'s intuitive drag-and-drop interface. Students learn fundamental programming concepts like loops, conditionals, and variables while creating interactive stories, games, and animations. Perfect for young minds to develop logical thinking and creativity.',
     icon: '🎮',
+    topics: ['Programming', 'Scratch', 'Game Development', 'Animation'],
     active: true
   },
   {
@@ -49,9 +75,9 @@ export const classData: ClassData[] = [
     name: 'Engineering & Brainstorming',
     level: 'beginner',
     instructors: ['Vivaan Parikh'],
-    sessions: [{ day: 'Wednesday', time: '4:00-5:00 PM', duration: '1 hour' }],
     description: 'Develop critical thinking and problem-solving skills through hands-on engineering challenges. Students learn the engineering design process, brainstorming techniques, and how to approach complex problems systematically. Includes building prototypes and testing solutions.',
     icon: '⚙️',
+    topics: ['Engineering', 'Problem Solving', 'Design Process', 'Prototyping'],
     active: true
   },
   
@@ -61,12 +87,9 @@ export const classData: ClassData[] = [
     name: 'Beginner to Intermediate Python',
     level: 'intermediate',
     instructors: ['Akshayraj Sanjai', 'Shresh Panda'],
-    sessions: [
-      { day: 'Saturday', time: '11:00 AM-12:00 PM', duration: '1 hour' },
-      { day: 'Sunday', time: '11:00 AM-12:00 PM', duration: '1 hour' }
-    ],
     description: 'Master Python programming from basics to intermediate concepts. Cover data types, functions, object-oriented programming, file handling, and popular libraries. Students build real projects including games, web scrapers, and data analysis tools.',
     icon: '🐍',
+    topics: ['Python', 'Programming', 'Object-Oriented', 'Data Analysis'],
     active: true
   },
   {
@@ -74,9 +97,9 @@ export const classData: ClassData[] = [
     name: 'Computer Aided Design (CAD)',
     level: 'intermediate',
     instructors: ['Manas Kamarsu'],
-    sessions: [{ day: 'Saturday', time: '5:00-6:00 PM', duration: '1 hour' }],
     description: 'Learn professional 3D modeling and design using industry-standard CAD software. Students create detailed technical drawings, 3D models, and learn about manufacturing processes. Essential skills for engineering, architecture, and product design.',
     icon: '🏗️',
+    topics: ['CAD', '3D Modeling', 'Engineering', 'Design'],
     active: true
   },
   
@@ -86,12 +109,9 @@ export const classData: ClassData[] = [
     name: 'Quantum Mechanics and Computations',
     level: 'advanced',
     instructors: ['Siddarth Shailesh', 'Noah Lee'],
-    sessions: [
-      { day: 'Wednesday', time: '6:00-7:00 PM', duration: '1 hour' },
-      { day: 'Sunday', time: '2:00-3:00 PM', duration: '1 hour' }
-    ],
     description: 'This course introduces students to the fascinating world of quantum physics and its modern applications in computing. Beginning with the fundamentals—wave-particle duality, diffraction and interference, superposition and entanglement, and Schrödinger\'s equation (and much more)—students will gain a strong theoretical foundation. They will then apply these ideas in the realm of quantum computing, working with qubits, matrix-based gate representations, Dirac notation, Quantum Circuits, and Python-based simulations of quantum algorithms. Students will even code their own mini quantum computer projects. By the end, they will have both a deep understanding of quantum mechanics and practical experience in quantum computation.',
     icon: '⚛️',
+    topics: ['Quantum Physics', 'Quantum Computing', 'Python', 'Advanced Math'],
     active: true
   },
   {
@@ -99,26 +119,20 @@ export const classData: ClassData[] = [
     name: 'Computer Science',
     level: 'advanced',
     instructors: ['Akshayraj Sanjai', 'Noah Lee', 'Siddarth Shailesh'],
-    sessions: [
-      { day: 'Saturday', time: '9:00-10:00 AM', duration: '1 hour' },
-      { day: 'Sunday', time: '9:00-10:00 AM', duration: '1 hour' }
-    ],
     description: 'This course provides a comprehensive foundation in computer science, combining theory and hands-on practice. Students will explore the principles of cryptography and apply programming techniques to encrypt and decrypt various ciphers. Along the way, they will develop advanced skills in algorithms, data structures, and high-level programming. The course also delves into computer hardware, covering CPUs, GPUs, storage systems, cooling methods, and more. By the end, students will have a strong command of both programming and the inner workings of modern computers.',
     icon: '💻',
+    topics: ['Computer Science', 'Cryptography', 'Algorithms', 'Hardware'],
     active: true
-  
+
   },
   {
     id: 'physics',
     name: 'Physics',
     level: 'advanced',
     instructors: ['Siddarth Shailesh'],
-    sessions: [
-      { day: 'Monday', time: '4:00-5:00 PM', duration: '1 hour' },
-      { day: 'Friday', time: '4:00-5:00 PM', duration: '1 hour' }
-    ],
     description: 'Students will build a solid understanding of the core principles of physics, beginning with vectors, scalars, matrices, gravitation, and Newton\'s laws. From there, they will progress to advanced applications such as predicting particle trajectories with vector calculus, deriving and integrating kinematic equations, modeling simple harmonic oscillators, and exploring the fundamentals of electrodynamics and energy (with much more). By the end of the course, students will be well-prepared for AP Physics concepts and equipped with skills that extend into more advanced topics.',
     icon: '🔬',
+    topics: ['Physics', 'Calculus', 'AP Physics', 'Electrodynamics'],
     active: true
   }
 ];
