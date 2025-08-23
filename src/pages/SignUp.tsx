@@ -228,94 +228,78 @@ const SignUp = () => {
                     onClick={() => handleClassSelect(classItem)}
                     className="bg-white rounded-lg shadow-sm border hover:shadow-lg hover:border-blue-300 transition-all duration-300 cursor-pointer group"
                   >
-                    <div className="flex">
+                    <div className="flex h-60">
                       {/* Image Section */}
-                      <div className="w-48 h-40 flex-shrink-0">
-                        <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 rounded-l-lg flex items-center justify-center overflow-hidden">
-                          {/* Placeholder for class image - you can replace this with actual images */}
+                      <div className="w-80 flex-shrink-0 relative overflow-hidden rounded-l-lg">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
                           <div className="text-6xl opacity-60 group-hover:scale-110 transition-transform duration-300">
                             {classItem.icon}
                           </div>
-                          {/* When you add images, replace the above div with:
-                          <img 
-                            src={`/class-images/${classItem.id}.jpg`} 
-                            alt={classItem.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                          */}
                         </div>
+                        {/* When you add images, replace the above div with:
+                        <img 
+                          src={`/class-images/${classItem.id}.jpg`} 
+                          alt={classItem.name}
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        */}
                       </div>
                       
                       {/* Content Section */}
-                      <div className="flex-1 p-6">
-                        <div className="flex items-start justify-between h-full">
-                          <div className="flex-1">
-                            <div className="mb-3">
-                              <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-200 mb-2">
-                                {classItem.name}
-                              </h3>
-                              <div className="flex items-center">
-                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                                  classItem.level === 'beginner' ? 'bg-green-100 text-green-800' :
-                                  classItem.level === 'intermediate' ? 'bg-blue-100 text-blue-800' :
-                                  'bg-purple-100 text-purple-800'
-                                }`}>
-                                  {levelOption?.icon} {levelOption?.title}
-                                </span>
-                              </div>
-                            </div>
-                            
-                            <p className="text-gray-600 mb-4 line-clamp-2 group-hover:text-gray-700 transition-colors duration-200">
-                              {classItem.description}
-                            </p>
-                            
-                            <div className="space-y-3">
-                              {/* Topics */}
-                              <div>
-                                <span className="font-medium text-gray-700 text-sm">Topics:</span>
-                                <div className="flex flex-wrap gap-2 mt-2">
-                                  {classItem.topics.map((topic, idx) => (
-                                    <span
-                                      key={idx}
-                                      className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-600 hover:text-white transition-colors duration-200 cursor-default"
-                                    >
-                                      {topic}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-                              
-                              {/* Instructors and Sessions */}
-                              <div className="flex items-center space-x-6">
-                                <div className="text-sm text-gray-500">
-                                  <span className="font-medium text-gray-700">Instructor:</span>
-                                  <div className="mt-1">
-                                    {classItem.instructors.map((instructor, idx) => (
-                                      <button
-                                        key={idx}
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          handleInstructorClick(instructor);
-                                        }}
-                                        className="text-blue-600 hover:text-blue-800 hover:underline mr-2"
-                                      >
-                                        {instructor}{idx < classItem.instructors.length - 1 ? ',' : ''}
-                                      </button>
-                                    ))}
-                                  </div>
-                                </div>
-                                <div className="text-sm">
-                                  <span className="font-medium text-gray-700">Level:</span>
-                                  <div className="text-blue-600 font-medium capitalize">{classItem.level}</div>
-                                </div>
-                              </div>
-                            </div>
+                      <div className="flex-1 p-6 flex flex-col justify-between min-h-0">
+                        <div className="flex-1 min-h-0">
+                          <div className="mb-2">
+                            <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-200 mb-1 line-clamp-2">
+                              {classItem.name}
+                            </h3>
+                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                              classItem.level === 'beginner' ? 'bg-green-100 text-green-800' :
+                              classItem.level === 'intermediate' ? 'bg-blue-100 text-blue-800' :
+                              'bg-purple-100 text-purple-800'
+                            }`}>
+                              {levelOption?.icon} {levelOption?.title}
+                            </span>
                           </div>
                           
-                          {/* Hover indicator */}
-                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-4">
-                            <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <p className="text-gray-600 mb-3 text-sm leading-relaxed line-clamp-3">
+                            {classItem.shortDescription}
+                          </p>
+                          
+                          <div className="space-y-2">
+                            {/* Topics */}
+                            <div>
+                              <span className="font-medium text-gray-700 text-sm">Topics:</span>
+                              <div className="flex flex-wrap gap-1 mt-1">
+                                {classItem.topics.slice(0, 3).map((topic, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs whitespace-nowrap"
+                                  >
+                                    {topic}
+                                  </span>
+                                ))}
+                                {classItem.topics.length > 3 && (
+                                  <span className="text-xs text-gray-500">+{classItem.topics.length - 3}</span>
+                                )}
+                              </div>
+                            </div>
+                            
+                            {/* Instructor */}
+                            <div className="text-sm">
+                              <span className="font-medium text-gray-700">Instructor:</span>
+                              <span className="text-blue-600 ml-1 truncate">{classItem.instructors[0]}</span>
+                              {classItem.instructors.length > 1 && (
+                                <span className="text-gray-500"> +{classItem.instructors.length - 1}</span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Hover indicator */}
+                        <div className="flex justify-end pt-2">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
+                              <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                               </svg>
                             </div>
