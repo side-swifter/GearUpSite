@@ -134,7 +134,7 @@ export const classData: ClassData[] = [
     id: 'computer-science',
     name: 'Computer Science',
     level: 'advanced',
-    instructors: ['Siddarth Shailesh', 'Noah Lee', 'Dr. Sudarshan Iyengar'],
+    instructors: ['Siddarth Shailesh', 'Noah Lee','Akshayraj Sanjai', 'Dr. Sudarshan Iyengar'],
     description: 'Students will build a comprehensive foundation in computer science, covering algorithms, data structures, cryptography, and computer hardware. They will learn programming paradigms, computational complexity, and software engineering principles. The course prepares students for advanced computer science studies and careers in technology.',
     shortDescription: 'Comprehensive computer science foundation covering cryptography, algorithms, and hardware.',
     icon: '💻',

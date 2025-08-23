@@ -164,7 +164,6 @@ const Rating = () => {
         feedback: formData.feedback,
         wouldRecommend: formData.wouldRecommend,
         submittedAt: serverTimestamp(),
-        documentName: formData.name
       };
 
       await addDoc(collection(db, 'ratings'), ratingData);
