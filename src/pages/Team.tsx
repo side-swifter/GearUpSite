@@ -67,7 +67,7 @@ const Team = () => {
     member.id === 'vivaan' ||
     member.id === 'manas' ||
     member.id === 'siddarth' ||
-    member.id === 'noah' ||
+    member.id === 'noah-lee' ||
     member.id === 'shresh'
   );
   

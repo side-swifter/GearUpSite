@@ -112,7 +112,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: 'noah-lee',
     name: 'Noah Lee',
-    role: 'Outreach & Marketing',
+    role: 'Quantum and Computer Science',
     image: '/team-photos/noah-lee.png',
     alt: 'Noah Lee',
     description: 'Noah brings creativity and strategic thinking to our outreach efforts, helping connect with students and families in the community.',
@@ -124,5 +124,5 @@ export const teamMembers: TeamMember[] = [
 // TEAM FILTERS
 // ==============================================
 // Control which team members appear in which sections
-export const mainTeamMembers = ['akshayraj', 'vivaan', 'manas', 'noah-lee'];
+export const mainTeamMembers = ['akshayraj', 'vivaan', 'manas', 'noah'];
 export const programDirectors = ['sudarshan-iyengar'];
