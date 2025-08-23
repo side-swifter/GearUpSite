@@ -101,6 +101,16 @@ export const teamMembers: TeamMember[] = [
     delay: 'delay-200'
   },
   {
+    id: 'noah-lee',
+    name: 'Noah Lee',
+    role: 'Quantum and Computer Science',
+    image: '/team-photos/noah-lee.png',
+    alt: 'Noah Lee',
+    description: 'Coding enthusiast. Quantum fanatic. Biology nerd. I have 5 years of experience of Python, C#, and Java in addition to 2 years of quantum computing experience.',
+    delay: 'delay-400'
+  },
+  
+  {
     id: 'shresh',
     name: 'Shresh Panda',
     role: 'Programming',
@@ -109,15 +119,7 @@ export const teamMembers: TeamMember[] = [
     description: 'Shresh brings enthusiasm and technical skills to our programming initiatives, helping students learn coding fundamentals.',
     delay: 'delay-300'
   },
-  {
-    id: 'noah-lee',
-    name: 'Noah Lee',
-    role: 'Quantum and Computer Science',
-    image: '/team-photos/noah-lee.png',
-    alt: 'Noah Lee',
-    description: 'Noah brings creativity and strategic thinking to our outreach efforts, helping connect with students and families in the community.',
-    delay: 'delay-400'
-  }
+
 ];
 
 // ==============================================

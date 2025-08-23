@@ -99,7 +99,7 @@ const Home = () => {
               <img src="/circle logo.png" alt="Gear Up Foundation Logo" className="h-64 w-auto" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 animate fade-in-left">
-              Powering the Future Through Robotics
+            Empowering the future generation through STEM
             </h1>
             <p className="text-xl md:text-2xl text-white mb-8 animate fade-in-left delay-200">
               At Gear Up Foundation, we're revolutionizing STEM education by

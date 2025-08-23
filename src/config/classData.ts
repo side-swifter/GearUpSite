@@ -98,7 +98,7 @@ export const classData: ClassData[] = [
     id: 'computer-science',
     name: 'Computer Science',
     level: 'advanced',
-    instructors: ['Akshayraj Sanjai', 'Noah Lee'],
+    instructors: ['Akshayraj Sanjai', 'Noah Lee', 'Siddarth Shailesh'],
     sessions: [
       { day: 'Saturday', time: '9:00-10:00 AM', duration: '1 hour' },
       { day: 'Sunday', time: '9:00-10:00 AM', duration: '1 hour' }
