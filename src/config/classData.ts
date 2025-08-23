@@ -7,14 +7,14 @@
 export interface ClassData {
   id: string;
   name: string;
+  level: 'beginner' | 'intermediate' | 'advanced';
+  instructors: string[]; // References to teamData member names
   description: string;
   shortDescription: string;
-  level: 'beginner' | 'intermediate' | 'advanced';
-  instructors: string[];
-  topics: string[];
   icon: string;
+  topics: string[];
+  schedule?: string;
   active?: boolean; // Set to false to temporarily hide a class
-  notes?: string;
 }
 
 // ==============================================
@@ -46,7 +46,12 @@ export const availableTopics = [
   'Physics',
   'Calculus',
   'AP Physics',
-  'Electrodynamics'
+  'Electrodynamics',
+  'Visual Programming',
+  'OOP',
+  'Data Structures',
+  'Technical Drawing',
+  'Engineering Design'
 ];
 
 // ==============================================
@@ -63,83 +68,78 @@ export const classData: ClassData[] = [
   // BEGINNER CLASSES
   {
     id: 'scratch',
-    name: 'Intro to Programming with Scratch',
+    name: 'Scratch',
     level: 'beginner',
     instructors: ['Vivaan Parikh'],
-    description: 'Discover the world of programming through Scratch\'s intuitive drag-and-drop interface. Students learn fundamental programming concepts like loops, conditionals, and variables while creating interactive stories, games, and animations. Perfect for young minds to develop logical thinking and creativity.',
-    shortDescription: 'Learn programming basics through Scratch\'s drag-and-drop interface while creating games and animations.',
+    description: 'Students will learn the fundamentals of programming through Scratch, a visual programming language. They will create interactive stories, games, and animations while developing computational thinking skills. The course covers basic programming concepts like loops, conditionals, variables, and events in a fun and engaging way.',
+    shortDescription: 'Learn programming fundamentals through Scratch with interactive stories, games, and animations.',
     icon: '🎮',
-    topics: ['Programming', 'Scratch', 'Game Development', 'Animation'],
+    topics: ['Scratch', 'Visual Programming', 'Game Development', 'Animation'],
+    schedule: 'Sunday: 5-6PM',
     active: true
   },
   {
     id: 'engineering-brainstorming',
     name: 'Engineering & Brainstorming',
-    level: 'beginner',
+    level: 'intermediate',
     instructors: ['Vivaan Parikh'],
-    description: 'Develop critical thinking and problem-solving skills through hands-on engineering challenges. Students learn the engineering design process, brainstorming techniques, and how to approach complex problems systematically. Includes building prototypes and testing solutions.',
-    shortDescription: 'Develop problem-solving skills through hands-on engineering challenges and design thinking.',
-    icon: '⚙️',
-    topics: ['Engineering', 'Problem Solving', 'Design Process', 'Prototyping'],
+    description: 'Students will develop critical thinking and problem-solving skills through engineering design challenges. They will learn brainstorming techniques, design thinking methodology, and project management. The course emphasizes creativity, collaboration, and iterative design processes to tackle real-world engineering problems.',
+    shortDescription: 'Develop problem-solving skills through engineering design challenges and brainstorming techniques.',
+    icon: '🔧',
+    topics: ['Engineering', 'Design Thinking', 'Problem Solving', 'Project Management'],
+    schedule: 'Wednesday: 4:00-5:00PM',
     active: true
   },
   
   // INTERMEDIATE CLASSES
   {
     id: 'python-basics',
-    name: 'Beginner to Intermediate Python',
+    name: 'Python Basics',
     level: 'intermediate',
-    instructors: ['Vivaan Parikh'],
-    description: 'Master Python programming from basics to intermediate concepts. Cover data types, functions, object-oriented programming, and popular libraries. Students build real projects including games, web scrapers, and data analysis tools.',
-    shortDescription: 'Master Python programming from basics to intermediate concepts with real-world projects.',
+    instructors: ['Akshayraj Sanjai', 'Shresh Panda'],
+    description: 'Students will dive into Python programming, starting with basic syntax and progressing to more complex concepts. They will learn about variables, data types, control structures, functions, and basic object-oriented programming. The course includes hands-on projects to reinforce learning and build practical programming skills.',
+    shortDescription: 'Dive into Python programming with hands-on projects covering syntax to object-oriented concepts.',
     icon: '🐍',
-    topics: ['Python', 'Programming', 'Object-Oriented', 'Data Analysis'],
+    topics: ['Python', 'Programming', 'OOP', 'Data Structures'],
+    schedule: 'Saturday and Sunday: 11:00-12:00',
     active: true
   },
   {
-    id: 'cad-design',
-    name: 'Computer Aided Design (CAD)',
+    id: 'cad',
+    name: 'CAD',
     level: 'intermediate',
-    instructors: ['Akshayraj Sanjal', 'Shivam Panda'],
-    description: 'Learn professional 3D modeling and design using industry-standard CAD software. Students create detailed technical drawings, 3D models, and learn about manufacturing processes. Essential skills for engineering, architecture, and product design.',
-    shortDescription: 'Learn professional 3D modeling and design using industry-standard CAD software.',
+    instructors: ['Shivmanas Kamarsu'],
+    description: 'Students will learn Computer-Aided Design (CAD) using industry-standard software. They will master 3D modeling techniques, technical drawing, and design principles. The course covers creating complex assemblies, simulations, and preparing designs for manufacturing, providing essential skills for engineering and product development.',
+    shortDescription: 'Master 3D modeling and technical drawing with industry-standard CAD software.',
     icon: '📐',
-    topics: ['CAD', '3D Modeling', 'Engineering', 'Design'],
+    topics: ['CAD', '3D Modeling', 'Technical Drawing', 'Engineering Design'],
+    schedule: 'Saturday: 5-6PM',
     active: true
   },
   
   // ADVANCED CLASSES
   {
-    id: 'advanced-programming',
-    name: 'Advanced Programming Concepts',
-    level: 'advanced',
-    instructors: ['Noah Lee'],
-    description: 'Dive deep into advanced programming paradigms, algorithms, and software architecture. Students learn about design patterns, data structures, performance optimization, and large-scale software development practices.',
-    shortDescription: 'Dive deep into advanced programming paradigms, algorithms, and software architecture.',
-    icon: '💻',
-    topics: ['Advanced Programming', 'Algorithms', 'Software Architecture', 'Performance'],
-    active: true
-  },
-  {
     id: 'quantum-mechanics',
     name: 'Quantum Mechanics and Computations',
     level: 'advanced',
-    instructors: ['Manas Kamaraju'],
-    description: 'This course introduces students to the fascinating world of quantum physics and its applications in modern computing. Students explore quantum principles, quantum algorithms, and the potential of quantum computers to solve complex problems.',
-    shortDescription: 'Explore quantum physics and its applications in modern computing and algorithms.',
+    instructors: ['Siddarth Shailesh', 'Noah Lee'],
+    description: 'Students will explore the fascinating world of quantum mechanics and quantum computing. They will learn about quantum states, superposition, entanglement, and quantum algorithms. The course covers both theoretical foundations and practical applications, including programming quantum computers and understanding their potential impact on technology.',
+    shortDescription: 'Explore quantum mechanics and computing with quantum states, algorithms, and programming.',
     icon: '⚛️',
-    topics: ['Quantum Physics', 'Quantum Computing', 'Advanced Mathematics', 'Algorithms'],
+    topics: ['Quantum Mechanics', 'Quantum Computing', 'Algorithms', 'Physics'],
+    schedule: 'Wednesday: 6:00-7:00PM, Sunday: 2:00-3:00PM',
     active: true
   },
   {
     id: 'computer-science',
     name: 'Computer Science',
     level: 'advanced',
-    instructors: ['Akshayraj Sanjai', 'Noah Lee', 'Siddarth Shailesh'],
-    description: 'This course provides a comprehensive foundation in computer science, combining theory and hands-on practice. Students will explore the principles of cryptography and apply programming techniques to encrypt and decrypt various ciphers. Along the way, they will develop advanced skills in algorithms, data structures, and high-level programming. The course also delves into computer hardware, covering CPUs, GPUs, storage systems, cooling methods, and more. By the end, students will have a strong command of both programming and the inner workings of modern computers.',
+    instructors: ['Siddarth Shailesh', 'Noah Lee', 'Dr. Sudarshan Iyengar'],
+    description: 'Students will build a comprehensive foundation in computer science, covering algorithms, data structures, cryptography, and computer hardware. They will learn programming paradigms, computational complexity, and software engineering principles. The course prepares students for advanced computer science studies and careers in technology.',
     shortDescription: 'Comprehensive computer science foundation covering cryptography, algorithms, and hardware.',
     icon: '💻',
     topics: ['Computer Science', 'Cryptography', 'Algorithms', 'Hardware'],
+    schedule: 'Saturday and Sunday: 9:00-10:00AM',
     active: true
   },
   {
@@ -151,6 +151,7 @@ export const classData: ClassData[] = [
     shortDescription: 'Build understanding of core physics principles from Newton\'s laws to electrodynamics and AP Physics.',
     icon: '🔬',
     topics: ['Physics', 'Calculus', 'AP Physics', 'Electrodynamics'],
+    schedule: 'Monday: 4:00-5:00PM, Friday: 4:00-5:00PM',
     active: true
   }
 ];

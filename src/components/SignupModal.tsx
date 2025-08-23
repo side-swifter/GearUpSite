@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../config/firebase';
 import { ClassData } from '../config/classData';
 
 // Custom Dropdown Component
@@ -157,32 +158,27 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose }) 
     setSubmitStatus(null);
 
     try {
-      const templateParams = {
-        to_email: 'gear-up-robotics@outlook.com',
-        to_name: 'Gear Up Foundation Team',
-        from_name: formData.parentName || 'Website Visitor',
-        from_email: formData.email,
-        reply_to: formData.email,
-        
+      const signupData = {
         studentName: formData.studentName,
-        grade: formData.grade || 'Not specified',
-        className: classItem.name,
-        instructor: classItem.instructors.join(', '),
-        interests: formData.interests || 'Not specified',
-        
         parentName: formData.parentName,
         email: formData.email,
-        phone: formData.phone || 'Not provided',
-        message: formData.message || 'No additional information provided',
-        currentYear: new Date().getFullYear()
+        phone: formData.phone || '',
+        grade: formData.grade || '',
+        interests: formData.interests || '',
+        message: formData.message || '',
+        className: classItem.name,
+        classId: classItem.id,
+        classLevel: classItem.level,
+        instructors: classItem.instructors,
+        submittedAt: serverTimestamp()
       };
 
-      await emailjs.send(
-        'service_71giipo',
-        'template_rgz4bxp',
-        templateParams,
-        'gU33dTEMvODoA6qw_'
-      );
+      // Create custom document name: "className by childName"
+      const docName = `${classItem.name} by ${formData.studentName}`;
+      await addDoc(collection(db, 'classes'), {
+        ...signupData,
+        documentName: docName
+      });
 
       setSubmitStatus({
         success: true,

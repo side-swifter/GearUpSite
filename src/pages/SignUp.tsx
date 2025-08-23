@@ -287,7 +287,15 @@ const SignUp = () => {
                             {/* Instructor */}
                             <div className="text-sm">
                               <span className="font-medium text-gray-700">Instructor:</span>
-                              <span className="text-blue-600 ml-1 truncate">{classItem.instructors[0]}</span>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleInstructorClick(classItem.instructors[0]);
+                                }}
+                                className="text-blue-600 ml-1 truncate hover:text-blue-800 hover:underline"
+                              >
+                                {classItem.instructors[0]}
+                              </button>
                               {classItem.instructors.length > 1 && (
                                 <span className="text-gray-500"> +{classItem.instructors.length - 1}</span>
                               )}

@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 type Testimonial = {
   id: string;
@@ -97,12 +99,102 @@ const TestimonialCard: React.FC<Testimonial> = ({ name, role, content, rating, d
 );
 
 const Rating = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    rating: 5,
+    experience: '',
+    feedback: '',
+    wouldRecommend: 'yes'
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{success: boolean; message: string} | null>(null);
+  const [isRatingDropdownOpen, setIsRatingDropdownOpen] = useState(false);
+  const [isRecommendDropdownOpen, setIsRecommendDropdownOpen] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === 'rating' ? parseInt(value) : value
+    }));
+  };
+
+  const handleRatingSelect = (rating: number) => {
+    setFormData(prev => ({ ...prev, rating }));
+    setIsRatingDropdownOpen(false);
+  };
+
+  const handleRecommendSelect = (value: string) => {
+    setFormData(prev => ({ ...prev, wouldRecommend: value }));
+    setIsRecommendDropdownOpen(false);
+  };
+
+  const getRatingText = (rating: number) => {
+    const ratingMap = {
+      5: '⭐⭐⭐⭐⭐ Excellent',
+      4: '⭐⭐⭐⭐ Very Good',
+      3: '⭐⭐⭐ Good',
+      2: '⭐⭐ Fair',
+      1: '⭐ Poor'
+    };
+    return ratingMap[rating as keyof typeof ratingMap];
+  };
+
+  const getRecommendText = (value: string) => {
+    const recommendMap = {
+      'yes': 'Yes, definitely!',
+      'maybe': 'Maybe',
+      'no': 'No'
+    };
+    return recommendMap[value as keyof typeof recommendMap];
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const ratingData = {
+        name: formData.name,
+        email: formData.email,
+        rating: formData.rating,
+        experience: formData.experience,
+        feedback: formData.feedback,
+        wouldRecommend: formData.wouldRecommend,
+        submittedAt: serverTimestamp(),
+        documentName: formData.name
+      };
+
+      await addDoc(collection(db, 'ratings'), ratingData);
+
+      setSubmitStatus({
+        success: true,
+        message: 'Thank you for your feedback! We really appreciate it.'
+      });
+      
+      setFormData({
+        name: '',
+        email: '',
+        rating: 5,
+        experience: '',
+        feedback: '',
+        wouldRecommend: 'yes'
+      });
+
+    } catch (error) {
+      console.error('Error submitting rating:', error);
+      setSubmitStatus({
+        success: false,
+        message: 'There was an error submitting your rating. Please try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = '//embed.typeform.com/next/embed.js';
-    script.async = true;
-    document.body.appendChild(script);
-    
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -118,7 +210,6 @@ const Rating = () => {
     });
     
     return () => {
-      document.body.removeChild(script);
       observer.disconnect();
     };
   }, []);
@@ -133,6 +224,167 @@ const Rating = () => {
             We value your feedback. Let us know how we're doing and how we can
             better serve our community.
           </p>
+        </div>
+      </section>
+
+      {/* Rating Form Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Share Your Experience</h2>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name Field */}
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                  Your Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              {/* Email Field */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter your email address"
+                />
+              </div>
+
+              {/* Rating Field - Custom Dropdown */}
+              <div className="relative">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Overall Rating *
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setIsRatingDropdownOpen(!isRatingDropdownOpen)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 flex justify-between items-center"
+                >
+                  <span>{getRatingText(formData.rating)}</span>
+                  <svg className={`w-5 h-5 transition-transform ${isRatingDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {isRatingDropdownOpen && (
+                  <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+                    {[5, 4, 3, 2, 1].map((rating) => (
+                      <button
+                        key={rating}
+                        type="button"
+                        onClick={() => handleRatingSelect(rating)}
+                        className="w-full px-3 py-2 text-left hover:bg-blue-50 focus:bg-blue-50 focus:outline-none first:rounded-t-md last:rounded-b-md"
+                      >
+                        {getRatingText(rating)}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Experience Field */}
+              <div>
+                <label htmlFor="experience" className="block text-sm font-medium text-gray-700 mb-2">
+                  Which program did you participate in?
+                </label>
+                <input
+                  type="text"
+                  id="experience"
+                  name="experience"
+                  value={formData.experience}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="e.g., Robotics Basics, Advanced Programming, etc."
+                />
+              </div>
+
+              {/* Feedback Field */}
+              <div>
+                <label htmlFor="feedback" className="block text-sm font-medium text-gray-700 mb-2">
+                  Your Feedback
+                </label>
+                <textarea
+                  id="feedback"
+                  name="feedback"
+                  value={formData.feedback}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Tell us about your experience, what you liked, and how we can improve..."
+                />
+              </div>
+
+              {/* Would Recommend Field - Custom Dropdown */}
+              <div className="relative">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Would you recommend Gear Up Robotics to others? *
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setIsRecommendDropdownOpen(!isRecommendDropdownOpen)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 flex justify-between items-center"
+                >
+                  <span>{getRecommendText(formData.wouldRecommend)}</span>
+                  <svg className={`w-5 h-5 transition-transform ${isRecommendDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {isRecommendDropdownOpen && (
+                  <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+                    {['yes', 'maybe', 'no'].map((value) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => handleRecommendSelect(value)}
+                        className="w-full px-3 py-2 text-left hover:bg-blue-50 focus:bg-blue-50 focus:outline-none first:rounded-t-md last:rounded-b-md"
+                      >
+                        {getRecommendText(value)}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Submit Status */}
+              {submitStatus && (
+                <div className={`p-4 rounded-md ${submitStatus.success ? 'bg-green-50 text-green-800 border border-green-200' : 'bg-red-50 text-red-800 border border-red-200'}`}>
+                  {submitStatus.message}
+                </div>
+              )}
+
+              {/* Submit Button */}
+              <div className="text-center">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`px-8 py-3 rounded-md font-medium text-white transition-colors ${
+                    isSubmitting 
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
+                  }`}
+                >
+                  {isSubmitting ? 'Submitting...' : 'Submit Rating'}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
 
