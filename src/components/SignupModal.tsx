@@ -170,11 +170,8 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose }) 
         submittedAt: serverTimestamp()
       };
 
-      // Create custom document name: "className by childName"
-      const docName = `${classItem.name} by ${formData.studentName}`;
       await addDoc(collection(db, 'classes'), {
         ...signupData,
-        documentName: docName
       });
 
       setSubmitStatus({
