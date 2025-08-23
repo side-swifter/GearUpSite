@@ -90,7 +90,7 @@ export const classData: ClassData[] = [
       { day: 'Wednesday', time: '6:00-7:00 PM', duration: '1 hour' },
       { day: 'Sunday', time: '2:00-3:00 PM', duration: '1 hour' }
     ],
-    description: 'Explore the fascinating world of quantum physics and quantum computing. Students learn quantum principles, superposition, entanglement, and how quantum computers work. Includes hands-on experience with quantum simulators and programming quantum algorithms.',
+    description: 'This course introduces students to the fascinating world of quantum physics and its modern applications in computing. Beginning with the fundamentals—wave-particle duality, diffraction and interference, superposition and entanglement, and Schrödinger\'s equation (and much more)—students will gain a strong theoretical foundation. They will then apply these ideas in the realm of quantum computing, working with qubits, matrix-based gate representations, Dirac notation, Quantum Circuits, and Python-based simulations of quantum algorithms. Students will even code their own mini quantum computer projects. By the end, they will have both a deep understanding of quantum mechanics and practical experience in quantum computation.',
     icon: '⚛️',
     active: true
   },
@@ -103,7 +103,7 @@ export const classData: ClassData[] = [
       { day: 'Saturday', time: '9:00-10:00 AM', duration: '1 hour' },
       { day: 'Sunday', time: '9:00-10:00 AM', duration: '1 hour' }
     ],
-    description: 'Comprehensive computer science fundamentals covering algorithms, data structures, computational complexity, and software engineering principles. Students solve challenging problems and learn to think like computer scientists through theoretical concepts and practical applications.',
+    description: 'This course provides a comprehensive foundation in computer science, combining theory and hands-on practice. Students will explore the principles of cryptography and apply programming techniques to encrypt and decrypt various ciphers. Along the way, they will develop advanced skills in algorithms, data structures, and high-level programming. The course also delves into computer hardware, covering CPUs, GPUs, storage systems, cooling methods, and more. By the end, students will have a strong command of both programming and the inner workings of modern computers.',
     icon: '💻',
     active: true
   
@@ -117,7 +117,7 @@ export const classData: ClassData[] = [
       { day: 'Monday', time: '4:00-5:00 PM', duration: '1 hour' },
       { day: 'Friday', time: '4:00-5:00 PM', duration: '1 hour' }
     ],
-    description: 'Advanced physics concepts including mechanics, thermodynamics, electromagnetism, and modern physics. Students conduct virtual experiments, solve complex problems, and understand the mathematical foundations that govern our universe.',
+    description: 'Students will build a solid understanding of the core principles of physics, beginning with vectors, scalars, matrices, gravitation, and Newton\'s laws. From there, they will progress to advanced applications such as predicting particle trajectories with vector calculus, deriving and integrating kinematic equations, modeling simple harmonic oscillators, and exploring the fundamentals of electrodynamics and energy (with much more). By the end of the course, students will be well-prepared for AP Physics concepts and equipped with skills that extend into more advanced topics.',
     icon: '🔬',
     active: true
   }

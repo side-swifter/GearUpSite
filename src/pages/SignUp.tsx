@@ -645,17 +645,24 @@ const SignUp = () => {
                   {/* Content */}
                   <div className="p-6">
                     <div className="space-y-3 mb-4">
-                      <div className="flex items-center text-sm text-gray-600">
-                        <span className="w-4 h-4 text-blue-500 mr-2">👨‍🏫</span>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleInstructorClick(classItem.instructors[0]);
-                          }}
-                          className="text-blue-600 hover:text-blue-800 hover:underline cursor-pointer transition-colors"
-                        >
-                          {classItem.instructors[0]}
-                        </button>
+                      <div className="flex items-center text-sm text-gray-600 mb-1">
+                        <span className="text-gray-500 mr-2">👨‍🏫</span>
+                        <div className="flex flex-wrap gap-1">
+                          {classItem.instructors.map((instructor, index) => (
+                            <span key={instructor}>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleInstructorClick(instructor);
+                                }}
+                                className="text-blue-600 hover:text-blue-800 hover:underline cursor-pointer transition-colors"
+                              >
+                                {instructor}
+                              </button>
+                              {index < classItem.instructors.length - 1 && <span className="text-gray-500">, </span>}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                       <div className="flex items-center text-sm text-gray-600">
                         <span className="w-4 h-4 text-blue-500 mr-2">📅</span>
