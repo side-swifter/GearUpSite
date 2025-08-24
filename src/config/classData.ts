@@ -122,36 +122,36 @@ export const classData: ClassData[] = [
     id: 'quantum-mechanics',
     name: 'Quantum Mechanics and Computations',
     level: 'advanced',
-    instructors: ['Siddarth Shailesh', 'Noah Lee'],
+    instructors: ['Noah Lee', 'Siddharth Shailesh'],
     description: 'Students will explore the fascinating world of quantum mechanics and quantum computing. They will learn about quantum states, superposition, entanglement, and quantum algorithms. The course covers both theoretical foundations and practical applications, including programming quantum computers and understanding their potential impact on technology.',
     shortDescription: 'Explore quantum mechanics and computing with quantum states, algorithms, and programming.',
     icon: '⚛️',
     topics: ['Quantum Mechanics', 'Quantum Computing', 'Algorithms', 'Physics'],
-    schedule: 'Wednesday: 6:00-7:00PM, Sunday: 2:00-3:00PM',
+    schedule: 'Wednesdays: 7:30-8:30PM, Sundays: 2:00-3:00PM',
     active: true
   },
   {
     id: 'computer-science',
     name: 'Computer Science',
     level: 'advanced',
-    instructors: ['Siddarth Shailesh', 'Noah Lee','Akshayraj Sanjai', 'Dr. Sudarshan Iyengar'],
+    instructors: ['Akshayraj Sanjai', 'Siddharth Shailesh', 'Noah Lee', 'Dr. Sudarshan Iyengar'],
     description: 'Students will build a comprehensive foundation in computer science, covering algorithms, data structures, cryptography, and computer hardware. They will learn programming paradigms, computational complexity, and software engineering principles. The course prepares students for advanced computer science studies and careers in technology.',
     shortDescription: 'Comprehensive computer science foundation covering cryptography, algorithms, and hardware.',
     icon: '💻',
     topics: ['Computer Science', 'Cryptography', 'Algorithms', 'Hardware'],
-    schedule: 'Saturday and Sunday: 9:00-10:00AM',
+    schedule: 'Saturday and Sunday: 9:00-10:00 AM',
     active: true
   },
   {
     id: 'physics',
     name: 'Physics',
     level: 'advanced',
-    instructors: ['Siddarth Shailesh'],
+    instructors: ['Siddharth Shailesh'],
     description: 'Students will build a solid understanding of the core principles of physics, beginning with vectors, scalars, matrices, gravitation, and Newton\'s laws. From there, they will progress to advanced applications such as predicting particle trajectories with vector calculus, deriving and integrating kinematic equations, modeling simple harmonic oscillators, and exploring the fundamentals of electrodynamics and energy (with much more). By the end of the course, students will be well-prepared for AP Physics concepts and equipped with skills that extend into more advanced topics.',
     shortDescription: 'Build understanding of core physics principles from Newton\'s laws to electrodynamics and AP Physics.',
     icon: '🔬',
     topics: ['Physics', 'Calculus', 'AP Physics', 'Electrodynamics'],
-    schedule: 'Monday: 4:00-5:00PM, Friday: 4:00-5:00PM',
+    schedule: 'Mondays: 4:00-5:00PM, Fridays: 4:00-5:00PM',
     active: true
   }
 ];

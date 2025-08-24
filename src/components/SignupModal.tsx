@@ -219,6 +219,9 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose }) 
               <p className="text-blue-800"><strong>Class:</strong> {classItem.name}</p>
               <p className="text-blue-800"><strong>Level:</strong> {classItem.level}</p>
               <p className="text-blue-800"><strong>Instructor:</strong> {classItem.instructors.join(', ')}</p>
+              {classItem.schedule && (
+                <p className="text-blue-800"><strong>Schedule:</strong> {classItem.schedule}</p>
+              )}
               {classItem.description && (
                 <p className="text-blue-800 mt-2">
                   <strong>Description:</strong> {classItem.description}

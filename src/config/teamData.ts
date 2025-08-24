@@ -93,10 +93,10 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: 'siddarth',
-    name: 'Siddarth Shailesh',
+    name: 'Siddharth Shailesh',
     role: 'Physics and Quantum Mechanics',
     image: '/team-photos/sid.png',
-    alt: 'Siddarth Shailesh',
+    alt: 'Siddharth Shailesh',
     description: 'Siddharth Shailesh is a dedicated FTC member with one year of experience, bringing a strong foundation in computer science and physics. He\'s committed to helping guide the organization\'s growth through collaboration and continuous learning.',
     classIds: ['physics', 'quantum-mechanics'], // References actual classes from classData.ts
     imageControls: { 

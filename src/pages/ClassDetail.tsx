@@ -106,6 +106,14 @@ const ClassDetail = () => {
                 </div>
               </div>
 
+              {/* Schedule */}
+              {classData.schedule && (
+                <div className="mb-6">
+                  <h3 className="font-semibold text-gray-900 mb-3">Schedule</h3>
+                  <p className="text-gray-700">{classData.schedule}</p>
+                </div>
+              )}
+
               {/* Duration */}
               <div className="mb-6">
                 <h3 className="font-semibold text-gray-900 mb-3">Duration</h3>

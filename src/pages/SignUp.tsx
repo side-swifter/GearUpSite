@@ -297,9 +297,19 @@ const SignUp = () => {
                                 {classItem.instructors[0]}
                               </button>
                               {classItem.instructors.length > 1 && (
-                                <span className="text-gray-500"> +{classItem.instructors.length - 1}</span>
+                                <span className="text-gray-500">
+                                  {' '}+{classItem.id === 'computer-science' ? 2 : (classItem.instructors.length - 1)}
+                                </span>
                               )}
                             </div>
+
+                            {/* Schedule */}
+                            {classItem.schedule && (
+                              <div className="text-sm text-gray-700">
+                                <span className="font-medium">Schedule:</span>
+                                <span className="ml-1">{classItem.schedule}</span>
+                              </div>
+                            )}
                           </div>
                         </div>
                         
