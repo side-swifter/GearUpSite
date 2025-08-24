@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { ClassData } from '../config/classData';
@@ -107,9 +107,10 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
 interface SignupModalProps {
   classItem: ClassData;
   onClose: () => void;
+  initialTimeslot?: string;
 }
 
-export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose }) => {
+export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose, initialTimeslot }) => {
   const [formData, setFormData] = useState({
     studentName: '',
     parentName: '',
@@ -117,10 +118,18 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose }) 
     phone: '',
     grade: '',
     interests: '',
-    message: ''
+    message: '',
+    timeslot: initialTimeslot || ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{success: boolean; message: string} | null>(null);
+
+  useEffect(() => {
+    // Update timeslot if a new initialTimeslot is provided (e.g., via query param)
+    if (initialTimeslot) {
+      setFormData(prev => ({ ...prev, timeslot: initialTimeslot }));
+    }
+  }, [initialTimeslot]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -150,10 +159,45 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose }) 
     { value: "12th", label: "12th Grade" }
   ];
 
+  // Parse schedule string like
+  // "Wednesdays: 7:30-8:30PM, Sundays: 2:00-3:00PM" or
+  // "Saturday and Sunday: 11:00-12:00" into individual options
+  const getTimeslotOptions = (): DropdownOption[] => {
+    if (!classItem?.schedule) return [];
+    const parts = classItem.schedule.split(',');
+    const slots: string[] = [];
+    for (const raw of parts) {
+      const segment = raw.trim();
+      if (!segment) continue;
+      const colonIdx = segment.indexOf(':');
+      if (colonIdx > -1) {
+        const daysStr = segment.slice(0, colonIdx).trim();
+        const timeStr = segment.slice(colonIdx + 1).trim();
+        if (daysStr.toLowerCase().includes(' and ')) {
+          const days = daysStr.split(/\band\b/i).map(d => d.trim()).filter(Boolean);
+          days.forEach(day => slots.push(`${day}: ${timeStr}`));
+        } else {
+          slots.push(`${daysStr}: ${timeStr}`);
+        }
+      } else {
+        slots.push(segment);
+      }
+    }
+    // De-dup and map
+    const unique = Array.from(new Set(slots));
+    return unique.map(s => ({ value: s, label: s }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!classItem) return;
-    
+    // Require timeslot selection if options exist
+    const timeslotOptions = getTimeslotOptions();
+    if (timeslotOptions.length > 0 && !formData.timeslot) {
+      setSubmitStatus({ success: false, message: 'Please select a preferred timeslot.' });
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus(null);
 
@@ -166,6 +210,7 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose }) 
         grade: formData.grade || '',
         interests: formData.interests || '',
         message: formData.message || '',
+        timeslot: formData.timeslot || '',
         className: classItem.name,
         submittedAt: serverTimestamp()
       };
@@ -186,7 +231,8 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose }) 
         phone: '',
         grade: '',
         interests: '',
-        message: ''
+        message: '',
+        timeslot: ''
       });
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -316,6 +362,20 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose }) 
                     label="Student's Grade (2024-2025)"
                   />
                 </div>
+
+                {getTimeslotOptions().length > 0 && (
+                  <div className="md:col-span-2">
+                    <CustomDropdown
+                      id="timeslot"
+                      value={formData.timeslot}
+                      onChange={(value) => handleDropdownChange('timeslot', value)}
+                      options={getTimeslotOptions()}
+                      placeholder="Select a preferred timeslot"
+                      required
+                      label="Preferred Timeslot"
+                    />
+                  </div>
+                )}
               </div>
 
               <div>

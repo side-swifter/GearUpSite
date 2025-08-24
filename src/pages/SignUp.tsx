@@ -85,6 +85,32 @@ const SignUp = () => {
   };
 
 
+  // Parse schedule into individual timeslots like "Saturday: 11:00-12:00"
+  const getTimeslots = (schedule?: string): string[] => {
+    if (!schedule) return [];
+    const parts = schedule.split(',');
+    const slots: string[] = [];
+    for (const raw of parts) {
+      const segment = raw.trim();
+      if (!segment) continue;
+      const colonIdx = segment.indexOf(':');
+      if (colonIdx > -1) {
+        const daysStr = segment.slice(0, colonIdx).trim();
+        const timeStr = segment.slice(colonIdx + 1).trim();
+        if (/\band\b/i.test(daysStr)) {
+          const days = daysStr.split(/\band\b/i).map(d => d.trim()).filter(Boolean);
+          days.forEach(day => slots.push(`${day}: ${timeStr}`));
+        } else {
+          slots.push(`${daysStr}: ${timeStr}`);
+        }
+      } else {
+        slots.push(segment);
+      }
+    }
+    return Array.from(new Set(slots));
+  };
+
+
 
   const levelOptions = [
     { id: 'beginner', title: 'Beginner', icon: '🌱', color: 'green' },
@@ -308,6 +334,21 @@ const SignUp = () => {
                               <div className="text-sm text-gray-700 break-words">
                                 <span className="font-medium">Schedule:</span>
                                 <span className="ml-1">{classItem.schedule}</span>
+                              </div>
+                            )}
+
+                            {getTimeslots(classItem.schedule).length > 0 && (
+                              <div className="flex flex-wrap gap-1 mt-2">
+                                {getTimeslots(classItem.schedule).map((slot, idx) => (
+                                  <button
+                                    key={idx}
+                                    type="button"
+                                    onClick={(e) => { e.stopPropagation(); navigate(`/class/${classItem.id}?slot=${encodeURIComponent(slot)}`); }}
+                                    className="px-2 py-0.5 bg-blue-100 text-blue-800 rounded-full text-xs font-medium whitespace-nowrap hover:bg-blue-200"
+                                  >
+                                    {slot}
+                                  </button>
+                                ))}
                               </div>
                             )}
                           </div>

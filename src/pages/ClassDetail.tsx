@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { getActiveClasses, ClassData } from '../config/classData';
 import { teamMembers } from '../config/teamData';
 import { SignupModal } from '../components/SignupModal';
@@ -9,6 +9,8 @@ const ClassDetail = () => {
   const navigate = useNavigate();
   const [classData, setClassData] = useState<ClassData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTimeslot, setSelectedTimeslot] = useState<string | undefined>(undefined);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const allClasses = getActiveClasses();
@@ -21,8 +23,44 @@ const ClassDetail = () => {
     }
   }, [classId, navigate]);
 
+  // Initialize preselected timeslot from query param and optionally open modal
+  useEffect(() => {
+    const slot = searchParams.get('slot') || undefined;
+    if (slot) {
+      setSelectedTimeslot(slot);
+      // Open modal automatically if a slot is specified
+      setIsModalOpen(true);
+    }
+  }, [searchParams]);
+
   const handleSignupClick = () => {
     setIsModalOpen(true);
+  };
+
+  // Parse schedule like "Wednesdays: 7:30-8:30PM, Sundays: 2:00-3:00PM"
+  // or "Saturday and Sunday: 11:00-12:00" into individual labeled slots
+  const getTimeslots = (schedule?: string): string[] => {
+    if (!schedule) return [];
+    const parts = schedule.split(',');
+    const slots: string[] = [];
+    for (const raw of parts) {
+      const segment = raw.trim();
+      if (!segment) continue;
+      const colonIdx = segment.indexOf(':');
+      if (colonIdx > -1) {
+        const daysStr = segment.slice(0, colonIdx).trim();
+        const timeStr = segment.slice(colonIdx + 1).trim();
+        if (/\band\b/i.test(daysStr)) {
+          const days = daysStr.split(/\band\b/i).map(d => d.trim()).filter(Boolean);
+          days.forEach(day => slots.push(`${day}: ${timeStr}`));
+        } else {
+          slots.push(`${daysStr}: ${timeStr}`);
+        }
+      } else {
+        slots.push(segment);
+      }
+    }
+    return Array.from(new Set(slots));
   };
 
   const closeModal = () => {
@@ -111,6 +149,20 @@ const ClassDetail = () => {
                 <div className="mb-6">
                   <h3 className="font-semibold text-gray-900 mb-3">Schedule</h3>
                   <p className="text-gray-700">{classData.schedule}</p>
+                  {getTimeslots(classData.schedule).length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {getTimeslots(classData.schedule).map((slot, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => { setSelectedTimeslot(slot); setIsModalOpen(true); }}
+                          className="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium whitespace-nowrap hover:bg-blue-200"
+                        >
+                          {slot}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -124,9 +176,9 @@ const ClassDetail = () => {
               <div className="mb-6 text-center">
                 <button
                   onClick={handleSignupClick}
-                  className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                  className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Sign Up for {classData.name}
+                  Sign Up
                 </button>
                 <p className="text-sm text-gray-600 mt-2">
                   Sign up for this {classData.level} level class!
@@ -228,10 +280,7 @@ const ClassDetail = () => {
 
       {/* Signup Modal */}
       {isModalOpen && classData && (
-        <SignupModal
-          classItem={classData}
-          onClose={closeModal}
-        />
+        <SignupModal classItem={classData} onClose={closeModal} initialTimeslot={selectedTimeslot} />
       )}
     </div>
   );
