@@ -101,7 +101,7 @@ const SignUp = () => {
             Browse Classes
           </h1>
           <p className="text-lg text-gray-600">
-            Find the perfect robotics and programming class for your skill level.
+            Find the perfect STEM and robotics classes for your skill level.
           </p>
         </div>
 
@@ -226,11 +226,11 @@ const SignUp = () => {
                   <div
                     key={classItem.id}
                     onClick={() => handleClassSelect(classItem)}
-                    className="bg-white rounded-lg shadow-sm border hover:shadow-lg hover:border-blue-300 transition-all duration-300 cursor-pointer group"
+                    className="bg-white rounded-lg shadow-sm border hover:shadow-lg hover:border-blue-300 transition-all duration-300 cursor-pointer group overflow-hidden"
                   >
-                    <div className="flex h-60">
+                    <div className="flex h-72">
                       {/* Image Section */}
-                      <div className="w-80 flex-shrink-0 relative overflow-hidden rounded-l-lg">
+                      <div className="w-80 h-full flex-shrink-0 relative overflow-hidden rounded-l-lg">
                         <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
                           <div className="text-6xl opacity-60 group-hover:scale-110 transition-transform duration-300">
                             {classItem.icon}
@@ -246,7 +246,7 @@ const SignUp = () => {
                       </div>
                       
                       {/* Content Section */}
-                      <div className="flex-1 p-6 flex flex-col justify-between min-h-0">
+                      <div className="flex-1 p-6 flex flex-col justify-between min-h-0 overflow-hidden">
                         <div className="flex-1 min-h-0">
                           <div className="mb-2">
                             <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-200 mb-1 line-clamp-2">
@@ -261,7 +261,7 @@ const SignUp = () => {
                             </span>
                           </div>
                           
-                          <p className="text-gray-600 mb-3 text-sm leading-relaxed line-clamp-3">
+                          <p className="text-gray-600 mb-3 text-sm leading-relaxed line-clamp-3 break-words">
                             {classItem.shortDescription}
                           </p>
                           
@@ -305,7 +305,7 @@ const SignUp = () => {
 
                             {/* Schedule */}
                             {classItem.schedule && (
-                              <div className="text-sm text-gray-700">
+                              <div className="text-sm text-gray-700 break-words">
                                 <span className="font-medium">Schedule:</span>
                                 <span className="ml-1">{classItem.schedule}</span>
                               </div>
