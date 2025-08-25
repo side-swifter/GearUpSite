@@ -254,7 +254,7 @@ const SignUp = () => {
                     onClick={() => handleClassSelect(classItem)}
                     className="bg-white rounded-lg shadow-sm border hover:shadow-lg hover:border-blue-300 transition-all duration-300 cursor-pointer group overflow-hidden"
                   >
-                    <div className="flex h-72">
+                    <div className="flex h-80">
                       {/* Image Section */}
                       <div className="w-80 h-full flex-shrink-0 relative overflow-hidden rounded-l-lg">
                         <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
