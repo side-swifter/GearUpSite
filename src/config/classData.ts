@@ -46,7 +46,6 @@ export const availableTopics = [
   'Physics',
   'Calculus',
   'AP Physics',
-  'Electrodynamics',
   'Visual Programming',
   'OOP',
   'Data Structures',
@@ -147,10 +146,10 @@ export const classData: ClassData[] = [
     name: 'Physics',
     level: 'advanced',
     instructors: ['Siddharth Shailesh'],
-    description: 'Students will build a solid understanding of the core principles of physics, beginning with vectors, scalars, matrices, gravitation, and Newton\'s laws. From there, they will progress to advanced applications such as predicting particle trajectories with vector calculus, deriving and integrating kinematic equations, modeling simple harmonic oscillators, and exploring the fundamentals of electrodynamics and energy (with much more). By the end of the course, students will be well-prepared for AP Physics concepts and equipped with skills that extend into more advanced topics.',
-    shortDescription: 'Build understanding of core physics principles from Newton\'s laws to electrodynamics and AP Physics.',
+    description: 'Students will build a solid understanding of the core principles of physics, beginning with vectors, scalars, matrices, gravitation, and Newton\'s laws (all at the middle and high school level). From there, they will progress to advanced applications such as predicting particle trajectories with vectors and equations, deriving and integrating kinematic equations, modeling simple harmonic oscillators, and exploring the fundamentals of electricity and magnetism (building up to the advanced high school level). By the end of the course, students will be well-prepared for AP Physics concepts and equipped with skills that extend into various topics.',
+    shortDescription: 'Build understanding of core physics principles from vectors and Newton\'s laws to AP Physics preparation.',
     icon: '🔬',
-    topics: ['Physics', 'Calculus', 'AP Physics', 'Electrodynamics'],
+    topics: ['Physics', 'Calculus', 'AP Physics'],
     schedule: 'Mondays: 4:00-5:00PM, Fridays: 4:00-5:00PM',
     active: true
   }
