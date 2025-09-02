@@ -121,10 +121,15 @@ export const teamMembers: TeamMember[] = [
     id: 'shresh',
     name: 'Shresh Panda',
     role: 'Programming',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    image: '/team-photos/shresh.png',
     alt: 'Shresh Panda',
     description: 'Shresh brings enthusiasm and technical skills to our programming initiatives, helping students learn coding fundamentals.',
     classIds: ['python-basics'], // References actual classes from classData.ts
+    imageControls: { 
+      shiftLeft: 0, 
+      shiftUp: -10,
+      scale: 1.05 
+    },
     delay: 'delay-300'
   },
 
