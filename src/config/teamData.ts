@@ -108,7 +108,7 @@ export const teamMembers: TeamMember[] = [
     role: 'Programming',
     image: '/team-photos/shresh.png',
     alt: 'Shresh Panda',
-    description: 'Shresh brings enthusiasm and technical skills to our programming initiatives, helping students learn coding fundamentals.',
+    description: 'Having passed PCEP Entry Level Certification and Python IT Specialist Certification, Shresh is well versed with Python and is always ready to provide the best learning experience for your student.',
     classIds: ['python-basics'], // References actual classes from classData.ts
     imageControls: { 
       shiftLeft: 0, 
