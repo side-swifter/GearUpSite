@@ -77,21 +77,6 @@ export const teamMembers: TeamMember[] = [
     }
   },
   {
-    id: 'manas',
-    name: 'Shivmanas Kamarsu',
-    role: 'CAD',
-    image: '/team-photos/manas.png',
-    alt: 'Shivmanas Kamarsu',
-    description: 'Manas is a 2-year FTC veteran and one of the driving forces behind Gear-Up Robotics.',
-    classIds: ['cad'], // References actual classes from classData.ts
-    delay: '',
-    imageControls: { 
-      shiftLeft: 0,
-      shiftUp: -15,
-      scale: 1.5 
-    }
-  },
-  {
     id: 'siddarth',
     name: 'Siddharth Shailesh',
     role: 'Physics and Quantum Mechanics',
@@ -139,5 +124,5 @@ export const teamMembers: TeamMember[] = [
 // TEAM FILTERS
 // ==============================================
 // Control which team members appear in which sections
-export const mainTeamMembers = ['akshayraj', 'vivaan', 'manas', 'noah'];
+export const mainTeamMembers = ['akshayraj', 'vivaan', 'noah'];
 export const programDirectors = ['sudarshan-iyengar'];

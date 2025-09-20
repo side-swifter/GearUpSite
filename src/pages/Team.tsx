@@ -133,7 +133,6 @@ const Team = () => {
   const mainTeamMembers = teamMembers.filter(member => 
     member.id === 'akshayraj' || 
     member.id === 'vivaan' ||
-    member.id === 'manas' ||
     member.id === 'siddarth' ||
     member.id === 'noah-lee' ||
     member.id === 'shresh'

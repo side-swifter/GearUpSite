@@ -107,7 +107,7 @@ export const classData: ClassData[] = [
     id: 'cad',
     name: 'CAD',
     level: 'intermediate',
-    instructors: ['Shivmanas Kamarsu'],
+    instructors: [],
     description: 'Students will learn Computer-Aided Design (CAD) using industry-standard software. They will master 3D modeling techniques, technical drawing, and design principles. The course covers creating complex assemblies, simulations, and preparing designs for manufacturing, providing essential skills for engineering and product development.',
     shortDescription: 'Master 3D modeling and technical drawing with industry-standard CAD software.',
     icon: '📐',
