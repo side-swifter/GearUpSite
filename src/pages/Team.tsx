@@ -135,7 +135,8 @@ const Team = () => {
     member.id === 'vivaan' ||
     member.id === 'siddarth' ||
     member.id === 'noah-lee' ||
-    member.id === 'shresh'
+    member.id === 'shresh' ||
+    member.id === 'nish'
   );
   
   // Professors & Advisors

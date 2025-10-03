@@ -117,6 +117,21 @@ export const teamMembers: TeamMember[] = [
     },
     delay: 'delay-300'
   },
+  {
+    id: 'nish',
+    name: 'Nishant Kulkarni',
+    role: 'CAD & Brainstorming',
+    image: '/team-photos/Nish.png',
+    alt: 'Nishant Kulkarni',
+    description: 'With 2 years of FTC experience, Nish knows his way around onshape and ready to make your student learn like never before.',
+    classIds: ['cad', 'engineering-brainstorming'], // References actual classes from classData.ts
+    imageControls: { 
+      shiftLeft: 0, 
+      shiftUp: -30,
+      scale: 1.05 
+    },
+    delay: 'delay-200'
+  }
 
 ];
 
@@ -124,5 +139,5 @@ export const teamMembers: TeamMember[] = [
 // TEAM FILTERS
 // ==============================================
 // Control which team members appear in which sections
-export const mainTeamMembers = ['akshayraj', 'vivaan', 'noah'];
+export const mainTeamMembers = ['akshayraj', 'vivaan', 'noah','nish'];
 export const programDirectors = ['sudarshan-iyengar'];
