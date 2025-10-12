@@ -33,20 +33,6 @@ export interface TeamMember {
 // Team page and SignUp page.
 export const teamMembers: TeamMember[] = [
   {
-    id: 'sudarshan-iyengar',
-    name: 'Dr. Sudarshan Iyengar',
-    role: 'Professor & Advisor',
-    image: '/team-photos/Professor.png',
-    alt: 'Dr. Sudarshan Iyengar',
-    description: 'Dr. Sudarshan Iyengar, a faculty member at IIT Ropar and PhD graduate from IISc, is a leading educator and researcher known for making technical education engaging through innovative teaching, storytelling, and large-scale online courses like "The Joy of Computing." Currently serving as Director of Annam.AI, he leads major AI education initiatives, coordinates national research fellowships, and heads the Education Design Lab, with his work reaching over 900,000 students and focusing on AI for social good and education design.',
-    classIds: ['computer-science'], // References actual classes from classData.ts
-    imageControls: {
-      shiftLeft: 0,
-      shiftUp: -80,
-      scale: 1
-    }
-  },
-  {
     id: 'akshayraj',
     name: 'Akshayraj Sanjai',
     role: 'Programming',
@@ -76,21 +62,7 @@ export const teamMembers: TeamMember[] = [
       scale: 1.05 
     }
   },
-  {
-    id: 'siddarth',
-    name: 'Siddharth Shailesh',
-    role: 'Physics and Quantum Mechanics',
-    image: '/team-photos/sid.png',
-    alt: 'Siddharth Shailesh',
-    description: 'Siddharth Shailesh is a dedicated FTC member with one year of experience, bringing a strong foundation in computer science and physics. He\'s committed to helping guide the organization\'s growth through collaboration and continuous learning.',
-    classIds: ['physics', 'quantum-mechanics'], // References actual classes from classData.ts
-    imageControls: { 
-      shiftLeft: 0, 
-      shiftUp: -30,
-      scale: 1.05 
-    },
-    delay: 'delay-200'
-  },
+
   {
     id: 'noah-lee',
     name: 'Noah Lee',
@@ -140,4 +112,4 @@ export const teamMembers: TeamMember[] = [
 // ==============================================
 // Control which team members appear in which sections
 export const mainTeamMembers = ['akshayraj', 'vivaan', 'noah','nish'];
-export const programDirectors = ['sudarshan-iyengar'];
+export const programDirectors = [];
