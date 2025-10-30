@@ -121,7 +121,7 @@ export const classData: ClassData[] = [
     id: 'quantum-mechanics',
     name: 'Quantum Mechanics and Computations',
     level: 'advanced',
-    instructors: ['Noah Lee', 'Siddharth Shailesh'],
+    instructors: ['Noah Lee'],
     description: 'Students will explore the fascinating world of quantum mechanics and quantum computing. They will learn about quantum states, superposition, entanglement, and quantum algorithms. The course covers both theoretical foundations and practical applications, including programming quantum computers and understanding their potential impact on technology.',
     shortDescription: 'Explore quantum mechanics and computing with quantum states, algorithms, and programming.',
     icon: '⚛️',
@@ -133,7 +133,7 @@ export const classData: ClassData[] = [
     id: 'computer-science',
     name: 'Computer Science',
     level: 'advanced',
-    instructors: ['Akshayraj Sanjai', 'Siddharth Shailesh', 'Noah Lee', 'Dr. Sudarshan Iyengar'],
+    instructors: ['Akshayraj Sanjai', 'Noah Lee'],
     description: 'Students will build a comprehensive foundation in computer science, covering algorithms, data structures, cryptography, and computer hardware. They will learn programming paradigms, computational complexity, and software engineering principles. The course prepares students for advanced computer science studies and careers in technology.',
     shortDescription: 'Comprehensive computer science foundation covering cryptography, algorithms, and hardware.',
     icon: '💻',
@@ -145,13 +145,13 @@ export const classData: ClassData[] = [
     id: 'physics',
     name: 'Physics',
     level: 'advanced',
-    instructors: ['Siddharth Shailesh'],
+    instructors: [],
     description: 'Students will build a solid understanding of the core principles of physics, beginning with vectors, scalars, matrices, gravitation, and Newton\'s laws (all at the middle and high school level). From there, they will progress to advanced applications such as predicting particle trajectories with vectors and equations, deriving and integrating kinematic equations, modeling simple harmonic oscillators, and exploring the fundamentals of electricity and magnetism (building up to the advanced high school level). By the end of the course, students will be well-prepared for AP Physics concepts and equipped with skills that extend into various topics.',
     shortDescription: 'Build understanding of core physics principles from vectors and Newton\'s laws to AP Physics preparation.',
     icon: '🔬',
     topics: ['Physics', 'Calculus', 'AP Physics'],
     schedule: 'Mondays: 4:00-5:00PM, Fridays: 4:00-5:00PM',
-    active: true
+    active: false
   }
 ];
 
