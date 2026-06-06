@@ -35,53 +35,24 @@ export const teamMembers: TeamMember[] = [
   {
     id: 'akshayraj',
     name: 'Akshayraj Sanjai',
-    role: 'Programming',
-    image: '/team-photos/akshay.png',
+    role: 'Founder',
+    image: '/team-photos/akshayraj-founder.png',
     alt: 'Akshayraj Sanjai',
-    description: 'With 1 year of FTC experience, 2 years of Vex V5RC experience and 1 year of FLL experience, Akshay is a skilled and well versed with robotics and programming and is always ready to jump in and guide students with patience and enthusiasm.',
-    classIds: ['python-basics', 'computer-science'], // References actual classes from classData.ts
+    description: 'Akshayraj works across programming, robotics, and student-led engineering projects, helping Gear Up turn ambitious ideas into real programs, events, and community technology impact.',
     delay: '',
     imageControls: { 
       shiftLeft: 0, 
-      shiftUp: -30,
-      scale: 1.05 
+      shiftUp: 0,
+      scale: 1 
     }
   },
-  {
-    id: 'vivaan',
-    name: 'Vivaan Parikh',
-    role: 'Engineering & Brainstorming',
-    image: '/team-photos/vivaan.png',
-    alt: 'Vivaan Parikh',
-    description: 'With 2 years of FTC experience, Vivaan is a skilled and strategic robotics mentor. He excels at explaining technical concepts in a way that clicks with students, and he\'s always ready to jump in and guide with patience and enthusiasm.',
-    classIds: ['engineering-brainstorming'], // References actual classes from classData.ts
-    delay: '',
-    imageControls: { 
-      shiftLeft: 0,
-      shiftUp: -120,
-      scale: 1.05 
-    }
-  },
-
-  {
-    id: 'noah-lee',
-    name: 'Noah Lee',
-    role: 'Quantum and Computer Science',
-    image: '/team-photos/noah-lee.png',
-    alt: 'Noah Lee',
-    description: 'Coding enthusiast. Quantum fanatic. Biology nerd. I have 5 years of experience of Python, C#, and Java in addition to 2 years of quantum computing experience.',
-    classIds: ['quantum-mechanics', 'computer-science'], // References actual classes from classData.ts
-    delay: 'delay-400'
-  },
-  
   {
     id: 'shresh',
     name: 'Shresh Panda',
-    role: 'Programming',
+    role: 'Founder',
     image: '/team-photos/shresh.png',
     alt: 'Shresh Panda',
-    description: 'Having passed PCEP Entry Level Certification and Python IT Specialist Certification, Shresh is well versed with Python and is always ready to provide the best learning experience for your student.',
-    classIds: ['python-basics'], // References actual classes from classData.ts
+    description: 'Shresh focuses on programming, engineering, and student leadership, helping build the systems and technical programs that let young builders launch serious projects.',
     imageControls: { 
       shiftLeft: 0, 
       shiftUp: -10,
@@ -89,27 +60,21 @@ export const teamMembers: TeamMember[] = [
     },
     delay: 'delay-300'
   },
+  
   {
-    id: 'nish',
-    name: 'Nishant Kulkarni',
-    role: 'CAD & Brainstorming',
-    image: '/team-photos/Nish.png',
-    alt: 'Nishant Kulkarni',
-    description: 'With 2 years of FTC experience, Nish knows his way around onshape and ready to make your student learn like never before.',
-    classIds: ['cad', 'engineering-brainstorming'], // References actual classes from classData.ts
-    imageControls: { 
-      shiftLeft: 0, 
-      shiftUp: -30,
-      scale: 1.05 
-    },
-    delay: 'delay-200'
+    id: 'noah-lee',
+    name: 'Noah Lee',
+    role: 'Founder',
+    image: '/team-photos/noah-lee.png',
+    alt: 'Noah Lee',
+    description: 'Noah brings a strong programming and computer science background to Gear Up, supporting technical projects, hackathon planning, and practical pathways for students to build real software.',
+    delay: 'delay-400'
   }
-
 ];
 
 // ==============================================
 // TEAM FILTERS
 // ==============================================
 // Control which team members appear in which sections
-export const mainTeamMembers = ['akshayraj', 'vivaan', 'noah','nish'];
+export const mainTeamMembers = ['akshayraj', 'shresh', 'noah-lee'];
 export const programDirectors = [];

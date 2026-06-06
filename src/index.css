@@ -3,6 +3,22 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes border-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-border-spin {
+    animation: border-spin 4s linear infinite;
+  }
+}
+
 /* Custom animations for signup flow */
 @keyframes fade-in {
   from {
