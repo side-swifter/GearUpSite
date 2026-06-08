@@ -95,8 +95,8 @@ const SectionHeader = ({
     transition={{ duration: 0.5, ease: 'easeOut' }}
     className={align === 'center' ? 'mx-auto mb-10 max-w-3xl text-center' : 'mb-10 max-w-3xl'}
   >
-    <h2 className="text-3xl font-bold tracking-normal text-slate-950 sm:text-4xl">{title}</h2>
-    <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">{description}</p>
+    <h2 className="text-3xl font-bold tracking-normal text-slate-50 sm:text-4xl">{title}</h2>
+    <p className="mt-4 text-base leading-7 text-slate-400 sm:text-lg">{description}</p>
   </motion.div>
 );
 
@@ -114,13 +114,13 @@ const ButtonLink = ({
   className?: string;
 }) => {
   const styles = {
-    primary: 'bg-blue-700 text-white shadow-sm hover:bg-blue-800',
-    secondary: 'border border-blue-200 bg-white text-blue-800 hover:border-blue-300 hover:bg-blue-50',
-    dark: 'bg-slate-950 text-white shadow-sm hover:bg-slate-800',
-    ghost: 'text-slate-700 hover:bg-slate-100',
+    primary: 'bg-blue-600 text-white shadow-sm hover:bg-blue-500',
+    secondary: 'border border-slate-600 bg-slate-800 text-slate-200 hover:border-slate-500 hover:bg-slate-700',
+    dark: 'bg-slate-800 text-white shadow-sm hover:bg-slate-700',
+    ghost: 'text-slate-400 hover:bg-slate-800 hover:text-white',
   };
   const base =
-    'inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2';
+    'inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-bold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950';
 
   if (to) {
     return (
@@ -139,14 +139,14 @@ const ButtonLink = ({
 
 const BlueprintGrid = () => (
   <div className="pointer-events-none absolute inset-0 opacity-70">
-    <div className="absolute inset-0 bg-[linear-gradient(rgba(37,99,235,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.08)_1px,transparent_1px)] bg-[size:32px_32px]" />
-    <div className="absolute inset-0 bg-[linear-gradient(rgba(37,99,235,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.04)_1px,transparent_1px)] bg-[size:8px_8px]" />
+    <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.12)_1px,transparent_1px)] bg-[size:32px_32px]" />
+    <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:8px_8px]" />
   </div>
 );
 
 const GearMark = ({ className = '' }: { className?: string }) => (
-  <div className={`inline-flex items-center justify-center rounded-full border-2 border-blue-700 bg-white text-blue-700 ${className}`}>
-    <Flame className="h-5 w-5 fill-orange-100 text-orange-500" />
+  <div className={`inline-flex items-center justify-center rounded-full border-2 border-blue-500 bg-slate-900 text-blue-400 ${className}`}>
+    <Flame className="h-5 w-5 fill-orange-950 text-orange-400" />
   </div>
 );
 
@@ -156,31 +156,31 @@ const BuilderBoard = () => {
       title: 'Hackathon planning',
       note: 'Venue, mentors, judges, beginner track',
       icon: Trophy,
-      color: 'bg-sky-100',
+      color: 'bg-sky-950/60',
     },
     {
       title: 'Robotics workshops',
       note: 'Build days, code, CAD, competition prep',
       icon: Bot,
-      color: 'bg-amber-100',
+      color: 'bg-amber-950/60',
     },
     {
       title: 'Student projects',
       note: 'Ideas to prototypes to community impact',
       icon: Lightbulb,
-      color: 'bg-lime-100',
+      color: 'bg-lime-950/60',
     },
     {
       title: 'Sponsor support',
       note: 'Food, prizes, hardware, outreach',
       icon: Handshake,
-      color: 'bg-blue-100',
+      color: 'bg-blue-950/60',
     },
     {
       title: 'HCB donation pipeline',
       note: 'Transparent funds, real student programs',
       icon: CircleDollarSign,
-      color: 'bg-violet-100',
+      color: 'bg-violet-950/60',
     },
   ];
 
@@ -191,15 +191,15 @@ const BuilderBoard = () => {
       transition={{ duration: 0.65, ease: 'easeOut' }}
       className="relative"
     >
-      <div className="w-full rounded-xl border border-slate-300 bg-white shadow-[0_18px_55px_rgba(15,23,42,0.14)]">
-        <div className="flex flex-col gap-3 border-b border-slate-300 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+      <div className="w-full rounded-xl border border-slate-700 bg-slate-900 shadow-[0_18px_55px_rgba(0,0,0,0.5)]">
+        <div className="flex flex-col gap-3 border-b border-slate-700 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
           <div className="flex min-w-0 items-center gap-3">
             <GearMark className="h-10 w-10" />
-            <p className="min-w-0 font-mono text-sm font-bold uppercase tracking-[0.1em] text-slate-900">
+            <p className="min-w-0 font-mono text-sm font-bold uppercase tracking-[0.1em] text-slate-100">
               Gear Up Builder Board
             </p>
           </div>
-          <div className="flex items-center gap-2 text-xs font-bold text-blue-700">
+          <div className="flex items-center gap-2 text-xs font-bold text-blue-400">
             <MapPin className="h-4 w-4" />
             North Carolina
           </div>
@@ -208,16 +208,16 @@ const BuilderBoard = () => {
           {boardItems.map(({ title, note, icon: Icon, color }, index) => (
             <div
               key={title}
-              className={`rounded-lg border border-slate-200 bg-slate-50 p-3 ${index === 4 ? 'sm:col-span-2 xl:col-span-1' : ''}`}
+              className={`rounded-lg border border-slate-700 bg-slate-800 p-3 ${index === 4 ? 'sm:col-span-2 xl:col-span-1' : ''}`}
             >
               <div className="mb-3 flex items-start justify-between gap-3">
-                <h3 className="text-sm font-black uppercase leading-5 text-slate-950">{title}</h3>
-                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" />
+                <h3 className="text-sm font-black uppercase leading-5 text-slate-100">{title}</h3>
+                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-blue-400" />
               </div>
-              <div className={`${color} min-h-[96px] rounded-md border border-slate-200 p-4 shadow-sm`}>
-                <p className="font-mono text-[13px] leading-6 text-slate-800 sm:text-sm">{note}</p>
+              <div className={`${color} min-h-[96px] rounded-md border border-slate-600 p-4 shadow-sm`}>
+                <p className="font-mono text-[13px] leading-6 text-slate-300 sm:text-sm">{note}</p>
               </div>
-              <div className="mt-3 h-9 rounded-md border border-dashed border-slate-300 bg-white/80" />
+              <div className="mt-3 h-9 rounded-md border border-dashed border-slate-600 bg-slate-700/40" />
             </div>
           ))}
         </div>
@@ -229,25 +229,25 @@ const BuilderBoard = () => {
 const MissionPillar = ({ title, description, icon: Icon }: CardData) => (
   <motion.article
     variants={fadeInUp}
-    className="border-l-4 border-blue-700 bg-white py-4 pl-5 pr-4"
+    className="border-l-4 border-blue-500 bg-slate-800 py-4 pl-5 pr-4"
   >
-    <Icon className="mb-4 h-6 w-6 text-blue-700" />
-    <h3 className="text-lg font-bold text-slate-950">{title}</h3>
-    <p className="mt-2 text-sm leading-6 text-slate-600">{description}</p>
+    <Icon className="mb-4 h-6 w-6 text-blue-400" />
+    <h3 className="text-lg font-bold text-slate-50">{title}</h3>
+    <p className="mt-2 text-sm leading-6 text-slate-400">{description}</p>
   </motion.article>
 );
 
 const ProgramRow = ({ title, description, icon: Icon }: CardData) => (
   <motion.article
     variants={fadeInUp}
-    className="group flex gap-4 border-t border-slate-200 py-6"
+    className="group flex gap-4 border-t border-slate-700 py-6"
   >
-    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-blue-100 bg-blue-50 text-blue-700 transition group-hover:bg-blue-700 group-hover:text-white">
+    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-blue-900/60 bg-blue-950/50 text-blue-400 transition group-hover:bg-blue-600 group-hover:text-white">
       <Icon className="h-5 w-5" />
     </div>
     <div>
-      <h3 className="font-bold text-slate-950">{title}</h3>
-      <p className="mt-2 text-sm leading-6 text-slate-600">{description}</p>
+      <h3 className="font-bold text-slate-50">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-slate-400">{description}</p>
     </div>
   </motion.article>
 );
@@ -255,13 +255,13 @@ const ProgramRow = ({ title, description, icon: Icon }: CardData) => (
 const ProgramCard = ({ title, description, icon: Icon }: CardData) => (
   <motion.article
     variants={fadeInUp}
-    className="group rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-md"
+    className="group rounded-lg border border-slate-700 bg-slate-900 p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-700 hover:shadow-lg hover:shadow-blue-950/30"
   >
-    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-md border border-blue-100 bg-blue-50 text-blue-700 transition group-hover:bg-blue-700 group-hover:text-white">
+    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-md border border-blue-900/60 bg-blue-950/50 text-blue-400 transition group-hover:bg-blue-600 group-hover:text-white">
       <Icon className="h-6 w-6" />
     </div>
-    <h3 className="text-lg font-black text-slate-950">{title}</h3>
-    <p className="mt-3 text-sm leading-6 text-slate-600">{description}</p>
+    <h3 className="text-lg font-black text-slate-50">{title}</h3>
+    <p className="mt-3 text-sm leading-6 text-slate-400">{description}</p>
   </motion.article>
 );
 
@@ -363,32 +363,34 @@ const HackathonInquiryForm = ({
     }
   };
 
+  const inputClass = 'mt-2 w-full rounded-md border border-slate-600 bg-slate-800 px-4 py-3 text-sm font-medium text-white outline-none transition placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-900';
+
   return (
-    <div id="hackathon-interest" className="mt-8 rounded-lg border border-blue-100 bg-white p-5 shadow-sm sm:p-6">
+    <div id="hackathon-interest" className="mt-8 rounded-lg border border-slate-700 bg-slate-900 p-5 shadow-sm sm:p-6">
       <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
         <div>
-          <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-700">
+          <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-400">
             Hackathon interest
           </p>
-          <h3 className="mt-3 text-2xl font-black text-slate-950">Interested in Gear Up Hackathon?</h3>
-          <p className="mt-3 text-sm leading-6 text-slate-600">
+          <h3 className="mt-3 text-2xl font-black text-slate-50">Interested in Gear Up Hackathon?</h3>
+          <p className="mt-3 text-sm leading-6 text-slate-400">
             Tell us how you want to be involved, and we&apos;ll follow up with the right next step.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="grid gap-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            <label className="text-sm font-bold text-slate-700">
+            <label className="text-sm font-bold text-slate-300">
               Name *
               <input
                 required
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="mt-2 w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-950 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className={inputClass}
               />
             </label>
-            <label className="text-sm font-bold text-slate-700">
+            <label className="text-sm font-bold text-slate-300">
               Email *
               <input
                 required
@@ -396,28 +398,28 @@ const HackathonInquiryForm = ({
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="mt-2 w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-950 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className={inputClass}
               />
             </label>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <label className="text-sm font-bold text-slate-700">
+            <label className="text-sm font-bold text-slate-300">
               School / company
               <input
                 name="organization"
                 value={formData.organization}
                 onChange={handleChange}
-                className="mt-2 w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-950 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className={inputClass}
               />
             </label>
-            <label className="text-sm font-bold text-slate-700">
+            <label className="text-sm font-bold text-slate-300">
               I am a *
               <select
                 required
                 name="role"
                 value={formData.role}
                 onChange={handleChange}
-                className="mt-2 w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-950 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className={inputClass}
               >
                 <option value="student">Student</option>
                 <option value="parent">Parent</option>
@@ -428,7 +430,7 @@ const HackathonInquiryForm = ({
               </select>
             </label>
           </div>
-          <label className="text-sm font-bold text-slate-700">
+          <label className="text-sm font-bold text-slate-300">
             Notes
             <textarea
               name="message"
@@ -442,18 +444,18 @@ const HackathonInquiryForm = ({
                     ? 'Tell us how you want to help students during the event.'
                     : 'Tell us who wants to participate, grade level, or what track sounds interesting.'
               }
-              className="mt-2 w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-950 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+              className={inputClass}
             />
           </label>
           {status && (
-            <p className={`rounded-md px-4 py-3 text-sm font-bold ${status.success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800'}`}>
+            <p className={`rounded-md px-4 py-3 text-sm font-bold ${status.success ? 'bg-green-950/50 text-green-400' : 'bg-red-950/50 text-red-400'}`}>
               {status.message}
             </p>
           )}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex min-h-11 items-center justify-center rounded-md bg-blue-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60 sm:w-fit"
+            className="inline-flex min-h-11 items-center justify-center rounded-md bg-blue-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60 sm:w-fit"
           >
             {isSubmitting ? 'Sending...' : 'Send interest'}
           </button>
@@ -466,18 +468,18 @@ const HackathonInquiryForm = ({
 const FundingItem = ({ title, description, icon: Icon }: CardData) => (
   <motion.article
     variants={fadeInUp}
-    className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm"
+    className="rounded-lg border border-slate-700 bg-slate-900 p-5 shadow-sm"
   >
-    <Icon className="mb-5 h-6 w-6 text-blue-700" />
-    <h3 className="font-bold text-slate-950">{title}</h3>
-    <p className="mt-2 text-sm leading-6 text-slate-600">{description}</p>
+    <Icon className="mb-5 h-6 w-6 text-blue-400" />
+    <h3 className="font-bold text-slate-50">{title}</h3>
+    <p className="mt-2 text-sm leading-6 text-slate-400">{description}</p>
   </motion.article>
 );
 
 const Hero = () => (
-  <section className="relative isolate overflow-hidden bg-white px-4 py-14 sm:px-6 lg:px-8">
+  <section className="relative isolate overflow-hidden bg-slate-950 px-4 py-14 sm:px-6 lg:px-8">
     <BlueprintGrid />
-    <div className="absolute left-0 top-0 h-full w-24 border-r border-blue-100 bg-white/70" />
+    <div className="absolute left-0 top-0 h-full w-24 border-r border-blue-900/30 bg-slate-950/70" />
     <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 pt-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
       <motion.div
         initial={{ opacity: 1, y: 0 }}
@@ -485,14 +487,14 @@ const Hero = () => (
         transition={{ duration: 0.65, ease: 'easeOut' }}
         className="max-w-3xl"
       >
-        <div className="mb-6 flex items-center gap-3 text-sm font-bold text-blue-800">
+        <div className="mb-6 flex items-center gap-3 text-sm font-bold text-blue-400">
           <MapPin className="h-4 w-4" />
           Founded by student builders in North Carolina
         </div>
-        <h1 className="max-w-4xl text-5xl font-black leading-[1.02] tracking-normal text-slate-950 sm:text-6xl xl:text-7xl">
+        <h1 className="max-w-4xl text-5xl font-black leading-[1.02] tracking-normal text-slate-50 sm:text-6xl xl:text-7xl">
           Students don&apos;t need permission to build big things.
         </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-700 sm:text-xl">
+        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
           Gear Up Foundation helps young builders launch hackathons, robotics programs, STEAM
           workshops, and student-led technology projects with the support, tools, and funding to
           make them real.
@@ -683,17 +685,18 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-950">
+    <div className="min-h-screen bg-slate-950 text-slate-50">
       <Hero />
 
-      <Section className="border-y border-blue-100 bg-blue-50/50">
+      {/* Mission section */}
+      <Section className="border-y border-slate-800 bg-slate-900">
         <div className="grid items-center gap-10 lg:grid-cols-[0.75fr_1.25fr]">
           <div>
             <GearMark className="h-20 w-20" />
-            <h2 className="mt-6 text-3xl font-black tracking-normal text-slate-950 sm:text-4xl">
+            <h2 className="mt-6 text-3xl font-black tracking-normal text-slate-50 sm:text-4xl">
               A nonprofit workshop for young builders.
             </h2>
-            <p className="mt-5 text-lg leading-8 text-slate-700">
+            <p className="mt-5 text-lg leading-8 text-slate-300">
               Gear Up exists to help students design, build, teach, and operate programs that make
               practical technology education easier to access.
             </p>
@@ -712,16 +715,17 @@ const Home = () => {
         </div>
       </Section>
 
-      <Section id="hackathon" className="bg-white">
+      {/* Hackathon section */}
+      <Section id="hackathon" className="bg-slate-950">
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div>
-            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-700">
+            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-400">
               FIRST UP: A STUDENT-BUILT HACKATHON
             </p>
-            <h2 className="mt-4 text-4xl font-black tracking-normal text-slate-950 sm:text-5xl">
+            <h2 className="mt-4 text-4xl font-black tracking-normal text-slate-50 sm:text-5xl">
               Gear Up Hackathon
             </h2>
-            <p className="mt-5 text-lg leading-8 text-slate-700">
+            <p className="mt-5 text-lg leading-8 text-slate-300">
               Our flagship campaign is a student-run hackathon for middle and high school students
               in the Triangle Area. Builders will create apps, AI tools, robotics concepts,
               hardware prototypes, and social-good projects in a beginner-friendly environment.
@@ -730,67 +734,67 @@ const Home = () => {
               <button
                 type="button"
                 onClick={() => openHackathonInquiry('student')}
-                className="inline-flex min-h-11 items-center justify-center rounded-md bg-blue-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-800"
+                className="inline-flex min-h-11 items-center justify-center rounded-md bg-blue-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-blue-500"
               >
                 Register Interest
               </button>
               <button
                 type="button"
                 onClick={() => openHackathonInquiry('sponsor')}
-                className="inline-flex min-h-11 items-center justify-center rounded-md border border-blue-200 bg-white px-5 py-3 text-sm font-bold text-blue-800 transition hover:border-blue-300 hover:bg-blue-50"
+                className="inline-flex min-h-11 items-center justify-center rounded-md border border-slate-600 bg-slate-800 px-5 py-3 text-sm font-bold text-slate-200 transition hover:border-slate-500 hover:bg-slate-700"
               >
                 Sponsor the Event
               </button>
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-xl border border-blue-100 bg-white shadow-lg shadow-blue-950/10">
+          <div className="overflow-hidden rounded-xl border border-slate-700 bg-slate-900 shadow-lg shadow-black/30">
             <div className="bg-gradient-to-br from-blue-700 via-blue-600 to-sky-500 p-6 text-white">
               <div className="flex items-start justify-between gap-4">
-                <GearMark className="h-14 w-14 border-white bg-white text-blue-700" />
+                <GearMark className="h-14 w-14 border-white bg-white/10 text-blue-200" />
                 <p className="rounded-full bg-white/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em]">
                   Coming Soon
                 </p>
               </div>
               <h3 className="mt-8 text-3xl font-black">Gear Up Hackathon</h3>
-              <p className="mt-2 text-sm font-semibold text-blue-50">Triangle Area, NC</p>
+              <p className="mt-2 text-sm font-semibold text-blue-100">Triangle Area, NC</p>
             </div>
             <div className="p-6">
               <div className="grid gap-3 sm:grid-cols-2">
                 {eventSnapshot.slice(2, 4).map(([label, value]) => (
-                  <div key={label} className="rounded-lg border border-blue-100 bg-blue-50/60 p-4">
-                    <p className="text-xs font-black uppercase tracking-[0.12em] text-blue-700">{label}</p>
-                    <p className="mt-2 text-sm font-bold leading-6 text-slate-800">{value}</p>
+                  <div key={label} className="rounded-lg border border-slate-700 bg-slate-800 p-4">
+                    <p className="text-xs font-black uppercase tracking-[0.12em] text-blue-400">{label}</p>
+                    <p className="mt-2 text-sm font-bold leading-6 text-slate-200">{value}</p>
                   </div>
                 ))}
               </div>
-              <div className="mt-5 rounded-lg border border-slate-200 bg-white p-4">
-                <p className="text-xs font-black uppercase tracking-[0.12em] text-blue-700">Support needed</p>
-                <p className="mt-2 text-sm font-bold leading-6 text-slate-800">Venue, food, prizes, mentors, hardware</p>
+              <div className="mt-5 rounded-lg border border-slate-700 bg-slate-800 p-4">
+                <p className="text-xs font-black uppercase tracking-[0.12em] text-blue-400">Support needed</p>
+                <p className="mt-2 text-sm font-bold leading-6 text-slate-200">Venue, food, prizes, mentors, hardware</p>
               </div>
             </div>
           </div>
         </div>
 
         <div className="mt-12">
-          <h3 className="text-2xl font-black text-slate-950">Get involved</h3>
+          <h3 className="text-2xl font-black text-slate-50">Get involved</h3>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             {involvementOptions.map((option) => {
               const Icon = option.icon;
               return (
                 <div
                   key={option.title}
-                  className="rounded-lg border border-blue-100 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                  className="rounded-lg border border-slate-700 bg-slate-900 p-5 shadow-sm transition hover:-translate-y-1 hover:border-blue-800 hover:shadow-lg hover:shadow-blue-950/20"
                 >
-                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-md bg-blue-50 text-blue-700">
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-md bg-blue-950/50 text-blue-400">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h4 className="text-lg font-black text-slate-950">{option.title}</h4>
-                  <p className="mt-3 text-sm leading-6 text-slate-600">{option.description}</p>
+                  <h4 className="text-lg font-black text-slate-50">{option.title}</h4>
+                  <p className="mt-3 text-sm leading-6 text-slate-400">{option.description}</p>
                   <button
                     type="button"
                     onClick={() => openHackathonInquiry(option.role)}
-                    className="mt-4 text-sm font-bold text-blue-700 underline decoration-blue-200 underline-offset-4 transition hover:text-blue-950"
+                    className="mt-4 text-sm font-bold text-blue-400 underline decoration-blue-900 underline-offset-4 transition hover:text-blue-200"
                   >
                     {option.action}
                   </button>
@@ -807,7 +811,8 @@ const Home = () => {
         />
       </Section>
 
-      <Section id="programs" className="bg-slate-50">
+      {/* Programs section */}
+      <Section id="programs" className="bg-slate-900">
         <SectionHeader
           title="Programs with workshop energy."
           description="Gear Up supports the systems students need to run events, teach workshops, build robotics projects, and keep youth-led technology work moving."
@@ -825,14 +830,15 @@ const Home = () => {
         </motion.div>
       </Section>
 
-      <Section id="sponsor" className="bg-white">
-        <div className="mb-12 grid gap-8 border-b border-slate-200 pb-10 lg:grid-cols-[0.9fr_1.1fr]">
+      {/* Sponsor section */}
+      <Section id="sponsor" className="bg-slate-950">
+        <div className="mb-12 grid gap-8 border-b border-slate-800 pb-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-700">Sponsor support</p>
-            <h2 className="mt-4 text-3xl font-black text-slate-950 sm:text-4xl">Partners fund the parts students can&apos;t fake.</h2>
+            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-400">Sponsor support</p>
+            <h2 className="mt-4 text-3xl font-black text-slate-50 sm:text-4xl">Partners fund the parts students can&apos;t fake.</h2>
           </div>
           <div>
-            <p className="text-lg leading-8 text-slate-700">
+            <p className="text-lg leading-8 text-slate-300">
               Sponsorship turns student ambition into a real event budget: a place to meet, supplies
               to build with, mentors to learn from, and enough operational support to run the day well.
             </p>
@@ -859,12 +865,13 @@ const Home = () => {
         </motion.div>
       </Section>
 
-      <Section className="border-y border-blue-100 bg-blue-50/60">
+      {/* HCB donation trust section */}
+      <Section className="border-y border-slate-800 bg-slate-900">
         <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-700">HCB donation trust</p>
-            <h2 className="mt-4 text-3xl font-black text-slate-950 sm:text-4xl">Transparent, accountable, student-led.</h2>
-            <p className="mt-5 text-lg leading-8 text-slate-700">
+            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-400">HCB donation trust</p>
+            <h2 className="mt-4 text-3xl font-black text-slate-50 sm:text-4xl">Transparent, accountable, student-led.</h2>
+            <p className="mt-5 text-lg leading-8 text-slate-300">
               Donations are processed through HCB, Hack Club&apos;s fiscal sponsorship platform.
             </p>
             <ButtonLink href={DONATION_URL} className="mt-7">
@@ -878,19 +885,20 @@ const Home = () => {
               ['Allocated to programs', CheckSquare],
               ['Builders get support', Rocket],
             ].map(([label, Icon], index) => (
-              <div key={label as string} className="relative rounded-lg border border-blue-100 bg-white p-5 text-center shadow-sm">
-                {index < 3 && <ChevronRight className="absolute -right-4 top-1/2 hidden h-6 w-6 -translate-y-1/2 text-blue-300 sm:block" />}
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-blue-700">
+              <div key={label as string} className="relative rounded-lg border border-slate-700 bg-slate-800 p-5 text-center shadow-sm">
+                {index < 3 && <ChevronRight className="absolute -right-4 top-1/2 hidden h-6 w-6 -translate-y-1/2 text-blue-700 sm:block" />}
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-950/50 text-blue-400">
                   <Icon className="h-6 w-6" />
                 </div>
-                <p className="mt-4 text-sm font-bold text-slate-950">{label as string}</p>
+                <p className="mt-4 text-sm font-bold text-slate-200">{label as string}</p>
               </div>
             ))}
           </div>
         </div>
       </Section>
 
-      <Section className="bg-white">
+      {/* Initiatives section */}
+      <Section className="bg-slate-950">
         <div className="grid gap-12 lg:grid-cols-[1fr_0.72fr]">
           <div>
             <SectionHeader
@@ -910,15 +918,15 @@ const Home = () => {
               ))}
             </motion.div>
           </div>
-          <div className="relative rounded-lg border border-slate-200 bg-slate-50 p-6 shadow-sm">
-            <div className="absolute -right-8 -top-8 hidden h-28 w-28 rounded-full border-[18px] border-blue-100 lg:block" />
-            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-700">Builder notebook</p>
-            <div className="mt-8 space-y-5 font-mono text-2xl font-bold leading-relaxed text-slate-900">
+          <div className="relative rounded-lg border border-slate-700 bg-slate-900 p-6 shadow-sm">
+            <div className="absolute -right-8 -top-8 hidden h-28 w-28 rounded-full border-[18px] border-blue-900/40 lg:block" />
+            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-400">Builder notebook</p>
+            <div className="mt-8 space-y-5 font-mono text-2xl font-bold leading-relaxed text-slate-100">
               <p>Big ideas.</p>
               <p>Real impact.</p>
               <p>Built by students.</p>
             </div>
-            <div className="mt-10 rounded-md border border-dashed border-blue-200 bg-white p-4 text-sm leading-6 text-slate-600">
+            <div className="mt-10 rounded-md border border-dashed border-slate-700 bg-slate-800 p-4 text-sm leading-6 text-slate-400">
               Notes, checklists, build plans, sponsor emails, workshop outlines, and project launches
               all belong in the same student-run system.
             </div>
@@ -926,7 +934,8 @@ const Home = () => {
         </div>
       </Section>
 
-      <Section id="impact" className="bg-slate-50">
+      {/* Impact section */}
+      <Section id="impact" className="bg-slate-900">
         <SectionHeader
           title="Impact we can stand behind."
           description="Gear Up is building sponsor-ready reporting around real programs, clear budgets, student leadership, and practical outcomes. No inflated numbers."
@@ -937,15 +946,16 @@ const Home = () => {
             ['Local focus', 'Programming centered on North Carolina students, families, schools, and sponsors.'],
             ['Responsible reporting', 'Impact updates will follow official program activity instead of invented metrics.'],
           ].map(([title, description]) => (
-            <article key={title} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="text-xl font-black text-slate-950">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-600">{description}</p>
+            <article key={title} className="rounded-lg border border-slate-700 bg-slate-800 p-6 shadow-sm">
+              <h3 className="text-xl font-black text-slate-50">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-400">{description}</p>
             </article>
           ))}
         </div>
       </Section>
 
-      <Section id="team" className="bg-white">
+      {/* Team section */}
+      <Section id="team" className="bg-slate-950">
         <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <motion.div
             variants={fadeInUp}
@@ -953,17 +963,17 @@ const Home = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.25 }}
           >
-            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-700">
+            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-400">
               About the founders
             </p>
-            <h2 className="mt-4 text-4xl font-black tracking-normal text-slate-950 sm:text-5xl">
+            <h2 className="mt-4 text-4xl font-black tracking-normal text-slate-50 sm:text-5xl">
               Founded by student builders.
             </h2>
-            <p className="mt-5 text-lg leading-8 text-slate-700">
+            <p className="mt-5 text-lg leading-8 text-slate-300">
               Gear Up Foundation was started by students in North Carolina who wanted to make
               hands-on technology programs more practical, accessible, and real.
             </p>
-            <p className="mt-5 text-base leading-7 text-slate-600">
+            <p className="mt-5 text-base leading-7 text-slate-400">
               Akshayraj Sanjai, Shresh Panda, and Noah Lee founded Gear Up Foundation to create
               student-led infrastructure for hackathons, robotics programs, STEAM workshops,
               sponsor-supported resources, and youth-led technology projects.
@@ -981,15 +991,15 @@ const Home = () => {
               {founders.map((founder) => (
                 founder && (
                   <div key={founder.id}>
-                    <div className="aspect-[3/4] overflow-hidden rounded-md bg-slate-100">
+                    <div className="aspect-[3/4] overflow-hidden rounded-md bg-slate-800">
                       <img
                         src={founder.image}
                         alt={founder.alt || founder.name}
                         className="h-full w-full object-cover"
                       />
                     </div>
-                    <h3 className="mt-4 text-lg font-black text-slate-950">{founder.name}</h3>
-                    <p className="mt-1 text-sm font-bold text-blue-700">Co-Founder</p>
+                    <h3 className="mt-4 text-lg font-black text-slate-50">{founder.name}</h3>
+                    <p className="mt-1 text-sm font-bold text-blue-400">Co-Founder</p>
                   </div>
                 )
               ))}
@@ -998,14 +1008,15 @@ const Home = () => {
         </div>
       </Section>
 
-      <Section className="bg-slate-950 text-white">
+      {/* CTA section */}
+      <Section className="bg-slate-900">
         <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-300">Back the build</p>
-            <h2 className="mt-4 text-4xl font-black leading-tight sm:text-5xl">
+            <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-blue-400">Back the build</p>
+            <h2 className="mt-4 text-4xl font-black leading-tight text-slate-50 sm:text-5xl">
               Help students turn plans into programs.
             </h2>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-400">
               Fund the venues, tools, meals, workshops, hardware, and operating support behind a
               serious student-led innovation nonprofit.
             </p>

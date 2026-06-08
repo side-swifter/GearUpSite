@@ -5,7 +5,7 @@ const DONATION_URL = 'https://hcb.hackclub.com/donations/start/gear-up-foundatio
 
 const Footer = () => {
   return (
-    <footer className="border-t border-slate-200 bg-slate-950 text-white">
+    <footer className="border-t border-slate-800 bg-slate-950 text-white">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-[1.4fr_0.8fr_0.8fr_1fr]">
           <div>

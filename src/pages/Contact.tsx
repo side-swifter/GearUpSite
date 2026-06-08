@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import { emailjsConfig, getAdminNotificationTemplate, getUserConfirmationTemplate } from '../config/emailjs';
 
-// Custom Dropdown Component
 interface DropdownOption {
   value: string;
   label: string;
@@ -46,7 +45,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
 
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">
+      <label htmlFor={id} className="block text-sm font-medium text-slate-300 mb-1">
         {label} {required && '*'}
       </label>
       <div className="relative" ref={dropdownRef}>
@@ -54,8 +53,8 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           type="button"
           id={id}
           onClick={() => setIsOpen(!isOpen)}
-          className={`relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm ${
-            !value ? 'text-gray-500' : 'text-gray-900'
+          className={`relative w-full bg-slate-800 border border-slate-600 rounded-md shadow-sm pl-3 pr-10 py-3 text-left cursor-default focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-sm ${
+            !value ? 'text-slate-500' : 'text-slate-100'
           }`}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
@@ -65,7 +64,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           </span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             <svg
-              className={`h-5 w-5 text-gray-400 transition-transform duration-200 ${
+              className={`h-5 w-5 text-slate-400 transition-transform duration-200 ${
                 isOpen ? 'transform rotate-180' : ''
               }`}
               xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +82,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         </button>
 
         {isOpen && (
-          <div className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+          <div className="absolute z-10 mt-1 w-full bg-slate-800 shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-50 overflow-auto focus:outline-none sm:text-sm border border-slate-600">
             {options.map((option) => (
               <div
                 key={option.value}
@@ -91,15 +90,15 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                   onChange(option.value);
                   setIsOpen(false);
                 }}
-                className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-blue-50 ${
-                  value === option.value ? 'text-blue-600 bg-blue-50' : 'text-gray-900'
+                className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-slate-700 ${
+                  value === option.value ? 'text-blue-400 bg-slate-700' : 'text-slate-200'
                 }`}
               >
                 <span className={`block truncate ${value === option.value ? 'font-semibold' : 'font-normal'}`}>
                   {option.label}
                 </span>
                 {value === option.value && (
-                  <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-blue-600">
+                  <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-blue-400">
                     <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                       <path
                         fillRule="evenodd"
@@ -120,8 +119,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
 
 const Contact = () => {
   const navigate = useNavigate();
-  
-  // Subject dropdown options
+
   const subjectOptions: DropdownOption[] = [
     { value: "New Contact Form Submission", label: "General Inquiry" },
     { value: "I want to join the team", label: "I want to join the team" },
@@ -159,7 +157,6 @@ const Contact = () => {
     setSubmitStatus(null);
 
     try {
-      // Send notification to admin
       const adminTemplate = getAdminNotificationTemplate({
         from_name: formData.name,
         from_email: formData.email,
@@ -171,10 +168,9 @@ const Contact = () => {
         emailjsConfig.serviceId,
         emailjsConfig.templateId,
         adminTemplate,
-        emailjsConfig.privateKey // Using private key for authentication
+        emailjsConfig.privateKey
       );
 
-      // Send confirmation to user
       const userTemplate = getUserConfirmationTemplate({
         from_name: formData.name,
         from_email: formData.email,
@@ -186,7 +182,7 @@ const Contact = () => {
         emailjsConfig.serviceId,
         emailjsConfig.templateId,
         userTemplate,
-        emailjsConfig.privateKey // Using private key for authentication
+        emailjsConfig.privateKey
       );
 
       setSubmitStatus({
@@ -210,25 +206,27 @@ const Contact = () => {
     }
   };
 
+  const inputClass = 'w-full px-4 py-3 border border-slate-600 rounded-md bg-slate-800 text-white placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition';
+
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
-          <p className="text-xl text-gray-600">Have questions or want to join our team? Send us a message!</p>
+          <h1 className="text-4xl font-bold text-slate-50 mb-4">Contact Us</h1>
+          <p className="text-xl text-slate-400">Have questions or want to join our team? Send us a message!</p>
         </div>
 
-        <div className="bg-white shadow rounded-lg p-8">
+        <div className="bg-slate-900 shadow rounded-lg p-8 border border-slate-800">
           {submitStatus ? (
-            <div className={`p-4 rounded-md ${submitStatus.success ? 'bg-green-50' : 'bg-blue-50'}`}>
-              <p className={`text-center text-lg ${submitStatus.success ? 'text-green-800' : 'text-blue-800'}`}>
+            <div className={`p-4 rounded-md ${submitStatus.success ? 'bg-green-950/50 border border-green-800' : 'bg-blue-950/50 border border-blue-800'}`}>
+              <p className={`text-center text-lg ${submitStatus.success ? 'text-green-400' : 'text-blue-400'}`}>
                 {submitStatus.message}
               </p>
               {submitStatus.success && (
                 <div className="mt-6 text-center">
                   <button
                     onClick={() => navigate('/')}
-                    className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-slate-900"
                   >
                     Return to Home
                   </button>
@@ -239,7 +237,7 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="name" className="block text-sm font-medium text-slate-300">
                     Full Name *
                   </label>
                   <div className="mt-1">
@@ -250,13 +248,13 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className={inputClass}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="email" className="block text-sm font-medium text-slate-300">
                     Email *
                   </label>
                   <div className="mt-1">
@@ -267,7 +265,7 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className={inputClass}
                     />
                   </div>
                 </div>
@@ -285,7 +283,7 @@ const Contact = () => {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="message" className="block text-sm font-medium text-slate-300">
                     Message *
                   </label>
                   <div className="mt-1">
@@ -296,7 +294,7 @@ const Contact = () => {
                       required
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className={inputClass}
                       placeholder="Tell us how we can help you..."
                     />
                   </div>
@@ -307,14 +305,14 @@ const Contact = () => {
                 <button
                   type="button"
                   onClick={() => navigate(-1)}
-                  className="inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="inline-flex items-center px-6 py-3 border border-slate-600 shadow-sm text-base font-medium rounded-md text-slate-300 bg-slate-800 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-slate-900"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-slate-900 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>

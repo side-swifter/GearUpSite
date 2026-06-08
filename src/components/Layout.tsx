@@ -17,7 +17,7 @@ const Layout = () => {
     }
     window.scrollTo(0, 0);
   }, [pathname]);
-  return <div className="flex flex-col min-h-screen bg-white">
+  return <div className="flex flex-col min-h-screen bg-slate-950">
       <NavBar />
       <main className="flex-grow">
         <div className="page-transition">
