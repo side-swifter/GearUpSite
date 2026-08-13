@@ -15,6 +15,26 @@
     <title>Gear Up Foundation</title>
   </head>
   <body>
+    <!-- Hidden static form so Netlify can detect the form at build time -->
+    <form
+      name="class-signup"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="text" name="studentName" />
+      <input type="text" name="parentName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="grade" />
+      <input type="text" name="timeslot" />
+      <input type="text" name="interests" />
+      <input type="text" name="message" />
+      <input type="text" name="className" />
+      <input type="text" name="bot-field" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>

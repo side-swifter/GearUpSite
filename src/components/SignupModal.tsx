@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../config/firebase';
 import { ClassData } from '../config/classData';
 
 // Custom Dropdown Component
@@ -188,7 +186,7 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose, in
     return unique.map(s => ({ value: s, label: s }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!classItem) return;
     // Require timeslot selection if options exist
@@ -202,38 +200,34 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose, in
     setSubmitStatus(null);
 
     try {
-      const signupData = {
-        studentName: formData.studentName,
-        parentName: formData.parentName,
-        email: formData.email,
-        phone: formData.phone || '',
-        grade: formData.grade || '',
-        interests: formData.interests || '',
-        message: formData.message || '',
-        timeslot: formData.timeslot || '',
-        className: classItem.name,
-        submittedAt: serverTimestamp()
-      };
-
-      await addDoc(collection(db, 'classes'), {
-        ...signupData,
+      const form = e.currentTarget;
+      const response = await fetch(form.action || '/', {
+        method: 'POST',
+        body: new FormData(form)
       });
 
-      setSubmitStatus({
-        success: true,
-        message: `Thank you for signing up for ${classItem.name}! We'll send you more details soon.`
-      });
-      
-      setFormData({
-        studentName: '',
-        parentName: '',
-        email: '',
-        phone: '',
-        grade: '',
-        interests: '',
-        message: '',
-        timeslot: ''
-      });
+      if (response.ok) {
+        setSubmitStatus({
+          success: true,
+          message: `Thank you for signing up for ${classItem.name}! We'll send you more details soon.`
+        });
+
+        setFormData({
+          studentName: '',
+          parentName: '',
+          email: '',
+          phone: '',
+          grade: '',
+          interests: '',
+          message: '',
+          timeslot: ''
+        });
+      } else {
+        setSubmitStatus({
+          success: false,
+          message: 'There was an error submitting your form. Please try again later.'
+        });
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitStatus({
@@ -289,7 +283,26 @@ export const SignupModal: React.FC<SignupModalProps> = ({ classItem, onClose, in
               )}
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form
+              name="class-signup"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              action="/"
+              onSubmit={handleSubmit}
+              className="space-y-4"
+            >
+              <input type="hidden" name="form-name" value="class-signup" />
+              <input type="hidden" name="className" value={classItem.name} />
+              <input type="hidden" name="grade" value={formData.grade} />
+              <input type="hidden" name="timeslot" value={formData.timeslot} />
+              <input
+                type="text"
+                name="bot-field"
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="studentName" className="block text-sm font-medium text-gray-700 mb-1">
