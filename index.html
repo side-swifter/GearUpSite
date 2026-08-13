@@ -50,6 +50,23 @@
       <input type="text" name="bot-field" />
     </form>
 
+    <!-- Hidden static hackathon interest form for Netlify detection -->
+    <form
+      name="hackathon-interest"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="organization" />
+      <input type="text" name="role" />
+      <input type="text" name="roleLabel" />
+      <input type="text" name="message" />
+      <input type="text" name="bot-field" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>

@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, ReactNode, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import emailjs from '@emailjs/browser';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
@@ -13,7 +12,6 @@ import {
   Cpu,
   Flame,
   Handshake,
-  HeartHandshake,
   Lightbulb,
   Megaphone,
   Rocket,
@@ -21,7 +19,6 @@ import {
   Trophy,
   Users,
 } from 'lucide-react';
-import { emailjsConfig, getAdminNotificationTemplate, getUserConfirmationTemplate } from '../config/emailjs';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -317,49 +314,36 @@ const HackathonInquiryForm = ({
     setFormData((current) => ({ ...current, [name]: value }));
   };
 
-  const handleSubmit = async (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
     setStatus(null);
 
-    const subject = `Gear Up Hackathon Interest: ${roleLabels[formData.role]}`;
-    const message = [
-      `Role: ${roleLabels[formData.role]}`,
-      `Organization / school: ${formData.organization || 'Not provided'}`,
-      '',
-      formData.message || 'No additional message provided.',
-    ].join('\n');
-
     try {
-      const adminTemplate = getAdminNotificationTemplate({
-        from_name: formData.name,
-        from_email: formData.email,
-        subject,
-        message,
+      const form = event.currentTarget;
+      const response = await fetch(form.getAttribute('action') || '/', {
+        method: 'POST',
+        body: new FormData(form),
       });
 
-      await emailjs.send(emailjsConfig.serviceId, emailjsConfig.templateId, adminTemplate, emailjsConfig.privateKey);
-
-      const userTemplate = getUserConfirmationTemplate({
-        from_name: formData.name,
-        from_email: formData.email,
-        subject,
-        message,
-      });
-
-      await emailjs.send(emailjsConfig.serviceId, emailjsConfig.templateId, userTemplate, emailjsConfig.privateKey);
-
-      setStatus({
-        success: true,
-        message: 'Thanks. We received your hackathon interest form and will follow up soon.',
-      });
-      setFormData({
-        name: '',
-        email: '',
-        organization: '',
-        role: formData.role,
-        message: '',
-      });
+      if (response.ok) {
+        setStatus({
+          success: true,
+          message: 'Thanks. We received your hackathon interest form and will follow up soon.',
+        });
+        setFormData({
+          name: '',
+          email: '',
+          organization: '',
+          role: formData.role,
+          message: '',
+        });
+      } else {
+        setStatus({
+          success: false,
+          message: 'Something went wrong while sending the form. Please try again.',
+        });
+      }
     } catch (error) {
       console.error('Error sending hackathon inquiry:', error);
       setStatus({
@@ -385,7 +369,18 @@ const HackathonInquiryForm = ({
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="grid gap-4">
+        <form
+          name="hackathon-interest"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          action="/"
+          onSubmit={handleSubmit}
+          className="grid gap-4"
+        >
+          <input type="hidden" name="form-name" value="hackathon-interest" />
+          <input type="hidden" name="roleLabel" value={roleLabels[formData.role]} />
+          <input type="text" name="bot-field" className="hidden" tabIndex={-1} autoComplete="off" />
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="text-sm font-black">
               Name *
