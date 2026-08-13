@@ -1,10 +1,25 @@
 /* PLEASE NOTE: THESE TAILWIND IMPORTS SHOULD NEVER BE DELETED */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif;
+  background: #14314a;
+}
+
+h1,
+h2,
+h3,
+h4,
+.gear-display {
+  font-family: 'Sora', ui-sans-serif, system-ui, sans-serif;
 }
 
 @keyframes border-spin {
@@ -102,15 +117,19 @@ html {
 }
 /* Page transition */
 .page-transition {
-  animation: fadeIn 0.4s ease-in-out;
+  animation: page-enter 0.28s ease-out;
 }
-@keyframes fadeIn {
+@keyframes page-enter {
   from {
-    opacity: 0;
     transform: translateY(10px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
   }
 }

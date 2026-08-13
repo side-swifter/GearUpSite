@@ -121,19 +121,19 @@ export const classData: ClassData[] = [
     id: 'quantum-mechanics',
     name: 'Quantum Mechanics and Computations',
     level: 'advanced',
-    instructors: ['Noah Lee'],
+    instructors: [],
     description: 'Students will explore the fascinating world of quantum mechanics and quantum computing. They will learn about quantum states, superposition, entanglement, and quantum algorithms. The course covers both theoretical foundations and practical applications, including programming quantum computers and understanding their potential impact on technology.',
     shortDescription: 'Explore quantum mechanics and computing with quantum states, algorithms, and programming.',
     icon: '⚛️',
     topics: ['Quantum Mechanics', 'Quantum Computing', 'Algorithms', 'Physics'],
     schedule: 'Wednesdays: 7:30-8:30PM, Sundays: 2:00-3:00PM',
-    active: true
+    active: false
   },
   {
     id: 'computer-science',
     name: 'Computer Science',
     level: 'advanced',
-    instructors: ['Akshayraj Sanjai', 'Noah Lee'],
+    instructors: ['Akshayraj Sanjai'],
     description: 'Students will build a comprehensive foundation in computer science, covering algorithms, data structures, cryptography, and computer hardware. They will learn programming paradigms, computational complexity, and software engineering principles. The course prepares students for advanced computer science studies and careers in technology.',
     shortDescription: 'Comprehensive computer science foundation covering cryptography, algorithms, and hardware.',
     icon: '💻',

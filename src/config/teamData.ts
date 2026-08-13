@@ -59,16 +59,6 @@ export const teamMembers: TeamMember[] = [
       scale: 1.05 
     },
     delay: 'delay-300'
-  },
-  
-  {
-    id: 'noah-lee',
-    name: 'Noah Lee',
-    role: 'Founder',
-    image: '/team-photos/noah-lee.png',
-    alt: 'Noah Lee',
-    description: 'Noah brings a strong programming and computer science background to Gear Up, supporting technical projects, hackathon planning, and practical pathways for students to build real software.',
-    delay: 'delay-400'
   }
 ];
 
@@ -76,5 +66,5 @@ export const teamMembers: TeamMember[] = [
 // TEAM FILTERS
 // ==============================================
 // Control which team members appear in which sections
-export const mainTeamMembers = ['akshayraj', 'shresh', 'noah-lee'];
+export const mainTeamMembers = ['akshayraj', 'shresh'];
 export const programDirectors = [];

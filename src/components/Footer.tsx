@@ -5,12 +5,12 @@ const DONATION_URL = 'https://hcb.hackclub.com/donations/start/gear-up-foundatio
 
 const Footer = () => {
   return (
-    <footer className="border-t border-slate-800 bg-slate-950 text-white">
+    <footer className="border-t-2 border-[#0b8fc5] bg-[#14314a] text-white">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-[1.4fr_0.8fr_0.8fr_1fr]">
           <div>
             <img src="/gearup-rectangle-logo.png" alt="Gear Up Foundation Logo" className="h-14 w-auto" />
-            <p className="mt-5 max-w-sm text-sm leading-6 text-slate-300">
+            <p className="mt-5 max-w-sm text-sm font-semibold leading-6 text-[#d7edf5]">
               Gear Up Foundation powers hackathons, STEAM programs, robotics initiatives, and
               student-led technology projects that help young builders create real-world impact.
             </p>
@@ -19,7 +19,7 @@ const Footer = () => {
                 href="https://www.instagram.com/gear.uprobotics/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
+                className="inline-flex h-10 w-10 items-center justify-center border-2 border-[#0b8fc5] bg-transparent text-white transition hover:bg-[#0b8fc5]"
               >
                 <span className="sr-only">Instagram</span>
                 <Instagram className="h-5 w-5" />
@@ -28,8 +28,8 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-white">Explore</h3>
-            <ul className="mt-4 space-y-3 text-sm text-slate-300">
+            <h3 className="text-sm font-black text-white">Explore</h3>
+            <ul className="mt-4 space-y-3 text-sm font-semibold text-[#d7edf5]">
               <li><a href="/#programs" className="hover:text-white">Programs</a></li>
               <li><a href="/#hackathon" className="hover:text-white">Hackathon</a></li>
               <li><a href="/#impact" className="hover:text-white">Impact</a></li>
@@ -39,8 +39,8 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-white">Support</h3>
-            <ul className="mt-4 space-y-3 text-sm text-slate-300">
+            <h3 className="text-sm font-black text-white">Support</h3>
+            <ul className="mt-4 space-y-3 text-sm font-semibold text-[#d7edf5]">
               <li><a href={DONATION_URL} className="hover:text-white">Donate</a></li>
               <li><a href={DONATION_URL} className="hover:text-white">Donate via HCB</a></li>
               <li><a href="mailto:team@gear-up-foundation.org?subject=Sponsor%20a%20Gear%20Up%20Hackathon" className="hover:text-white">Sponsor a Hackathon</a></li>
@@ -49,25 +49,25 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-white">Contact</h3>
-            <ul className="mt-4 space-y-4 text-sm text-slate-300">
+            <h3 className="text-sm font-black text-white">Contact</h3>
+            <ul className="mt-4 space-y-4 text-sm font-semibold text-[#d7edf5]">
               <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-5 w-5 text-cyan-300" />
+                <MapPin className="mt-0.5 h-5 w-5 text-[#8fd8ef]" />
                 <span>Cary, North Carolina</span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-cyan-300" />
+                <Phone className="h-5 w-5 text-[#8fd8ef]" />
                 <span>(984) 687-6529</span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-cyan-300" />
+                <Mail className="h-5 w-5 text-[#8fd8ef]" />
                 <span>team@gear-up-foundation.org</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-slate-400 md:flex-row md:items-center md:justify-between">
+        <div className="mt-10 flex flex-col gap-4 border-t border-[#0b8fc5]/40 pt-8 text-sm font-semibold text-[#d7edf5] md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} Gear Up Foundation. All rights reserved.</p>
           <p>Donations are processed through HCB.</p>
         </div>

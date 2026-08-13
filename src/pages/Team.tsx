@@ -54,8 +54,7 @@ const TeamMemberCard: React.FC<TeamMember> = ({ name, role, image, alt, descript
 const Team = () => {
   const mainTeamMembers = teamMembers.filter(member =>
     member.id === 'akshayraj' ||
-    member.id === 'shresh' ||
-    member.id === 'noah-lee'
+    member.id === 'shresh'
   );
 
   const professors = teamMembers.filter(member =>
@@ -124,7 +123,7 @@ const Team = () => {
             Gear Up Foundation is led by students building the infrastructure for hackathons,
             robotics, STEAM programs, and youth-led technology projects across the community.
           </p>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 max-w-3xl mx-auto">
             {mainTeamMembers.map((member, index) => (
               <TeamMemberCard
                 key={member.id}
