@@ -35,6 +35,21 @@
       <input type="text" name="bot-field" />
     </form>
 
+    <!-- Hidden static contact form for Netlify detection -->
+    <form
+      name="contact-form"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <input type="text" name="message" />
+      <input type="text" name="bot-field" />
+    </form>
+
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>

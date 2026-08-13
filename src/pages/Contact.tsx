@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import emailjs from '@emailjs/browser';
-import { emailjsConfig, getAdminNotificationTemplate, getUserConfirmationTemplate } from '../config/emailjs';
 
 interface DropdownOption {
   value: string;
@@ -151,50 +149,35 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
 
     try {
-      const adminTemplate = getAdminNotificationTemplate({
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message
+      const form = e.currentTarget;
+      const response = await fetch(form.action || '/', {
+        method: 'POST',
+        body: new FormData(form)
       });
 
-      await emailjs.send(
-        emailjsConfig.serviceId,
-        emailjsConfig.templateId,
-        adminTemplate,
-        emailjsConfig.privateKey
-      );
-
-      const userTemplate = getUserConfirmationTemplate({
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message
-      });
-
-      await emailjs.send(
-        emailjsConfig.serviceId,
-        emailjsConfig.templateId,
-        userTemplate,
-        emailjsConfig.privateKey
-      );
-
-      setSubmitStatus({
-        success: true,
-        message: 'Thank you for your message! We will get back to you soon.'
-      });
-      setFormData({
-        name: '',
-        email: '',
-        subject: 'New Contact Form Submission',
-        message: ''
-      });
+      if (response.ok) {
+        setSubmitStatus({
+          success: true,
+          message: 'Thank you for your message! We will get back to you soon.'
+        });
+        setFormData({
+          name: '',
+          email: '',
+          subject: 'New Contact Form Submission',
+          message: ''
+        });
+      } else {
+        setSubmitStatus({
+          success: false,
+          message: 'There was an error sending your message. Please try again later.'
+        });
+      }
     } catch (error) {
       console.error('Error sending email:', error);
       setSubmitStatus({
@@ -234,7 +217,24 @@ const Contact = () => {
               )}
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form
+              name="contact-form"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              action="/"
+              onSubmit={handleSubmit}
+              className="space-y-6"
+            >
+              <input type="hidden" name="form-name" value="contact-form" />
+              <input type="hidden" name="subject" value={formData.subject} />
+              <input
+                type="text"
+                name="bot-field"
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
               <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-slate-300">
