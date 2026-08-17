@@ -35,7 +35,7 @@ const NavBar = () => {
     onClick: scrollToSection('programs')
   }, {
     name: 'Hackathon',
-    onClick: scrollToSection('hackathon')
+    path: '/hackathon'
   }, {
     name: 'Sponsor',
     onClick: scrollToSection('sponsor')

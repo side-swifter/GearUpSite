@@ -31,7 +31,7 @@ const Footer = () => {
             <h3 className="text-sm font-black text-white">Explore</h3>
             <ul className="mt-4 space-y-3 text-sm font-semibold text-[#d7edf5]">
               <li><a href="/#programs" className="hover:text-white">Programs</a></li>
-              <li><a href="/#hackathon" className="hover:text-white">Hackathon</a></li>
+              <li><Link to="/hackathon" className="hover:text-white">Hackathon</Link></li>
               <li><a href="/#impact" className="hover:text-white">Impact</a></li>
               <li><Link to="/team" className="hover:text-white">Team</Link></li>
               <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
