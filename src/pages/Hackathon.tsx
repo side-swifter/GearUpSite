@@ -39,8 +39,8 @@ type HackathonSignupData = {
 };
 
 const awards: AwardItem[] = [
-  { title: 'First place', group: 'Overall', icon: Trophy, featured: true },
-  { title: 'Second place', group: 'Overall', icon: Trophy, featured: true },
+  { title: '1st place', group: 'Overall', icon: Trophy, featured: true },
+  { title: '2nd place', group: 'Overall', icon: Trophy, featured: true },
   { title: '3rd place', group: 'Overall', icon: Trophy, featured: true },
   { title: '4th place', group: 'Overall', icon: Trophy, featured: true },
   { title: '5th place', group: 'Overall', icon: Trophy, featured: true },
